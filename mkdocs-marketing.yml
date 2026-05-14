@@ -1,0 +1,94 @@
+site_name: Domain Connect — Marketing Knowledge Base
+site_description: Marketing and communications knowledge base for the Domain Connect protocol
+site_author: Pawel Kowalik
+
+docs_dir: Knowledge Base
+site_dir: docs/marketing-kb
+
+theme:
+  name: material
+  logo: assets/logo.png
+  favicon: assets/favicon.png
+  font:
+    text: Open Sans
+    code: Roboto Mono
+  palette:
+    scheme: default
+    primary: custom
+    accent: custom
+  features:
+    - navigation.sections
+    - navigation.expand
+    - navigation.indexes
+    - navigation.top
+    - toc.follow
+    - search.highlight
+    - search.suggest
+    - content.code.copy
+
+extra_css:
+  - stylesheets/extra.css
+
+markdown_extensions:
+  - admonition
+  - tables
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+  - attr_list
+  - md_in_html
+
+nav:
+  - Home: index.md
+  - Overview: 00_MASTER_marketing.md
+  - The Problem & Solution:
+    - Context & Problem: 01_Problem_and_Context.md
+    - What Is Domain Connect: 02_What_Is_Domain_Connect.md
+    - How It Works: 03_How_It_Works.md
+    - Use Cases: 05_Use_Cases.md
+  - The Case for Domain Connect:
+    - Value by Audience: 06_Value_by_Audience.md
+    - Adoption & Ecosystem: 07_Adoption_and_Ecosystem.md
+    - Security Model: 08_Security_Model.md
+    - Getting Involved: 09_Getting_Involved.md
+  - Messaging & Content:
+    - Key Messages: 10_Key_Messages.md
+    - Storytelling:
+      - Index: 14_Storytelling.md
+      - DNS Provider Stories:
+        - CEO: Stories/dns_provider_ceo.md
+        - Developer: Stories/dns_provider_dev.md
+        - Product Manager: Stories/dns_provider_pm.md
+        - Support: Stories/dns_provider_support.md
+      - Service Provider Stories:
+        - CEO: Stories/service_provider_ceo.md
+        - Developer: Stories/service_provider_dev.md
+        - Product Manager: Stories/service_provider_pm.md
+        - Support: Stories/service_provider_support.md
+      - End User Stories:
+        - Skilled User: Stories/user_skilled.md
+        - Non-technical User: Stories/user_unskilled.md
+      - Explainers:
+        - Index: Stories/Explainers/explainers.md
+        - Blogger: Stories/Explainers/explainer_blogger.md
+        - Casual User: Stories/Explainers/explainer_casual_user.md
+        - Child: Stories/Explainers/explainer_child.md
+        - Grandma: Stories/Explainers/explainer_grandma.md
+        - Influencer: Stories/Explainers/explainer_influencer.md
+        - IT Department: Stories/Explainers/explainer_it_dept.md
+
+repo_url: https://github.com/Domain-Connect/knowledge-base
+repo_name: Domain-Connect/knowledge-base
+
+copyright: "Copyright &copy; 2026 Domain Connect Contributors. Content licensed under <a href='https://creativecommons.org/licenses/by/4.0/'>CC BY 4.0</a>."
+
+extra:
+  generator: false

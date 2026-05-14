@@ -50,10 +50,47 @@ body,
   font-weight: 700;
 }
 
-/* Sidebar nav */
+/* Sidebar nav — section headers */
 .md-nav__title {
   font-weight: 700;
   color: var(--dc-secondary);
+}
+
+/* Top-level section labels in the sidebar */
+.md-nav--primary > .md-nav__list > .md-nav__item--section > .md-nav__link,
+.md-nav--lifted > .md-nav__list > .md-nav__item--section > .md-nav__link {
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--dc-secondary);
+  opacity: 1;
+  padding-top: 1rem;
+  padding-bottom: 0.25rem;
+}
+
+/* Section children: subtle left border for grouping */
+.md-nav__item--section > .md-nav {
+  border-left: 2px solid var(--dc-tertiary);
+  margin-left: 0.6rem;
+  padding-left: 0.4rem;
+}
+
+/* Active/current page link */
+.md-nav__link--active,
+.md-nav__link[aria-current="page"] {
+  color: var(--dc-accent);
+  font-weight: 600;
+}
+
+/* Tighten spacing between nav items */
+.md-nav__item {
+  line-height: 1.4;
+}
+
+.md-nav__link {
+  padding-top: 0.22rem;
+  padding-bottom: 0.22rem;
 }
 
 /* Accent on links */
@@ -72,6 +109,43 @@ body,
 
 .md-footer-meta {
   background-color: #021d2c;
+}
+
+.md-footer-meta__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.md-copyright {
+  font-size: 0.7rem;
+  color: var(--dc-tertiary);
+  opacity: 0.85;
+}
+
+.md-copyright a {
+  color: var(--dc-accent);
+  text-decoration: none;
+}
+
+.md-copyright a:hover {
+  text-decoration: underline;
+}
+
+/* GitHub icon in header */
+.md-header__source {
+  color: #fff;
+  opacity: 0.85;
+}
+
+.md-header__source:hover {
+  opacity: 1;
+}
+
+.md-source__repository {
+  font-size: 0.7rem;
 }
 
 /* Tables: alternating rows, matching site style */

@@ -1,2 +1,5 @@
 .DS_Store
 docs
+.venv/
+.claude/
+__pycache__/

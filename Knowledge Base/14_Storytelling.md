@@ -10,7 +10,7 @@ These are narrative-form stories and plain-language explainers for communicating
 
 Each piece is designed for a specific context: conference talks, sales calls, partner outreach, social media, or press briefings. Use the "Best for" column to pick the right piece for your situation.
 
-All stories are in the [Stories/](./Stories/) subfolder. Explainers are in [Stories/Explainers/](./Stories/Explainers/).
+All stories are in the Stories subfolder. Explainers are in the [Explainers index](./Stories/Explainers/explainers.md).
 
 ---
 
