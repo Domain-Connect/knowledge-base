@@ -1,0 +1,500 @@
+All right. Can you hear me? Actually, I think. Yeah. Okay. The mic fields doesn't seem
+to work. So, um yeah, welcome everybody to um the very first session of the new
+domain connect working group. Um maybe somebody in the back can close the door in the meantime um at some point. Um my
+name is Hansa Capell. Um together with my co-chair Peter Thomasson who will be remote today uh a warm welcome uh to
+this new group. Um so we start the working group with a usual note well
+slide. Um you might have seen it this week already a couple of times. Um this is a reminder of the processes and
+policies of the IETF uh which you already have agreed upon when registering for this meeting. But still
+it's very important that you know uh about all of these aspects here which cover various um you know uh rules and
+procedures of IETF work like you know how to uh communicate with each other in
+a um in a good way and also about various other um you know intellectual
+property rights and these kind of things. Um so that's important for you to participate here you are aware of all
+these things. Um this has actually been updated uh for this ITF meeting. Um
+there is also a QR code where you can find additional information and if you have any questions uh your chairs and
+also the area directors are available for more information.
+So then we have the ITF meeting tips. Um also most of you might be aware of that
+as well. Um I would like to ask everybody in the room um to also sign in
+with Meet Echo either with a tool or with a light tool. There's a QR code on the microphone which you can use for
+that. Um you will also need that in order to be able to join the queue later
+on if you have any questions or want to comment on things. Um I would also like kindly like to ask you if you do that
+later on uh to clearly state your name so everybody here in the room and remote can um understand who is speaking.
+Um all right. Um there's couple of further resources available. I guess the
+agenda is very well known to everybody. Um if you want to learn more about me media which is an awesome tool there's
+also a nice page of it. And I think that's it. So yeah, again uh welcome to
+domain connect. Um it's uh probably I don't even know uh one of the most
+recent working groups uh formed before this meeting and obviously then uh meeting formally the first time uh here
+in Montreal. Um as I said um I'm chairing this group together with uh
+Peter uh who is uh in in remote he also uh take take care of the notes today but
+um yeah if anybody wants to help please join the chat and uh help him probably
+um with that um yeah as with every Martin has volunteered um so hi there
+Peter um Martin has volunteered for taking notes so thank you awesome thank you very
+Um yeah, you might know every ITF working group has a mailing list and actually
+formally all formal decisions are taken on this mailing list. So if you're not yet a member of that mailing list, it's
+probably also a good time to join it. Um you see the address on the slide and um as every ITF working group there is also
+a dedicated website where you find for instance all the materials of this meeting um a link to the mailing list
+and further information the charter of the working group um and the URL is also
+on that slide. Um so shortly about um the scope of domain connect or decon by
+the way be aware there was a form above with decon with one n so if you search for it don't get confused it's decon
+with 2n um so what decon will domain connect will be about in terms of um uh the
+actual topic Peter uh Pablo will give a a short introduction when he begins with
+the slide so I won't talk too much about that But uh it's the domain connect protocol which is also already an
+implemented protocol in the wild which has been now brought to the ITF and um the scope of the working group as
+defined by the charter of the working group is thus um relatively narrow to a certain extent. So the task we have here
+as a group is basically um to take that existing protocol and ensure its uh
+specification is precise and provides clear guidance um to address any ambiguities or inconsistencies
+um and especially also check it for potential security issues and there has been some discussion already on the
+mailing list on some of these issues. Um but it's the task of this working group um to iron those out in in its entirety
+and bring this document hopefully um to a full-fledged RC. Uh what is currently
+out of scope as by the charter is any extensions or new feature or additional use cases um to this document. Um if
+there will be any arising that's fine but it would require a rechartering of the group at a certain point. Um that
+said um that brings us to our agenda. So we are just in the uh admin or just at
+the end of the administrative introduction and I'll shortly hand over to um Pavle for the main presentation
+today. So we have one um presentation on the list and at the end we will uh talk
+about next steps and any other business. And I see he's the area director in the queue. Yes. So I'm Andy Newton. I am not your
+area director, but I am one of the art area directors. Uh Ory Steel is the
+responsible AD for this group. He cannot be here because he's got a conflict with another work group uh because of the way
+the scheduling works. Uh so he did ask me to stop by and uh and uh uh say a few
+words. Basically, uh thanks for everyone for being here. thanks for uh um dealing with the uh I guess it was a a sort of
+unorthodox way in which this working group got formed but I see we have a lot of interest uh and so that uh bodess
+well for uh for going forward and so we wish everyone success and thank you.
+All right, thank you and this um I hand over to Po.
+Okay. Hi, I'm Pollik. I'm one of the authors of the
+Yeah. Yeah. Yeah. Yeah. Is it working now? Better. All right.
+So, I'm one of the authors of the draft which is let's say in the main focus of this working group. So, I will entertain
+you through through this session most of the time.
+If the clicker would be working that' be perfect. No, not yet. Okay. I probably misclicked in the
+meeting. Sorry. Misclicking the clicker. Yes. Yes. So, so I was asked to present
+briefly uh what domain connect is about for the folks who maybe joined uh quite
+recently. Uh so basically the problem it solves uh it's a problem between let's
+say two providers. one being a software as a service provider or it can be application provider but I think
+software as a service is the main use case uh which would typically define uh
+a set of DNS uh entries to be uh configured for domain name in order to
+establish a connection or the configuration for for this uh domain name. uh the DNS provider typically
+offers just a generic user interface for this and in between is a user which is
+uh typically not skilled for the task. Uh so just to to show illustrate how bad
+it can be. So there's a example of of uh microsoft
+365 setup which requires a user to set up like seven to 15 DNx entries in
+sixstep process. So to to for the user to succeed with it, they they set up 16
+help u sites um for 10 of them being very specific to providers and they even
+offer 40 minutes training about it. So, so there's a lot of effort for like 50%
+uh success rate that they have in the setup and uh let's say this instruction looks like like this and uh basically
+the user who is not skilled in DNS he has no clue what he's doing he's just
+trying to follow it and usually fails so how domain connect addresses it it's
+basically the this configuration of of DNS is defined in in the template which
+uh which will be defined by the the application or the soft service provider. Uh this uh template would be
+pro let's say uh deployed offband on the DNS provider side. This where the trust
+is being built between the two providers. So the DNS provider is actually voting for this template but
+it's uh sane and and uh basically it's uh doing what it it says to to be doing.
+Uh and when it's done basically the the user can uh go through an uh process
+where uh when being asked to configure the domain name on the service provider
+side he will be driven through for the flow where he gives the um let's say
+after being authenticated and DNS provider he will consent to the changes uh and the the configuration will be
+done automatically for him. So to to summarize what what is domain
+connect in total? So it is a application level protocol. So let's say everything is happening on on this layer the DNS
+setup for for the third party is uh less complicated for the user offering better
+customer experience and simplicity. um the contract between the parties is
+based on this uh templates as I uh mentioned and uh act in the end of the
+day it's operational gain for both sides because uh let's say the user is uh
+happy being let's say having the setup done in the matter of seconds instead of sometimes uh minutes or hours the DNS
+provider and service provider have uh let's say uh connection technical setup uh done with less failures less support
+and all what is around. So how it works on the uh technical side
+of things the when the user would type in which domain he would would like to
+configure uh the um service provider would look up the underscore domain
+connect uh txt record from from the DNS provider which will point him first it
+will indicate that this provider is supporting domain connect at all. So this the first signal uh the takes the
+record also has a pointer to um uh this let's discover a document on the DNS
+provider side we will tell um the service to write the all the end points
+uh it needs to asks to ask uh on this endpoints will allow also discover is
+the template already deployed there. So is is it is it ready to to be configured on once all of that is successful the uh
+service provider could forge let's say the let's say mint a link uh or or
+redirect the user um agent to DNS provider sites to initiate the the setup
+the user agent is then displaying the the user interface from from DNS provider author um authenticating the
+the user u asking for authorization for the changes and applying the changes eventually.
+So the how this template looks like. So basically the the template structure
+defines of course the the resource records with this the part below uh the
+configuration of it is let's say mainly consisting of the of the uh let's say
+resource record definition itself but also has some additional metadata which allows for example for conflict
+resolution. So the provider is able to say for example that on this label only
+one txt record should exist. Uh this very helpful for uh use cases like
+demark where uh let's say multiple records of on the same label would wouldn't be uh wouldn't render a valid
+configuration. So so such controls are also in the template. Uh template can also include variables. So uh if some of
+the elements uh of the DNS setup are are not static but uh let's say the service provider would like to to do it
+dynamically it can define variables which are are initiated in the flow and
+also the metadata on the whole template. Let's say first is the identification. This is how the the service provider can
+ask whether the template is supported. And this how the service provider would uh uh initiate the process uh on on on
+the certain template and some other metadata which is defining the version the um some let's say human readable
+information for someone let's say uh receiving this template or uh also the
+um the domain name which is uh actually controlling the signature keys for for security because the uh service provider
+can uh also sign the request so it not no other service provider could could
+impersonate the link of of of the setup.
+So this how this link would would look like. So the the orange
+part on the top there's a a discovered uh endpoint when uh there is the part
+which will tell which service and which uh template to apply the domain name and
+the host are the standard parameters which define which domain is being set up and uh under which label and then uh
+the variables which can be defined in the template. So in this in this case
+there's a text records uh content and the IP address in for a record.
+So this is the part which is actually not in the in the protocol itself but just for the for the illustration. Uh if
+in the flow after authenticating the user the DNS provider could display such such user interface which will show uh
+on this domain this configuration will be will be performed uh specifying which
+uh records will be will be. Uh so basically the user can make an informed
+decision about performing the setup. In certain cases this user interface can also display the conflicts which appear
+or some other records which will be deleted. So this all up to the let's say
+creativity of the DNS provider what kind of information uh it will display but this all in the realm of of DNS provider
+of informing the the user but as I said this not uh let's say defined in the
+protocol itself protocol may give guidance to the um DNS providers what
+information the user should receive to make this flow secure but but this not
+uh not necessary. So the summary of of uh other things
+that uh let's say in the sake of time I I didn't present here is also that uh
+there is a secondary flow which is using OF so basically the flow that I shown is one off the the flow ends with the setup
+of the DNS and there is no continuous relationship between the providers but
+there is also a flow which will establish a a longer um um relationship
+with uh or off tokens which will allow the application of parts of the templates uh later. This uh especially
+important for such complex setups like we we've seen before where where there is a multi-step process and the provider
+would like to have the user consent only once and then set up the the the DNS in
+steps uh without bothering the user uh again.
+Um yeah this about the the protection with signature I already mentioned uh there's
+also support for ephemeurial uh records. So basically the records which are set only once and can be deleted afterwards.
+Um and the rest I think already was covered.
+So this a short glimpse of the implementation stat status. As I mentioned the protocol is already a
+pretty widely deployed uh with uh like around 20 DNS providers and uh few
+hundred of uh templates already on the service provider side. So so it's pretty
+pretty good used and there's a short history of how this
+temp this draft went through through ITF. So basically it was presented as uh
+early as 2016 first time uh since then it uh kind of evolved uh its own life uh
+um being let's say worked on and deployed in many places and uh uh and
+2024 was brought up again uh to the ITF uh it had a short period of ad
+sponsorship which uh ended up with the conclusion that it's maybe a bit of to
+uh broad work for for ad sponsorship track and uh that's how the the um let's
+say charting of the working group started which actually concluded quite recently.
+All right. So uh I think this is the first part and I if there are any clarifying questions I think we can open
+the queue if there's anyone.
+So at least there's nothing in the chat yet and I see nothing in the room. So
+unless I don't see ah there's one question.
+Um, Marco Davitz, can you elaborate a little bit on how this is already used in the
+wild because I I seem to have come across this on several occasions when I was doing stuff. Um, so so basically the
+um most of the providers are using this synchronous flow when I presented. So, so basically there wasn't one off uh
+setup where let's say depending on the requirements of the providers of providers that are having just one
+single entry uh and are doing this for texture records. We see a lot of
+providers right now uh setting up the Kim Denmark um SPF because the the let's
+say email security is right now uh very much of the topic. Um there are also
+providers doing let's say more more complex uh setups like like Microsoft but there are also some more creative
+use cases. So uh people also uh are doing the uh dynamic DNS using domain
+connect but using the the off tokens. So so this what we seen and there's like a
+community let's say activity without let's say anyone uh um forcing it. Um
+the what else uh worth mentioning?
+Um so most of most of the cases are let's say standard inter I think I get it. This is somewhat
+longer way of saying yes this is actually being used. Yeah. Yeah. So so as I mentioned
+uh here where where let's say all the services are actively using it. So, so
+basically if if you verify the domain ownership with Google for example and you you have domain with a provider
+which supports that you are using domain connect or Excellent. Thank you. Yeah.
+All right. So now um a bit of about the issues which were um reported uh over
+the time. So uh I I divided into two aspects which are kind of corresponding to what is in the charter. So I think
+the security concerns was one of the biggest topics was was uh uh brought up
+uh on the list. Um so I will quickly go through them.
+Uh so um Paul was uh mentioning that uh there is a um let's say assumption in
+the in the protocol that uh user trusts with all uh DNS records. So uh the zero
+01 uh draft I think makes it more clear uh that uh basically the uh template is
+the constraint for for the changes that uh provider can do and and there is this
+vouching uh element in it. So DNS providers can can see whether the template allows for more things that
+that the user the provider would claim. Um so I think this this already covered.
+Um then um was this uh um indication that the registrant would have to
+understand which which changes are are being made and that the will be confronted with this template language.
+So so as I I presented actually the user interface is built by DNS providers. So
+it can communicate in the way that that their users are used to to see the the
+things and uh and basically they see just what technical setup is is being done. So so there's no uh no need for
+let's say understanding on the templates itself.
+Paul Hoffman um gosh this is low. Oh okay. Um, so I love the fact that
+there's a new trust model section. I think it's very detailed. That's a polite way of
+saying it might be too long, but given that almost every other document that I want a trust model
+section in doesn't have one at all. It's okay. I would love to hear other
+people's opinions because again I love these things and other people might think it's too much
+but I'm really glad that you put it in for this very reason. Thank you. Thank you.
+So the um also in the in the same area was about uh but if warnings uh can or
+generally the communication with the uh human user can be controlled by the the
+attacker. Um so basically the elements which are which can be controlled by the
+pot potentially malicious application provider or service provider are the
+name of the service uh and the logo because uh there there are no other elements that such application provider
+can control and and basically during the deployment of the template the DNS
+provider could even uh let's say check whether uh the company name matches. So
+this this probably not a big uh factor that someone can misuse.
+Uh so the protocol has also an option that these two values can be dynamic but
+this has to be a decision of DNS provider to trust service provider with
+such a template which allows for dynamic things. The dynamic element was introduced actually for the case of
+resellers which will set let's say sell the same product as under different name. Uh but these are very specific
+cases of this kind of of providers where I think the trust uh level between uh
+DNS provider and service provider can be higher.
+Um so this was u brought up during discussion on the charter. Uh I think
+this more or less covers the items that I mentioned before but I but just to for completeness I I brought it here. So um
+unless I hear back otherwise I believe this covered already in 01 or make it
+more clear in in O1 but so there are no material changes in in one but uh uh a
+lot of clarification to to make it more more understandable. Yes, Paul.
+For those of you in the room who know me, I know nothing about OOTH. It's someone else's problem. Um, I would very
+much like to see OOTH people take a good look at this because I sort of had the
+same reaction Paul did. I didn't say anything because again, I don't know that much about OOTH, but having
+specifically OOTH people who don't even necessarily care about your model take a look at this, that would be great.
+Absolutely agree. Yeah.
+So I I don't know if if if is anyone from or here in the room. I I asked the chair to see if someone can join but I
+don't see no um
+and uh there was a mention of uh of possible attacks uh despite the request
+signing uh which is uh part of the protocol uh here uh I would love to hear back
+from you all what can be can it be because this would be something to to take a look into.
+Oh okay that's great that's great thank
+and also the uh false sense of security so if there is a flow which is easy
+people won't pay attention uh I can only agree to that but this more social
+technical problem which uh likely is not solvable by anything which
+makes things easier so the only solution is the let's say make maybe some
+advisory to DNS providers how they could present this stuff so so people pay attention but uh um on the other side
+it's the the question how much uh internet draft should go into directing
+people user interfaces because there's not something that we we do at ITF at that much
+all right so the second aspect was about clarity or removing ambiguities,
+imprecisions and inconsistencies from from the draft. So there was quite few of them reported.
+Uh so I think that this one was basically the conversation we we had
+with Paul on the mailing list that uh many of the issues reported were result
+of bad written draft. Shame on me. Uh this I think is better in in one and I
+hope the uh this would was cons confirmed. Uh Lisa
+unless you want to wait the end. Yeah. This was actually um I was waiting for
+the end issues. This is Lisa Dusso. Yeah, I was waiting for the end of the security issues um because I wanted to
+know if it was possible for different people to be the one setting up this service and the one responsible for the
+DNS because in um it looks like this is possible to be used for domain verification
+is that one of the things that it is a lot used for domain verification. Yeah. And in domain verification, often the person who needs to use this service
+and make sure that they are part of the company that has the domain, they're authorizing themselves somehow to the
+for for example getting an API key and making sure you're a responsible party that can be found and sued if necessary.
+Um, but this person responsible for filling in the DNS is over in IT and, you know, doing another job,
+looking at their messages another day. Is this something that anybody's trying?
+So because I can I could see problems with that but also power in that. So I can imagine how it could be
+working. It will include elements which I maybe don't like like forwarding
+someone a link which is doing some stuff. Uh so this worth investigating.
+It is not not in core use cases which were more in the interactive part but uh
+it can be investigated whether it can work but so if if if the person setting
+things up has to wait for an person in it to go and fill in a text record then they probably can't use this
+uh not in the let's say happy path flow as as it's defined in the protocol.
+Yeah.
+All right. So this we done. So there was also a review
+from uh HTTP directory about uh let's say this aspect because
+this protocol is actually using HTTP pretty heavily. So one was about the the
+hardcoded path segments instead of discoverable mechanisms. uh I had also
+chat with Daryl separately but generally the protocol allows discovery of all key
+endpoints and they don't have to be fixed on the root of the of the domain name let's say in the the URL so the
+provider can deploy it on whatever URL just the paths afterwards as you as you
+saw the the links are let's say defined in the protocol the segments what what what they mean so uh I think this uh
+gives have deployed enough of flexibility for deployments uh and so far there was no
+not really uh feedback from the people implementing it that it would be a
+problem. So uh I think this issue uh we wouldn't address uh in the draft because
+it be potentially breaking things but uh uh the value of this breaking things is
+right now not yet visible. um when the variable substitution was uh
+not clearly described. So this was fixed in in 01 uh how exactly this this should
+work. Uh so if if someone is uh good at verifying whether this description is
+now clear enough uh I would be happy to to hear some feedback.
+Uh Ben uh was a question asked about the uh
+syntax of the variables because the uh URL templates are actually uh using the
+standard RFC uh notation with curly brackets uh whereas the templates use
+the percent uh notation. Um so actually
+there is a clear distinction where are which elements used. So basically the everything which is in protocol part is
+defined let's say with the uh standard RFC URL template notation and everything
+which is dynamic in the protocol. So defined either by the uh DNS provider or
+uh in the template is using this person uh notation. It has actually a security
+benefit of it because if it would be the same and someone let's say would
+programmed it uh uh wrongly uh the template processing could basically mix
+the two and someone could inject the variables into the paths the paths elements which maybe are not intended
+to. So so I think there is a uh good element to to having them distinct.
+Um and there was some clarification about redirect redirect URI. This this
+one was uh already revised in 01. Uh
+there was a point uh about the potential parameter collision. So basically the as
+you seen the apply uh uh link contains parameters which are domain name and
+host which are defined in the protocol they are fixed and the other parameters which are coming from the template and
+they don't have any name spacing con uh concept. So uh this is true um right
+right now without breaking uh the let's say making break changes uh basically
+what uh I've done for one is clarifying either more that that the template that
+is forbidden in the templates to use on of the um defined u variables
+um as uh so far the implementation experience didn't show issue that but uh
+if someone has a strong opinion on it. So please please bring it to to me or to
+the list. Um and um on the a part some elements of
+are kind kind of redefined in in the in the draft. So uh this is probably the
+the part where I would love to hear back from from all of guides whether
+um this can be covered by reference to to the to the existing drafts uh better
+uh some parts of it are let's say maybe a time constraint where uh at the time
+when domain connect was was firstly defined didn't have features like uh reach authorization requests which could
+cover for it. Uh so basically it was compensating some some features which or
+didn't have back back in time. Um maybe this uh uh something worth taking look
+looking uh into um whether it can be revised.
+Um yeah there's also uh still open issue about uh ambiguity between uh in
+asynchronous flow between uh query string parameters and JSON body on on
+post because the actually the protocol supports uh both uh so solutions to to
+that can be different. So either defining a clear precedence or uh basically removing one of the two two
+variants likely the query parameters variance for asynchronous flow. uh but here I would love to hear back more from
+the implementers which of the solutions is actually better or breaking less
+things and um using HTTP problem details RFC
+uh and registering media types for for templates. So both of them are likely
+doable. uh question mark is uh what kind of clients it would break if if a media
+type would appear and when they uh expecting uh let's say generic application JSON media type uh so the uh
+idea was that maybe uh based on accept header it can be it can be done opportunistically
+and uh uh this is one of the potential solution Um
+and uh there was one scenario brought up that uh basically if there are two
+templates which want to set up uh this exactly the same uh record with the same
+content uh actually according to current
+definition it can be considered as a conflict. So one of the templates which would be uh removed but uh actually if
+if they are the same it's maybe not a conflict or this the the specification was uh not clear about it. Um but
+generally generally this uh this cases this use case that was uh brought up is
+already covered by the the main protocol. So basically you can define a template which can be applied several
+times if the the template is identical.
+Yes, there was some some confusion in the part regarding the DS updates. This
+was already clarified in 01. uh and there was uh the um ambiguity
+regarding the UI design. Uh so I think the 01 gives much more clarity. So those
+00 included some mocks of user interface how the user would proceed through the
+protocol. So this was completely removed and there are flow uh diagrams which
+basically shows the interactions between the elements without suggesting that that the user interface is specified in
+the protocol the registration for underscore domain connect record. So this was already uh
+addressed uh or this included in the 01 version
+and uh Peter broke brought up uh issue of uh protocol versioning. So this part
+is indeed not included. uh um the
+question that I would have to to working group for the opinions is uh whether
+it's worth already defining into the depth in in this version rather than just defining a a generic uh or pushing
+the problem to the next version saying that this version is not is 01
+uh without any specific mechanism or versioning and uh whoever brought up 20
+would have to define the the transition path.
+Uh yeah there there was there's a a a good good point that uh basically there's
+this host uh uh parameter which will allow to applying the template to to
+subdomain but uh it's not defined fully what to do if uh or how the protocol
+should behave if the host is underscore domain. Uh so my personal take would be
+that uh it is rather no legit use uh that would need such such a template
+which will applied exactly on this host. Uh but maybe I'm I'm not creative enough
+to to think of it. Uh I I think that it can be misused as well if the user won't
+notice this underscore and will set up something that he wouldn't expect. uh so
+some discussion around this would be would be helpful.
+Yeah. And there was one formal uh issue brought up during the
+uh chartering that the original specification which was uh um pro let's
+say uh worked on on GitHub uh actually uh included MIT license which has a
+standard text about copyright which was assigned to to uh godaddy as the
+original uh let's say um authorship of the of the specification
+and uh this right now fixed. So basically in the last days the there was
+an update uh to creative commerce um uh text uh in this license. So, so
+basically uh in this times there should be no no issue about from the formal
+side about uh ITF taking uh change control over this document and the text.
+Yeah, there was one feature request brought to the list uh about extensions
+of providers who are having uh non-standard DNS features like uh
+fuzzy like uh proxying of of the records or or CNAME flattening. Uh
+this I think question whether whether we should take care of it right now. Um I
+think this uh is how the charter is is built. This would be uh out of the uh
+out of scope right now, but uh this probably conversation that should be uh
+um not forgotten but investigated whether whether it has some some merits.
+Yeah. So, uh I think this is the uh final slide on on on this set. So, uh
+there was a lot of issues already addressed in 01. uh however uh uh only
+now some feedbacks whether it's going in the right direction so so it's good uh more reviews are always helpful so I
+think uh the off topic what was brought up but but any other reviews would be
+would be helpful uh especially on security part if there are
+more stuff to cover would be very helpful and other issues
+Thank you. Um I noticed an unusual amount of of UX um uh description in the
+document and wondered if that was avoidable like particularly the window size stuff. Um seems like that makes
+some assumptions that might not hold for all users. Um there are ways that an
+OOTH flow can work when triggered by a CLI interface, which is another use case
+to bring in mind when you're thinking of whether these things can be left out. I
+would I would love to I would it I don't know if it's possible to remove these elements but it would it would sure be
+better for accessibility and future proofing right I think the the window size
+element which you you brought up it was uh the element which uh actually allows
+the uh DNS provider to inform service provider in case they make a really uh
+popup window how large the window should be so it fits the user interface. So this a
+was a specific pragmatical aspect to it. Uh uh it actually doesn't have any
+formal influence on the protocol flow itself but uh it's a hint
+it might be better to arrange things so that pop-ups aren't needed and then the pop-up size isn't needed.
+Yeah. Thank you.
+Uh Paul Hoffman supporting what Lisa just said, there are still things in
+there that as you say are not part of the protocol um that cause people in the
+IETF to twitch. Um and if it's not part of the protocol and you're the people
+implementing it might think, oh, I know how to do this. I'll make it as tiny text and push it over here. That seems
+unlikely. I would say do a pass and look for everything in the document because
+the UI stuff actually appears at least in two different places and I could have missed others. Um, take it out.
+Take out whatever you can that's not protocol specific while you are still
+saying this is for the browser for the user. I would have loved that to go away. I as I was reading the 01 I
+couldn't see how it went away and it really is sort of core to what you're doing but do as little beyond saying
+this is going to be in the user's browser so as Lisa said size there was also something about explicitness which
+is not something that you can measure things like that just take out those bits if you can I would say
+all right thank
+Yeah. So there's a question last question whether this document in the form would Yeah. So
+first question is is there any more discussion first of all or any more points for the presentation so far? I
+think probably not. So yeah, I also the
+adoption of the slides. So I don't know. Okay. So we can switch to to your slides.
+Give me a second. Yeah. Right.
+Do I do it? That's the first time.
+All right. All right. Thank you. Thank you. Okay.
+All right. Yes. So
+this is the next step. So um as P already said um the document already
+exists in a considerable extent and was already uh discussed with many issues.
+So um um the obvious question is if we should um already adopt the document in
+the current state and proceed further with it under change control of the working group and I think Pavle by
+itself is happy to do that. Um this is a decision we can't take here in the room obviously but this is something we need
+to do after the meeting or uh on the mailing list. Um however I think it would be interesting to get a sense of
+the room and uh of the remote participants um in order to think if
+people agree or disagree or have an opinion at all if this document is ready
+for adoption by the working group in its current state and in order to facilitate this I would try the wonderful
+yeah we have O2 that's the future draft um no is it isn't it the current No.
+Yeah, I took it.
+So, I took it from the data tracker. All right.
+All right.
+Oops. All right. So, I phrase it. I hope it's clear
+enough. Should the working group adopt the current draft? What's your opinion on that? Um, please cast your vote. I
+will give you a couple of seconds. I think the light was slightly dimmed
+for it. Some suspense.
+Total number is 43 people around and so far
+it's not an absolute majority yet but see a lot of yes
+and few no opinions. Um would be particularly interesting probably if
+there is anybody objecting. So we don't see here yet, but obviously that would be certainly interesting if somebody
+sees any points um blocking current adoption. But unless that's the case, I think um
+that's at least a pretty solid statement for um adopting it. As I said, um this
+is not a formally binding uh decision yet here, but chairs will um sometime
+the next days issue a call for adoption formally on the mailing list. And um yeah this will then lead to the actual
+decision and uh for the working group to continue on this and yeah thank you. I
+think I will stop the show of hands at this point. Um another question is
+actually on the practice of the working group. So um this far I think there is a
+GitHub repository. Um it's actually also linked if you look in the data tracker on the working group page. If you
+navigate to the draft, there's actually a link to that GitHub repository and I've seen there's also GitHub issues uh
+which reflect many of the points which Pavle um brought up on the slides. Um so
+Pavl for yourself probably also a question how would you prefer um I think there is set up a notification also to
+the list um um in case there is something happen on the GitHub. Um
+however I would also uh leave it to the group to uh raise uh statements about if
+there's any preference people have on um you know how to handle and discuss these
+issues that might also involve things like do we want to have um uh an interim meeting something like that or we want
+to just proceed until the next ITF meeting in Jensen. Um, is there any any
+opinions in the room
+or in the chat? Um,
+unless it's a case. Okay. Oh, I see a cube. Okay. Sorry.
+So, Paul, I think you're first.
+So power so um about GitHub uh so as you said everything is is in there however
+you know I would love to hear from the people whether uh it's okay but the
+GitHub is in right now in domain connect uh GitHub organization uh because this
+say the draft is on a special branch which is just having this ITF uh variant
+of the specification compared to the the one that people were were using let's say last last years. Uh so I'm happy to
+divide this two to and move it to some dedicated repository from the working group. This is not not an issue if if
+people think that is useful. Uh yeah,
+I can't seem to find the GitHub repos. I can't seem to find the GitHub repository on the data track in the
+additional resources. So maybe I've missed it. Or maybe you Yeah, it's at least mentioned on the draft itself. There's also additional
+resources. I saw it there. Okay, it might not be on the overall page. Sorry.
+Yeah. Um, I mean, I voted in favor of adopt. Oh, I'm still John Lavine. Yes, I I voted in
+favor of adopting this and, you know, and I think we should do it because I mean, it's clear this is something that that people are using and that it's and
+that it addresses a problem. Nonetheless, I mean, I I read through the draft today and it's it seems
+it's what is the thing is describing is fairly complicated, but it seems awfully hard to follow even even. So, so and I'm
+not I'm not quite sure what to do about this. I think part of it is that that we're we're adopting a draft that from a
+document that you you wrote not intending to be for the ITF, you know, and it's, you know, and it came from
+outside. So I am I think I may make some suggestions about you know like coming
+getting people with more ITF experience to help help reorganize it just you know to to make it clearer and stuff which I
+know is something it's fairly common to do with drafts that come from come come from outside. Um, but I don't have
+anything super I don't think I'm volunteering to be a co-author yet. But um, yeah, but I I
+think I I would like to go back and beyond the tech beyond the technical issues just to see if I can come up with suggestions about, you know, how to make
+it clearer like I looked at the threat model and I read the threat model. I think I understand it, but I think I would like to make it clear like what's
+the granularity at which the providers and the DNS operators, you know, agree to accept each other's templates and
+stuff like that. And perhaps also go back and we can just find some more
+examples of people who have actually implemented this, you know, so we can go back and say, well, like when you did this, how did you do it? Just to make
+sure that what we're doing doesn't break existing practice. Um, yeah, just to be just to be clear, I
+think there was some discussion within the ITF already as you know, this document already wandered around for a while and there's been some English
+discussion. So it's certainly not something which totally was coming from the outside yet. Um however as we have
+been learning um there's still also some wording inside probably from from its history which predate uh its its
+um um involvement. Um also the charter somehow mentions um documents in a in a
+plural in theory. So there would be an option since the document by itself is is also large and we shortly discussed
+that in beforehand there would be an option also to split the document even though the question as you said would
+really help out because we would need to coordinate. Yeah, exactly. So uh I think that's
+probably not the solution. Um but yeah, I mean I think any feedback and there was already quite some on that um um
+issue in terms of um you know adapting it to the idea of audience and making it more easily digestible is certainly
+welcome. All right. Um any further opinions from
+the group? Um so then any other business actually
+And I think in my opinion we are done with the meeting for today and we will
+continue work uh on the mailing list probably see each other in Shenzhen and thank you very much for discussion and
+also for the show up of so many faces here at the very first decon meeting. Thank you. Have a nice day.
