@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title></title>
+	<atom:link href="https://www.domainconnect.org/feed/" rel="self" type="application/rss+xml" />
+	<link>https://www.domainconnect.org</link>
+	<description></description>
+	<lastBuildDate>Wed, 26 Feb 2025 22:06:19 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.8.5</generator>
+
+<image>
+	<url>https://www.domainconnect.org/wp-content/uploads/2018/11/cropped-DomainConnectSquareBlack-32x32.png</url>
+	<title></title>
+	<link>https://www.domainconnect.org</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>Domain Connect Specification v2.3: New Record Types and Variables in Numeric Properties</title>
+		<link>https://www.domainconnect.org/domain-connect-specification-v2-3-new-record-types-and-variables-in-numeric-properties/</link>
+		
+		<dc:creator><![CDATA[DomainConnect]]></dc:creator>
+		<pubDate>Wed, 26 Feb 2025 22:06:17 +0000</pubDate>
+				<category><![CDATA[Annoucements]]></category>
+		<category><![CDATA[Documentation]]></category>
+		<category><![CDATA[Dynamic Configuration]]></category>
+		<category><![CDATA[Expanded DNS]]></category>
+		<guid isPermaLink="false">https://www.domainconnect.org/?p=820</guid>
+
+					<description><![CDATA[Domain Connect specification version 2.3 introduces two key enhancements: expanded support for DNS Resource Records (RRs) and the introduction of&#8230;]]></description>
+										<content:encoded><![CDATA[
+<p>Domain Connect specification <a href="https://github.com/Domain-Connect/spec/releases/tag/rev.67">version 2.3</a> introduces two key enhancements: expanded support for DNS Resource Records (RRs) and the introduction of variable support within numerical fields such as TTL and port settings. This update to the specification, released on February 3, 2025, reflects the ongoing contributions of the Domain Connect community and its commitment to practical advancements and broader applicability of the protocol.</p>
+
+
+
+<p>These enhancements originated from community input and feature requests submitted through <a href="https://www.domainconnect.org/inquiries/">Slack</a> and <a href="https://github.com/Domain-Connect/spec/">GitHub</a> as communication platforms. This transparent and collaborative approach is fundamental to the Domain Connect development process. Proposed changes are openly drafted and discussed on GitHub, ensuring visibility and providing opportunities for community feedback. The Domain Connect community then collectively approved the updates through votes conducted on Slack, ensuring the specification&#8217;s evolution aligns with the needs of its users.</p>
+
+
+
+<h3 class="wp-block-heading"><strong>Expanded DNS Record Support</strong></h3>
+
+
+
+<p>Responding to community-driven requests, Domain Connect now incorporates expanded support for DNS Resource Records (RRs), extending beyond the explicitly defined records in prior versions. A notable example of community demand was the inclusion of CAA (Certification Authority Authorization) records.</p>
+
+
+
+<p>With this update, Domain Connect templates can now accommodate a wider range of DNS record types as defined in the <a href="https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml#dns-parameters-4">IANA registry of Resource Record (RR) TYPEs</a> as well as handling of unknown DNS Resource Record Types aligned with <a href="https://www.rfc-editor.org/info/rfc3597">RFC3597</a>. This removes previous limitations on predefined record types. Whether implementing CAA records for security enhancements or integrating other specialized record types, Domain Connect v2.3 provides the necessary framework for seamless integration within domain management workflows. This expansion significantly increases the versatility of Domain Connect, enabling support for a broader spectrum of services and configurations.</p>
+
+
+
+<h3 class="wp-block-heading"><strong>Dynamic Configuration through Variable Numerical Fields</strong></h3>
+
+
+
+<p>Another significant addition in v2.3, is the introduction of variable support within numerical fields of DNS records. Previously, fields such as Time-to-Live (TTL) values and port settings in SRV records were limited to static values. Domain Connect templates can now utilize variables in these fields, enabling dynamic configuration options.</p>
+
+
+
+<p>This update directly addresses requirements identified by Service Providers offering services beyond standard web hosting or email. For instance,providers offering game server hosting often rely on SRV records, frequently requiring operation on different ports within the same host system. Version 2.3 now permits the use of variables within SRV port settings, as well as in other numerical fields like TTL and priority/weight in SRV/MX records.</p>
+
+
+
+<p>For providers offering such adaptable services, Domain Connect can now facilitate streamlined service deployment. Instead of being constrained by fixed port definitions, templates can be designed to accept port numbers as variables. This simplifies the integration of services like game servers or other applications necessitating dynamic port assignments, enhancing user-friendliness and automation.&nbsp;</p>
+
+
+
+<p>While the specification advises careful use of variables in numerical fields to maintain template predictability, this new capability offers a valuable tool for dynamic DNS configurations.</p>
+
+
+
+<p><strong>Provider Support</strong></p>
+
+
+
+<p>With the release of v2.3 also the <a href="https://github.com/Domain-Connect/Templates/blob/master/template.schema">JSON Schema</a> of Domain Connect templates has been updated in the <a href="https://github.com/Domain-Connect/Templates">Public Template Repository</a> to reflect the changes and new capabilities.</p>
+
+
+
+<p>Some other services, like <a href="https://domainconnect.paulonet.eu/dc/free/templateedit">Template Editor</a> or <a href="https://domainconnect.paulonet.eu/">Demo DNS Provider</a> still require an update.</p>
+
+
+
+<p>Some DNS providers implemented the new functionality already, however, as always, the compatibility with a provider has to be confirmed when onboarding a template containing new features.</p>
+
+
+
+<p></p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>Webmaster Integration</title>
+		<link>https://www.domainconnect.org/webmaster-integration/</link>
+		
+		<dc:creator><![CDATA[Robert Philip]]></dc:creator>
+		<pubDate>Thu, 19 Sep 2019 23:20:09 +0000</pubDate>
+				<category><![CDATA[Uncategorized]]></category>
+		<guid isPermaLink="false">https://www.domainconnect.org/?p=479</guid>
+
+					<description><![CDATA[Two recent blog posts, one from Google and the other from Microsoft Bing. Both Google and Microsoft have added capabilities&#8230;]]></description>
+										<content:encoded><![CDATA[
+<p>Two recent blog posts, one from Google and the other from Microsoft Bing.  Both Google and Microsoft have added capabilities to verify domain ownership via DNS using Domain Connect.</p>
+
+
+
+<p><a href="https://blogs.bing.com/webmaster/august-2019/Bing-Webmaster-Tools-simplifies-site-verification-using-Domain-Connect">https://blogs.bing.com/webmaster/august-2019/Bing-Webmaster-Tools-simplifies-site-verification-using-Domain-Connect</a></p>
+
+
+
+<p><a href="https://webmasters.googleblog.com/2019/09/auto-dns-verification.html">https://webmasters.googleblog.com/2019/09/auto-dns-verification.html</a></p>
+
+
+
+<p></p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>CloudFest Hackathon</title>
+		<link>https://www.domainconnect.org/cloudfest-hackathon/</link>
+		
+		<dc:creator><![CDATA[Robert Philip]]></dc:creator>
+		<pubDate>Mon, 25 Mar 2019 11:02:10 +0000</pubDate>
+				<category><![CDATA[Events]]></category>
+		<guid isPermaLink="false">https://www.domainconnect.org/?p=460</guid>
+
+					<description><![CDATA[On March 23rd through March 25th Domain Connect participated in the CloudFest Hackathon. Our team implemented a library that implements&#8230;]]></description>
+										<content:encoded><![CDATA[
+<p>On March 23rd through March 25th Domain Connect participated in the CloudFest Hackathon.</p>
+
+
+
+<p>Our team implemented a library that implements the Domain Connect protocol for DNS Providers. Using this, we protoptyped implementations on top of PowerDNS, cPanel, and Bind.</p>
+
+
+
+<p>This library fills a huge gap in gaining adoption. We&#8217;ve had great sample code for Service Providers for a couple of years, but no sample code to help the DNS Providers. </p>
+
+
+
+<p>This library solves the harder problems of Domain Connect. This includes verification of signatures, processing variables into templates, and applying the template to an existing zone and dealing with conflict resolution.</p>
+
+
+
+<p>The DNS Provider still needs to implement elements of the protocol the flow, including gaining consent, verification of domain ownership, and handling of redirects and UX flow. The DNS Provide also needs to read and write the actual zone contents. But the library handles some of the more difficult challenges DNS Providers face.</p>
+
+
+
+<p>The results of our work can be found at <a href="https://github.com/Domain-Connect/DomainConnectApplyZone">https://github.com/Domain-Connect/DomainConnectApplyZone</a></p>
+
+
+
+<figure class="wp-block-image"><img fetchpriority="high" decoding="async" width="1024" height="768" src="https://www.domainconnect.org/wp-content/uploads/2019/03/Team_DomainConnect-1024x768.jpg" alt="" class="wp-image-461" srcset="https://www.domainconnect.org/wp-content/uploads/2019/03/Team_DomainConnect.jpg 1024w, https://www.domainconnect.org/wp-content/uploads/2019/03/Team_DomainConnect-300x225.jpg 300w, https://www.domainconnect.org/wp-content/uploads/2019/03/Team_DomainConnect-768x576.jpg 768w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>Domain Connect at CloudFest</title>
+		<link>https://www.domainconnect.org/domain-connect-at-cloudfest/</link>
+		
+		<dc:creator><![CDATA[DomainConnect]]></dc:creator>
+		<pubDate>Tue, 19 Mar 2019 14:43:47 +0000</pubDate>
+				<category><![CDATA[Events]]></category>
+		<guid isPermaLink="false">https://www.domainconnect.org/?p=456</guid>
+
+					<description><![CDATA[Meet Domain Connect during the CloudFest &#8211; Hackathon and Panel Discussion. This will be the third year Domain Connect has&#8230;]]></description>
+										<content:encoded><![CDATA[
+<p> Meet Domain Connect during the <a href="https://www.linkedin.com/company/5289511/">CloudFest</a> &#8211; Hackathon and Panel Discussion. </p>
+
+
+
+<p>This will be the third year Domain Connect has participated in the Hackathon. This year again it would show its presence with a new project &#8220;Domain Connect DNS Provider&#8221;. The goal is to build a DNS-Provider on top of standard open source DNS projects (PowerDNS or BIND). Results will be presented on Tuesday at 10am NameStudio<img src="https://s.w.org/images/core/emoji/16.0.1/72x72/2122.png" alt="™" class="wp-smiley" style="height: 1em; max-height: 1em;" /> API Main Forum Ballsaal Berlin.  <a rel="noreferrer noopener" target="_blank" href="https://lnkd.in/eZj3_pK">https://lnkd.in/eZj3_pK</a>  </p>
+
+
+
+<p>Also, don&#8217;t miss the opportunity to hear about current developments, experiences and opinions in the Panel Discussion on Wednesday, with <a href="https://www.linkedin.com/in/ACoAAAAB3BoBfXvK4-cWL1t9Dh9Dd1k7xtDjXMQ/">Arnold Blinn</a> (<a href="https://www.linkedin.com/company/7846/">GoDaddy</a>), <a href="https://www.linkedin.com/in/ACoAAACErx0By60dn1BdgCSIJT9Hdoy0cHYPuSc/">Pawel Kowalik</a> ( <a href="https://www.linkedin.com/company/10298/">1&amp;1 IONOS</a>), <a href="https://www.linkedin.com/in/ACoAAAEZuaoBWANv2phmliN3A4TUwOfrMYqB4kg/">Jan Löffler</a> ( <a href="https://www.linkedin.com/company/10335097/">Plesk</a>) and <a href="https://www.linkedin.com/in/ACoAAABat2sB0NdMMnz6D0h7Dv5Oc7hWzQSi13w/">Kellie Peterson</a> ( <a href="https://www.linkedin.com/company/58194/">Automattic</a>) on Wednesday at 3:35pm in NameStudio<img src="https://s.w.org/images/core/emoji/16.0.1/72x72/2122.png" alt="™" class="wp-smiley" style="height: 1em; max-height: 1em;" /> API Main Forum Ballsaal Berlin. <a rel="noreferrer noopener" target="_blank" href="https://lnkd.in/e-ia3iy">https://lnkd.in/e-ia3iy</a> See you there! <br></p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>Domain Connect and SIDN</title>
+		<link>https://www.domainconnect.org/domain-connect-and-sidn/</link>
+		
+		<dc:creator><![CDATA[DomainConnect]]></dc:creator>
+		<pubDate>Tue, 05 Mar 2019 16:10:01 +0000</pubDate>
+				<category><![CDATA[Annoucements]]></category>
+		<guid isPermaLink="false">https://www.domainconnect.org/?p=452</guid>
+
+					<description><![CDATA[Domain Connect recently presented to SIDN. SIDN manages the .nl ccTLD. We gave an overview of the protocol, ran some&#8230;]]></description>
+										<content:encoded><![CDATA[
+<p>Domain Connect recently presented to SIDN. SIDN manages the .nl ccTLD.</p>
+
+
+
+<p>We gave an overview of the protocol, ran some of our demos, and answered questions from folks at the .nl registry and some active registrars.</p>
+
+
+
+<p>It resulted in this nice article.</p>
+
+
+
+<p><a href="https://www.sidn.nl/a/nl-domain-name/domain-connect-a-new-standard-makes-using-your-domain-name-easier?language_id=2">https://www.sidn.nl/a/nl-domain-name/domain-connect-a-new-standard-makes-using-your-domain-name-easier?language_id=2</a></p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>Spec Updates: Dectecting TXT Record Conflicts</title>
+		<link>https://www.domainconnect.org/spec-updates-dectecting-txt-record-conflicts/</link>
+		
+		<dc:creator><![CDATA[DomainConnect]]></dc:creator>
+		<pubDate>Thu, 22 Nov 2018 14:49:25 +0000</pubDate>
+				<category><![CDATA[Specification]]></category>
+		<guid isPermaLink="false">https://www.domainconnect.org/?p=443</guid>
+
+					<description><![CDATA[We tempted fate at ICANN. A few of us were chatting about how we haven&#8217;t had a spec update in&#8230;]]></description>
+										<content:encoded><![CDATA[<p>We tempted fate at ICANN. A few of us were chatting about how we haven&#8217;t had a spec update in months.</p>
+<p>Naturally we all came home and something came up.</p>
+<p>We&#8217;ve always known that detecting conflicts in TXT records was a bit optimistic. The specification had indicated that adding a TXT record should not detect conflicts with existing TXT records. But we got some feedback that this behavior wasn&#8217;t always desired.</p>
+<p>As such, we&#8217;ve added some simple rules around how conflicts in TXT records should be seen. There are three possible settings for a new value called &#8220;txtConflictMatchingMode&#8221; as an attribute of a TXT record in a template.</p>
+<p>None: This is the default value, and is the existing behavior. With this setting, a template would behave as it always has.</p>
+<p>All: This value indicates that existing values should be detected as conflicts.</p>
+<p>Prefix: This value indicates that existing values with the same prefix (specified in another attribute txtConfictMatchingPrefix).</p>
+<p>For detail section 6.2 of the specification.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>Domain Connect @ ICANN Barcelona</title>
+		<link>https://www.domainconnect.org/domain-connect-icann-barcelona/</link>
+		
+		<dc:creator><![CDATA[DomainConnect]]></dc:creator>
+		<pubDate>Tue, 30 Oct 2018 09:34:04 +0000</pubDate>
+				<category><![CDATA[Events]]></category>
+		<guid isPermaLink="false">https://www.domainconnect.org/?p=420</guid>
+
+					<description><![CDATA[Domain Connect has been around for a couple of years, but we had a coming out part at ICANN in&#8230;]]></description>
+										<content:encoded><![CDATA[<p>Domain Connect has been around for a couple of years, but we had a coming out part at ICANN in Barcelona during the week of October 21st 2018.</p>
+<p>Several DNS Providers (1&amp;1 and GoDaddy) along with Service Providers (Google, Microsoft, and WPEngine) were present. We were also had help from Hubspot and from the Domain Name Association (DNA).</p>
+<p>Our goal was to make sure people knew what Domain Connect was and how it helps the industry. To that end the event was highly successful. The most common reaction was &#8220;this makes a ton of sense&#8221;. We shared several case studies (links will be shared from here in the next couple of weeks) outlining the benefits to Service Providers, DNS Providers, and of course Consumers.</p>
+<p><img decoding="async" class="alignnone size-medium wp-image-421" src="https://www.domainconnect.org/wp-content/uploads/2018/10/IMG_20181022_174613-300x225.jpg" alt="" width="300" height="225" srcset="https://www.domainconnect.org/wp-content/uploads/2018/10/IMG_20181022_174613-300x225.jpg 300w, https://www.domainconnect.org/wp-content/uploads/2018/10/IMG_20181022_174613-768x576.jpg 768w, https://www.domainconnect.org/wp-content/uploads/2018/10/IMG_20181022_174613-1024x768.jpg 1024w" sizes="(max-width: 300px) 100vw, 300px" /></p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>Welcome</title>
+		<link>https://www.domainconnect.org/welcome/</link>
+		
+		<dc:creator><![CDATA[DomainConnect]]></dc:creator>
+		<pubDate>Fri, 20 Jul 2018 18:36:30 +0000</pubDate>
+				<category><![CDATA[Annoucements]]></category>
+		<guid isPermaLink="false">https://www.domainconnect.org/?p=384</guid>
+
+					<description><![CDATA[We&#8217;ve finally launched a blog as part of the Domain Connect website. Domain Connect is over 4 years old. Those&#8230;]]></description>
+										<content:encoded><![CDATA[<p>We&#8217;ve finally launched a blog as part of the Domain Connect website.</p>
+<p>Domain Connect is over 4 years old. Those of us in the weeds have been working with different DNS Providers and Service Providers to define templates and onboard. This has resulted in some great new integrations, some great additions to the specification, and new capabilities for end users and the providers.</p>
+<p>We now have multiple highly active companies contributing to the growth and evolution of the specification and service. Yet we have no easy way for to make make annoucements or celebrate victories.</p>
+<p>We&#8217;ll see how it goes. We can always remove the blog&#8230;</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>

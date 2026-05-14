@@ -1,7 +1,7 @@
 # Domain Connect — Marketing Knowledge Base
 
 **Version:** 1.0 | **Last updated:** May 2026  
-**Author:** Pawel Kowalik, Head of Product Management, DENIC eG  
+**Author:** Pawel Kowalik, Co-Author of Domain Connect specification
 **Sources:** APNIC blog article (Oct 2025), ROW presentation (Oct 2025), IETF-124 DCONN WG presentation (Oct 2025), IETF draft-ietf-dconn-domainconnect-01 (Mar 2026), IETF 123 WG transcript
 
 ---

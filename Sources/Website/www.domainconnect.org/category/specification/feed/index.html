@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Specification</title>
+	<atom:link href="https://www.domainconnect.org/category/specification/feed/" rel="self" type="application/rss+xml" />
+	<link>https://www.domainconnect.org</link>
+	<description></description>
+	<lastBuildDate>Mon, 25 Mar 2019 15:39:33 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.8.5</generator>
+
+<image>
+	<url>https://www.domainconnect.org/wp-content/uploads/2018/11/cropped-DomainConnectSquareBlack-32x32.png</url>
+	<title>Specification</title>
+	<link>https://www.domainconnect.org</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>Spec Updates: Dectecting TXT Record Conflicts</title>
+		<link>https://www.domainconnect.org/spec-updates-dectecting-txt-record-conflicts/</link>
+		
+		<dc:creator><![CDATA[DomainConnect]]></dc:creator>
+		<pubDate>Thu, 22 Nov 2018 14:49:25 +0000</pubDate>
+				<category><![CDATA[Specification]]></category>
+		<guid isPermaLink="false">https://www.domainconnect.org/?p=443</guid>
+
+					<description><![CDATA[We tempted fate at ICANN. A few of us were chatting about how we haven&#8217;t had a spec update in&#8230;]]></description>
+										<content:encoded><![CDATA[<p>We tempted fate at ICANN. A few of us were chatting about how we haven&#8217;t had a spec update in months.</p>
+<p>Naturally we all came home and something came up.</p>
+<p>We&#8217;ve always known that detecting conflicts in TXT records was a bit optimistic. The specification had indicated that adding a TXT record should not detect conflicts with existing TXT records. But we got some feedback that this behavior wasn&#8217;t always desired.</p>
+<p>As such, we&#8217;ve added some simple rules around how conflicts in TXT records should be seen. There are three possible settings for a new value called &#8220;txtConflictMatchingMode&#8221; as an attribute of a TXT record in a template.</p>
+<p>None: This is the default value, and is the existing behavior. With this setting, a template would behave as it always has.</p>
+<p>All: This value indicates that existing values should be detected as conflicts.</p>
+<p>Prefix: This value indicates that existing values with the same prefix (specified in another attribute txtConfictMatchingPrefix).</p>
+<p>For detail section 6.2 of the specification.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>

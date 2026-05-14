@@ -1,0 +1,104 @@
+site_name: Domain Connect Knowledge Base
+site_description: Technical and marketing knowledge base for the Domain Connect protocol
+site_author: Pawel Kowalik
+site_url: https://domainconnect.org/
+
+docs_dir: Knowledge Base
+site_dir: docs
+
+theme:
+  name: material
+  logo: assets/logo.png
+  favicon: assets/favicon.png
+  font:
+    text: Open Sans
+    code: Roboto Mono
+  palette:
+    scheme: default
+    primary: custom
+    accent: custom
+  features:
+    - navigation.sections
+    - navigation.expand
+    - navigation.indexes
+    - navigation.top
+    - toc.follow
+    - search.highlight
+    - search.suggest
+    - content.code.copy
+
+extra_css:
+  - stylesheets/extra.css
+
+markdown_extensions:
+  - admonition
+  - tables
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+  - attr_list
+  - md_in_html
+
+nav:
+  - Home: index.md
+  - Overview: 00_MASTER.md
+  - Context & Problem: 01_Problem_and_Context.md
+  - What Is Domain Connect: 02_What_Is_Domain_Connect.md
+  - How It Works: 03_How_It_Works.md
+  - Protocol Features: 04_Protocol_Features.md
+  - Use Cases:
+    - Summary: 05_Use_Cases.md
+    - UC-01 Email Hosting: Use Cases/UC-01_Email_Hosting.md
+    - UC-02 Email Authentication & Marketing: Use Cases/UC-02_Email_Authentication_Marketing.md
+    - UC-03 Email Security (DMARC): Use Cases/UC-03_Email_Security_DMARC.md
+    - UC-04 Website Hosting (Apex): Use Cases/UC-04_Website_Hosting_Apex.md
+    - UC-05 Website Hosting (Subdomain): Use Cases/UC-05_Website_Hosting_Subdomain.md
+    - UC-05-2 Website Subdomain + SSL: Use Cases/UC-05-2_Website_Subdomain_SSL.md
+    - UC-06 CDN / WAF / Reverse Proxy: Use Cases/UC-06_CDN_WAF_Reverse_Proxy.md
+    - UC-07 URL Redirect: Use Cases/UC-07_URL_Redirect.md
+    - UC-08 Dynamic DNS: Use Cases/UC-08_Dynamic_DNS.md
+    - UC-09 DNS Subdomain Delegation: Use Cases/UC-09_DNS_Subdomain_Delegation.md
+  - Value by Audience: 06_Value_by_Audience.md
+  - Adoption & Ecosystem: 07_Adoption_and_Ecosystem.md
+  - Security Model: 08_Security_Model.md
+  - Getting Involved: 09_Getting_Involved.md
+  - Key Messages: 10_Key_Messages.md
+  - Template Reference: 11_Template_Reference.md
+  - Template Use Cases: 15_Template_Use_Cases.md
+  - Getting Started:
+    - DNS Providers: 12_Getting_Started_DNS_Provider.md
+    - Service Providers: 13_Getting_Started_Service_Provider.md
+  - Storytelling:
+    - Index: 14_Storytelling.md
+    - DNS Provider Stories:
+      - CEO: Stories/dns_provider_ceo.md
+      - Developer: Stories/dns_provider_dev.md
+      - Product Manager: Stories/dns_provider_pm.md
+      - Support: Stories/dns_provider_support.md
+    - Service Provider Stories:
+      - CEO: Stories/service_provider_ceo.md
+      - Developer: Stories/service_provider_dev.md
+      - Product Manager: Stories/service_provider_pm.md
+      - Support: Stories/service_provider_support.md
+    - End User Stories:
+      - Skilled User: Stories/user_skilled.md
+      - Non-technical User: Stories/user_unskilled.md
+    - Explainers:
+      - Index: Stories/Explainers/explainers.md
+      - Blogger: Stories/Explainers/explainer_blogger.md
+      - Casual User: Stories/Explainers/explainer_casual_user.md
+      - Child: Stories/Explainers/explainer_child.md
+      - Grandma: Stories/Explainers/explainer_grandma.md
+      - Influencer: Stories/Explainers/explainer_influencer.md
+      - IT Department: Stories/Explainers/explainer_it_dept.md
+
+extra:
+  generator: false

@@ -33,14 +33,42 @@ Source material for LinkedIn posts, blog articles, conference presentations, par
 | [12](./Knowledge%20Base/12_Getting_Started_DNS_Provider.md) | Getting Started: DNS Provider | Step-by-step implementation guide for DNS Providers |
 | [13](./Knowledge%20Base/13_Getting_Started_Service_Provider.md) | Getting Started: Service Provider | Step-by-step integration guide for Service Providers |
 | [14](./Knowledge%20Base/14_Storytelling.md) | Storytelling | First-person stories and plain-language explainers by audience |
+| [15](./Knowledge%20Base/15_Template_Use_Cases.md) | Template Use Cases | 8 use-case patterns with examples and implementation guidance |
 
 ## Structure
 
 ```
-Knowledge Base/       — 14 linked Markdown documents
-  Stories/            — individual story files (one per role/audience)
+Knowledge Base/       — Markdown source (MkDocs docs_dir)
+  Stories/            — story files per role/audience
     Explainers/       — plain-language explainers + index
+  Use Cases/          — one file per template use-case pattern
 Sources/              — raw source documents (do not modify)
+  assets/             — logo files (PNG, EPS)
+  Website/            — archived domainconnect.org pages
+.github/workflows/
+  pages.yml           — CI: build MkDocs and publish to GitHub Pages
+mkdocs.yml            — MkDocs configuration
+requirements.txt      — Python dependencies
 ```
+
+## Website
+
+The knowledge base is published as a static site using [MkDocs Material](https://squidfunk.github.io/mkdocs-material/), styled to match the Domain Connect brand.
+
+### Local development
+
+```bash
+python3 -m venv .venv
+.venv/bin/pip install -r requirements.txt
+.venv/bin/mkdocs serve
+```
+
+Open [http://127.0.0.1:8000](http://127.0.0.1:8000).
+
+### Deployment
+
+Every push to `main` automatically builds and deploys the site to GitHub Pages via GitHub Actions. No manual steps required.
+
+> **Repository setting:** Pages → Source must be set to **GitHub Actions**.
 
 *Live stats: [stats.domainconnect.org](https://stats.domainconnect.org)*

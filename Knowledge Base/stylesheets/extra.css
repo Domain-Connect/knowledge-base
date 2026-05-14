@@ -1,0 +1,102 @@
+/* Domain Connect brand colors from domainconnect.org (Ascension theme) */
+/* Primary: #03263B  Secondary: #0b3954  Accent: #00bfff  Tertiary: #bddae6 */
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap');
+
+:root {
+  --dc-primary:   #03263B;
+  --dc-secondary: #0b3954;
+  --dc-accent:    #00bfff;
+  --dc-tertiary:  #bddae6;
+}
+
+/* Override Material theme palette with DC brand */
+[data-md-color-scheme="dc"] {
+  --md-primary-fg-color:        var(--dc-primary);
+  --md-primary-fg-color--light: var(--dc-secondary);
+  --md-primary-fg-color--dark:  #021d2c;
+  --md-accent-fg-color:         var(--dc-accent);
+  --md-typeset-a-color:         var(--dc-accent);
+}
+
+/* Font: Open Sans everywhere, matching the original site */
+body,
+.md-typeset,
+.md-nav,
+.md-header,
+.md-footer {
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 400;
+}
+
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4,
+.md-typeset h5,
+.md-typeset h6 {
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  color: var(--dc-primary);
+}
+
+/* Header */
+.md-header {
+  background-color: var(--dc-primary);
+}
+
+.md-header__title {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 700;
+}
+
+/* Sidebar nav */
+.md-nav__title {
+  font-weight: 700;
+  color: var(--dc-secondary);
+}
+
+/* Accent on links */
+.md-typeset a {
+  color: var(--dc-accent);
+}
+
+.md-typeset a:hover {
+  color: var(--dc-secondary);
+}
+
+/* Footer */
+.md-footer {
+  background-color: var(--dc-primary);
+}
+
+.md-footer-meta {
+  background-color: #021d2c;
+}
+
+/* Tables: alternating rows, matching site style */
+.md-typeset table:not([class]) th {
+  background-color: var(--dc-secondary);
+  color: #fff;
+}
+
+.md-typeset table:not([class]) tr:hover td {
+  background-color: rgba(3, 38, 59, 0.05);
+}
+
+/* Admonition accent color */
+.md-typeset .admonition,
+.md-typeset details {
+  border-left-color: var(--dc-accent);
+}
+
+/* Search highlight */
+.md-search-result mark {
+  color: var(--dc-accent);
+}
+
+/* Logo sizing */
+.md-header__button.md-logo img {
+  height: 2rem;
+  width: auto;
+}

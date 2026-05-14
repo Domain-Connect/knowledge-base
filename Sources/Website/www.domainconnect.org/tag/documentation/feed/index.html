@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Documentation</title>
+	<atom:link href="https://www.domainconnect.org/tag/documentation/feed/" rel="self" type="application/rss+xml" />
+	<link>https://www.domainconnect.org</link>
+	<description></description>
+	<lastBuildDate>Wed, 26 Feb 2025 22:06:19 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.8.5</generator>
+
+<image>
+	<url>https://www.domainconnect.org/wp-content/uploads/2018/11/cropped-DomainConnectSquareBlack-32x32.png</url>
+	<title>Documentation</title>
+	<link>https://www.domainconnect.org</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>Domain Connect Specification v2.3: New Record Types and Variables in Numeric Properties</title>
+		<link>https://www.domainconnect.org/domain-connect-specification-v2-3-new-record-types-and-variables-in-numeric-properties/</link>
+		
+		<dc:creator><![CDATA[DomainConnect]]></dc:creator>
+		<pubDate>Wed, 26 Feb 2025 22:06:17 +0000</pubDate>
+				<category><![CDATA[Annoucements]]></category>
+		<category><![CDATA[Documentation]]></category>
+		<category><![CDATA[Dynamic Configuration]]></category>
+		<category><![CDATA[Expanded DNS]]></category>
+		<guid isPermaLink="false">https://www.domainconnect.org/?p=820</guid>
+
+					<description><![CDATA[Domain Connect specification version 2.3 introduces two key enhancements: expanded support for DNS Resource Records (RRs) and the introduction of&#8230;]]></description>
+										<content:encoded><![CDATA[
+<p>Domain Connect specification <a href="https://github.com/Domain-Connect/spec/releases/tag/rev.67">version 2.3</a> introduces two key enhancements: expanded support for DNS Resource Records (RRs) and the introduction of variable support within numerical fields such as TTL and port settings. This update to the specification, released on February 3, 2025, reflects the ongoing contributions of the Domain Connect community and its commitment to practical advancements and broader applicability of the protocol.</p>
+
+
+
+<p>These enhancements originated from community input and feature requests submitted through <a href="https://www.domainconnect.org/inquiries/">Slack</a> and <a href="https://github.com/Domain-Connect/spec/">GitHub</a> as communication platforms. This transparent and collaborative approach is fundamental to the Domain Connect development process. Proposed changes are openly drafted and discussed on GitHub, ensuring visibility and providing opportunities for community feedback. The Domain Connect community then collectively approved the updates through votes conducted on Slack, ensuring the specification&#8217;s evolution aligns with the needs of its users.</p>
+
+
+
+<h3 class="wp-block-heading"><strong>Expanded DNS Record Support</strong></h3>
+
+
+
+<p>Responding to community-driven requests, Domain Connect now incorporates expanded support for DNS Resource Records (RRs), extending beyond the explicitly defined records in prior versions. A notable example of community demand was the inclusion of CAA (Certification Authority Authorization) records.</p>
+
+
+
+<p>With this update, Domain Connect templates can now accommodate a wider range of DNS record types as defined in the <a href="https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml#dns-parameters-4">IANA registry of Resource Record (RR) TYPEs</a> as well as handling of unknown DNS Resource Record Types aligned with <a href="https://www.rfc-editor.org/info/rfc3597">RFC3597</a>. This removes previous limitations on predefined record types. Whether implementing CAA records for security enhancements or integrating other specialized record types, Domain Connect v2.3 provides the necessary framework for seamless integration within domain management workflows. This expansion significantly increases the versatility of Domain Connect, enabling support for a broader spectrum of services and configurations.</p>
+
+
+
+<h3 class="wp-block-heading"><strong>Dynamic Configuration through Variable Numerical Fields</strong></h3>
+
+
+
+<p>Another significant addition in v2.3, is the introduction of variable support within numerical fields of DNS records. Previously, fields such as Time-to-Live (TTL) values and port settings in SRV records were limited to static values. Domain Connect templates can now utilize variables in these fields, enabling dynamic configuration options.</p>
+
+
+
+<p>This update directly addresses requirements identified by Service Providers offering services beyond standard web hosting or email. For instance,providers offering game server hosting often rely on SRV records, frequently requiring operation on different ports within the same host system. Version 2.3 now permits the use of variables within SRV port settings, as well as in other numerical fields like TTL and priority/weight in SRV/MX records.</p>
+
+
+
+<p>For providers offering such adaptable services, Domain Connect can now facilitate streamlined service deployment. Instead of being constrained by fixed port definitions, templates can be designed to accept port numbers as variables. This simplifies the integration of services like game servers or other applications necessitating dynamic port assignments, enhancing user-friendliness and automation.&nbsp;</p>
+
+
+
+<p>While the specification advises careful use of variables in numerical fields to maintain template predictability, this new capability offers a valuable tool for dynamic DNS configurations.</p>
+
+
+
+<p><strong>Provider Support</strong></p>
+
+
+
+<p>With the release of v2.3 also the <a href="https://github.com/Domain-Connect/Templates/blob/master/template.schema">JSON Schema</a> of Domain Connect templates has been updated in the <a href="https://github.com/Domain-Connect/Templates">Public Template Repository</a> to reflect the changes and new capabilities.</p>
+
+
+
+<p>Some other services, like <a href="https://domainconnect.paulonet.eu/dc/free/templateedit">Template Editor</a> or <a href="https://domainconnect.paulonet.eu/">Demo DNS Provider</a> still require an update.</p>
+
+
+
+<p>Some DNS providers implemented the new functionality already, however, as always, the compatibility with a provider has to be confirmed when onboarding a template containing new features.</p>
+
+
+
+<p></p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>
