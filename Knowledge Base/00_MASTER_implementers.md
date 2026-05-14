@@ -17,7 +17,7 @@ This edition is for DNS providers, service providers, template authors, and prot
 | **Template author** | Field-by-field template reference, use-case patterns, contribution process |
 | **Protocol contributor or IETF participant** | Full protocol specification context, security model, open issues, WG participation |
 
-Looking for messaging, stories, or business-case materials? See the [Marketing & Communications Edition](/marketing-kb/).
+Looking for messaging, stories, or business-case materials? See the [Marketing & Communications Edition](../../marketing-kb/).
 
 ---
 

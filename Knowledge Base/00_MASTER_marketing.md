@@ -17,7 +17,7 @@ This edition is for people who communicate Domain Connect to external audiences 
 | **Product manager or business lead** | Plain-language explainers, audience-specific value propositions |
 | **Partner or registrar outreach** | Business case data, adoption statistics, ecosystem overview |
 
-Looking for technical implementation details? See the [Implementers Edition](/implementers-kb/).
+Looking for technical implementation details? See the [Implementers Edition](../../implementers-kb/).
 
 ---
 

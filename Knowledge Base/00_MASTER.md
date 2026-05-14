@@ -16,7 +16,7 @@ This knowledge base is published in two focused editions. Choose the one that ma
 
 ---
 
-## [Marketing & Communications Edition](/marketing-kb/)
+## [Marketing & Communications Edition](../../marketing-kb/)
 
 For marketing professionals, communications teams, conference speakers, and partner outreach. Covers the business case, key messages, soundbites, storytelling guides, and audience-specific narratives.
 
@@ -24,7 +24,7 @@ For marketing professionals, communications teams, conference speakers, and part
 
 ---
 
-## [Implementers Edition](/implementers-kb/)
+## [Implementers Edition](../../implementers-kb/)
 
 For DNS providers, service providers, and protocol contributors. Covers the technical protocol, template structure, security model, step-by-step implementation guides, and IETF participation.
 
