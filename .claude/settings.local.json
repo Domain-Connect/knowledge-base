@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(curl -s \"https://stats.domainconnect.org/stats.json\")"
+      "Bash(curl -s \"https://stats.domainconnect.org/stats.json\")",
+      "Bash(.venv/bin/python3 -)"
     ]
   }
 }

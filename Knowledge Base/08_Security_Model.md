@@ -12,6 +12,8 @@ Domain Connect is an authorization protocol operating on a sensitive resource: t
 
 ## Trust Model
 
+![Domain Connect three-party trust model](media/trust_model.svg)
+
 ### The three-party trust hierarchy
 
 Domain Connect establishes explicit trust relationships between three parties:
@@ -23,6 +25,14 @@ This out-of-band vetting process is the foundation of the trust model: malicious
 
 **User trusts the DNS Provider**
 The user's consent is obtained by their own DNS Provider — a party they already have a relationship with (they use them for DNS hosting). The consent screen is controlled entirely by the DNS Provider, not by the Service Provider. The Service Provider cannot manipulate what the user sees or bypass the consent step.
+
+![GoDaddy + Shopify consent screen — controlled by DNS Provider](media/screenshot_godaddy_consent.png)
+
+*The consent screen is rendered and controlled by GoDaddy (the DNS Provider). Shopify cannot alter its content or bypass it.*
+
+![Reference implementation consent screen showing exact DNS records](media/screenshot_consent_reference.png)
+
+*Reference implementation: the consent screen displays the exact DNS records that will be written, allowing informed user approval.*
 
 **DNS Provider verifies user identity and zone ownership**
 Before applying any template, the DNS Provider must authenticate the user and verify that the user controls the target zone. A user cannot apply DNS changes to a domain they don't own, even if they have a valid redirect URL.

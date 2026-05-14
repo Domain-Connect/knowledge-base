@@ -16,6 +16,14 @@ The CENTR Domain Renewal Study 2024 reveals the underlying mechanism:
 | Low content | ~78% |
 | High content | ~90% |
 
+![CENTR30 median domain growth 2022–2025](media/chart_domain_growth.png)
+
+*Median domain growth across CENTR30 registries, declining from ~4% (Jan 2022) to near 0% (Jan 2025). Source: CENTR / ROW 2025 presentation.*
+
+![CENTR30 median create/delete ratio 2022–2024](media/chart_create_delete_ratio.png)
+
+*Deletes ratio (red) narrowing the gap with creates ratio (grey), reflecting structural pressure on domain base growth. Source: CENTR Jamboree 2025.*
+
 **The business implication:** Getting domains into active use is not a nice-to-have for registries and registrars — it is the single most important lever for renewal revenue. A domain sitting unused after registration is a customer walking out the door at renewal time.
 
 ---
@@ -43,6 +51,10 @@ DNS configuration is a hidden but catastrophic failure point in the domain user 
 - **16 help sites** maintained by Microsoft (10 of them registrar-specific, because every registrar's DNS interface is different)
 - **40 minutes** of training needed to reliably complete the process
 
+![Microsoft 365 manual DNS configuration help page](media/screenshot_ms365_manual_dns.png)
+
+*One of the 16 Microsoft 365 DNS help articles — each DNS record requires its own instructions, and the instructions differ per registrar.*
+
 The result? **Approximately 50% of users who attempt manual DNS configuration fail and abandon the process.**
 
 These are not uninterested visitors — these are paying customers who have already registered a domain and signed up for a service. They are motivated. They fail because the technical complexity is genuinely beyond most non-expert users.
@@ -55,13 +67,7 @@ This pattern repeats across Google Workspace, Shopify, Squarespace, Apple iCloud
 
 The problem is architectural. Three parties are involved, and none of them communicate directly with each other:
 
-```
-SaaS Service Provider          End User              DNS Provider / Registrar
-─────────────────────          ────────              ──────────────────────────
-Knows what DNS records         Has no DNS            Has a generic DNS
-are needed, but cannot         skills or             administration UI, no
-write them directly            knowledge             service-specific guidance
-```
+![Three-actor DNS configuration gap](media/three_actor_problem.svg)
 
 The service provider knows what DNS configuration is needed for their service, but they cannot access the user's DNS zone. The DNS provider has full access to the zone, but has no idea what the service provider needs. The user sits in the middle, expected to translate between the two — without the knowledge to do so.
 

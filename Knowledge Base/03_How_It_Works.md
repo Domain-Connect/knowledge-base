@@ -49,6 +49,8 @@ The SP calls the DNS Provider's settings endpoint (a JSON document called the "d
 **Step 3 — Check Template Support**  
 The SP queries the DNS Provider's API to confirm that its specific template is deployed and supported. If the answer is yes, the user is offered the "connect automatically" button. If not, the SP falls back to showing manual DNS instructions.
 
+![Domain Connect discovery sequence](media/discovery_sequence.svg)
+
 **What the user sees:** Nothing. This entire discovery process happens invisibly in the background, typically in less than a second.
 
 ---
@@ -57,22 +59,21 @@ The SP queries the DNS Provider's API to confirm that its specific template is d
 
 This is the most common flow — used for one-off service connections where the user is present.
 
-```
-User → enters domain at Service Provider
-     → Service Provider detects Domain Connect support (discovery)
-     → Service Provider presents "Connect automatically" button
-     → User clicks button
-     → Browser redirects to DNS Provider's Domain Connect URL
-       (URL contains: template ID, domain name, variable values, optional signature)
-     → DNS Provider authenticates the user (login)
-     → DNS Provider verifies user owns/controls this domain
-     → DNS Provider shows consent screen (what records will be changed)
-     → User clicks "Connect" / "Approve"
-     → DNS Provider writes DNS records to the zone
-     → DNS Provider redirects back to Service Provider (or closes window)
-     → Service Provider verifies DNS changes (optional polling)
-     → User sees success confirmation
-```
+![Domain Connect synchronous flow](media/sync_flow.svg)
+
+The screenshots below show a real-world example: connecting a custom domain to Shopify via GoDaddy as the DNS Provider.
+
+![Shopify "Connect existing domain" dialog — user enters their domain name](media/screenshot_shopify_connect_dialog.png)
+
+*Step 1: The user enters their domain name in Shopify's interface.*
+
+![Shopify detects GoDaddy Domain Connect support and offers "Connect automatically"](media/screenshot_shopify_connect_automatically.png)
+
+*After discovery: Shopify detects that GoDaddy supports Domain Connect and offers one-click setup alongside the manual option.*
+
+![GoDaddy login page during the Domain Connect flow](media/screenshot_godaddy_login.png)
+
+*The user is redirected to GoDaddy to authenticate — the DNS Provider controls this step entirely.*
 
 **Key security checkpoints in this flow:**
 - The DNS Provider authenticates the user — no one else can approve changes to their zone
@@ -96,17 +97,7 @@ Some services need to make DNS changes over time, or in multiple steps, without 
 
 Steps 1–14 are identical to the synchronous flow (discovery, authentication, domain verification). The divergence begins at the consent step:
 
-```
-[... steps 1-14 same as synchronous flow ...]
-→ DNS Provider shows consent for FUTURE DNS changes (not just current)
-→ User grants consent
-→ DNS Provider issues OAuth authorization code
-→ Service Provider exchanges code for access token
-→ [Later, without user present:]
-→ Service Provider sends API request with access token
-→ DNS Provider applies DNS changes
-→ Service Provider confirms success (asynchronously notifies user)
-```
+![Domain Connect asynchronous OAuth flow](media/async_flow.svg)
 
 **OAuth token scope:** Tokens are scoped precisely to the specific template and the resource records it covers. A token granted for "Shopify Website" cannot be used to modify MX records or any other records outside the template's scope. Only subdomain scoping has some flexibility (none, single, multiple, or any).
 
@@ -114,7 +105,11 @@ Steps 1–14 are identical to the synchronous flow (discovery, authentication, d
 
 ## Template Structure
 
-A template is a JSON document with the following components:
+A template is a JSON document with the following components. The screenshot below shows a complete minimal example from the IETF specification:
+
+![Example Domain Connect template JSON](media/screenshot_template_json.png)
+
+*A complete minimal template: identification fields, two DNS records (A + TXT), a variable (`%IP%`, `%RANDOMTEXT%`), conflict resolution mode, and signing configuration.*
 
 ### Identification
 ```json
@@ -200,12 +195,15 @@ The DNS Provider presents a human-readable consent screen to the user before mak
 - What DNS changes will be made (record type, hostname, value)
 - Any conflicts with existing records
 
-Example (from GoDaddy's implementation connecting Shopify):
+The screenshots below show two real consent screens — GoDaddy's production implementation (Shopify integration) and the reference implementation from the IETF specification:
 
-> **Connect you domain to Shopify Site.**  
-> *cookingwithwalters.shop*  
-> Click **Connect** to enable the service **Shopify Site** from **Shopify** for cookingwithwalters.shop.  
-> [Connect] [Cancel]
+![GoDaddy + Shopify Domain Connect consent screen](media/screenshot_godaddy_consent.png)
+
+*GoDaddy's consent screen: shows service name, domain being configured, and a single "Connect" button. The Service Provider cannot alter this UI.*
+
+![Reference consent screen — DNS Provider reference implementation](media/screenshot_consent_reference.png)
+
+*Reference implementation consent screen: shows the exact DNS records that will be written (type, hostname, value) before the user approves.*
 
 The user can always cancel. The DNS Provider controls this UI — the Service Provider cannot manipulate it beyond providing the service name and logo (which were vetted during template onboarding).
 
@@ -214,6 +212,10 @@ The user can always cancel. The DNS Provider controls this UI — the Service Pr
 ## After the Connection
 
 Once the user approves and DNS records are written:
+
+![Shopify confirms DNS is live in all regions globally](media/screenshot_shopify_dns_live.png)
+
+*Shopify's post-connection confirmation: DNS records verified as live across all regions.*
 
 1. The DNS Provider redirects the user back to the Service Provider (or closes the popup)
 2. The Service Provider may poll DNS to verify propagation

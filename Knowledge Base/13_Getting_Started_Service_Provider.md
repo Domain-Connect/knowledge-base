@@ -185,6 +185,10 @@ This is the client-side integration in your own application.
 
 When a user enters their domain name in your interface:
 
+![Shopify "Connect existing domain" dialog](media/screenshot_shopify_connect_dialog.png)
+
+*The user enters their domain name in your interface — this triggers the discovery flow in the background.*
+
 1. **Look up `_domainconnect.<domain>`** as a DNS TXT record
    - If the record does not exist: Domain Connect is not supported for this domain → show manual instructions
 2. **Fetch the settings document** at `https://{record-value}/v2/{domain}/settings`
@@ -198,6 +202,10 @@ If Domain Connect is not available at any step, always fall back gracefully to m
 ### Redirect construction
 
 When the user clicks "Connect":
+
+![Shopify surfaces "Connect automatically" after detecting Domain Connect support](media/screenshot_shopify_connect_automatically.png)
+
+*After successful discovery, show a "Connect automatically" button. Always keep the manual option available as fallback.*
 
 ```
 {urlSyncUX}/v2/domainTemplates/providers/{providerId}/services/{serviceId}/apply

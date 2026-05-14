@@ -24,6 +24,8 @@ If you are new to Domain Connect, implement the **synchronous flow** first. It c
 
 Discovery is how a Service Provider finds out that your DNS provider supports Domain Connect, and learns your API endpoints. It consists of three parts:
 
+![Domain Connect discovery sequence](media/discovery_sequence.svg)
+
 ### 1a. `_domainconnect` TXT record
 
 For each zone you host, respond to DNS queries for `_domainconnect.<domain>` with a TXT record containing your API base URL (authority + optional path, no scheme, no query or fragment).
@@ -95,6 +97,11 @@ Your UX must:
 1. **Validate the request** — check that all required parameters are present and the template is deployed
 2. **Verify the URL signature** (if `syncPubKeyDomain` is set in the template) — fetch the public key from DNS at `{key}.{syncPubKeyDomain}`, reassemble fragments if split, and verify the `sig` parameter. Reject unsigned requests for templates that require signing
 3. **Authenticate the user** — use your existing login flow; the user must be logged into your system
+
+   ![GoDaddy login page during a Domain Connect flow](media/screenshot_godaddy_login.png)
+
+   *Example: GoDaddy's login page, reached via redirect from the Service Provider. The URL bar shows the Domain Connect apply endpoint.*
+
 4. **Verify zone ownership** — confirm the `domain` parameter is in the authenticated user's account
 5. **Resolve variables** — substitute all `%VARNAME%` expressions in the template records with the values from the query string
 6. **Perform conflict detection** — check resolved records against the existing zone; present conflicts to the user before proceeding

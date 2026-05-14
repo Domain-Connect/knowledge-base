@@ -20,6 +20,10 @@ Domain Connect was designed for a specific problem: the gap between "domain regi
 
 **With Domain Connect:** The user types their domain into the service's interface. The service detects that the DNS provider supports Domain Connect. The user clicks "Connect," logs into their DNS provider, sees a plain-language description of what will be configured, approves, and is done.
 
+![Shopify offers "Connect automatically" via GoDaddy Domain Connect](media/screenshot_shopify_connect_automatically.png)
+
+*Real-world example: Shopify detects GoDaddy Domain Connect support and surfaces a one-click setup button. "Manual setup" remains available as fallback.*
+
 **Real-world examples:** Shopify, Squarespace, Weebly, and other website builders have deployed Domain Connect templates with major DNS providers.
 
 **DNS records typically involved:** A or CNAME (to point the domain to the hosting platform), TXT (for ownership verification)

@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 680" width="760" height="680" font-family="Arial, Helvetica, sans-serif">
+  <rect width="760" height="680" fill="#f8f9fa" rx="8"/>
+  <text x="380" y="28" text-anchor="middle" font-size="14" font-weight="bold" fill="#374151">Domain Connect — Synchronous Flow</text>
+
+  <!-- Actor header boxes -->
+  <rect x="20"  y="44" width="150" height="42" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="95"  y="70" text-anchor="middle" font-size="12" font-weight="bold" fill="#92400e">User / Browser</text>
+
+  <rect x="295" y="44" width="170" height="42" rx="6" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="380" y="70" text-anchor="middle" font-size="12" font-weight="bold" fill="#1d4ed8">Service Provider</text>
+
+  <rect x="575" y="44" width="165" height="42" rx="6" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="657" y="63" text-anchor="middle" font-size="12" font-weight="bold" fill="#166534">DNS Provider</text>
+  <text x="657" y="78" text-anchor="middle" font-size="11" fill="#166534">(User's registrar/host)</text>
+
+  <!-- Lifelines — x anchors: user=95, sp=380, dnsp=657 -->
+  <line x1="95"  y1="86" x2="95"  y2="648" stroke="#d1d5db" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="380" y1="86" x2="380" y2="648" stroke="#d1d5db" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="657" y1="86" x2="657" y2="648" stroke="#d1d5db" stroke-width="1" stroke-dasharray="4,3"/>
+
+  <!-- row positions (top of arrow): base=110, step=40 -->
+  <!-- r1=110, r2=150(box), r3=200, r4=240, r5=280(box), r6=330, r7=370, r8=410, r9=450, r10=490, r11=530(box), r12=570, r13=610 -->
+
+  <!-- ① User → SP: enter domain name  y=110 -->
+  <text x="237" y="104" text-anchor="middle" font-size="11" fill="#374151">① Enter domain name</text>
+  <line x1="102" y1="112" x2="373" y2="112" stroke="#374151" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- ② SP internal: discovery box  y=130–168 -->
+  <rect x="295" y="128" width="170" height="36" rx="4" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="380" y="147" text-anchor="middle" font-size="11" fill="#1e40af">② Discovery (background)</text>
+  <text x="380" y="160" text-anchor="middle" font-size="10" fill="#60a5fa">_domainconnect lookup + template check</text>
+
+  <!-- ③ SP → User: show "Connect automatically" button  y=196 -->
+  <text x="237" y="190" text-anchor="middle" font-size="11" fill="#374151">③ Show "Connect automatically" button</text>
+  <line x1="373" y1="198" x2="102" y2="198" stroke="#374151" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#a)"/>
+
+  <!-- ④ User → SP: click Connect  y=236 -->
+  <text x="237" y="230" text-anchor="middle" font-size="11" fill="#374151">④ User clicks "Connect"</text>
+  <line x1="102" y1="238" x2="373" y2="238" stroke="#374151" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- ⑤ SP internal: build signed redirect URL  box y=254–278 -->
+  <rect x="295" y="252" width="170" height="28" rx="4" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="380" y="270" text-anchor="middle" font-size="11" fill="#1e40af">⑤ Build signed redirect URL</text>
+
+  <!-- ⑥ SP → DNSP: HTTP redirect  y=300 -->
+  <text x="518" y="294" text-anchor="middle" font-size="11" fill="#374151">⑥ HTTP redirect (template + variables)</text>
+  <line x1="387" y1="302" x2="650" y2="302" stroke="#374151" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- ⑦ DNSP → User: redirect to login page  y=340 -->
+  <text x="376" y="334" text-anchor="middle" font-size="11" fill="#374151">⑦ Redirect to login page</text>
+  <line x1="650" y1="342" x2="102" y2="342" stroke="#374151" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#a)"/>
+
+  <!-- ⑧ User → DNSP: authenticate + zone ownership  y=380 -->
+  <text x="376" y="374" text-anchor="middle" font-size="11" fill="#374151">⑧ User authenticates + zone ownership verified</text>
+  <line x1="102" y1="382" x2="650" y2="382" stroke="#374151" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- ⑨ DNSP → User: show consent screen  y=420 -->
+  <text x="376" y="414" text-anchor="middle" font-size="11" fill="#374151">⑨ Show consent screen (what records will change)</text>
+  <line x1="650" y1="422" x2="102" y2="422" stroke="#374151" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#a)"/>
+
+  <!-- ⑩ User → DNSP: approve  y=460 -->
+  <text x="376" y="454" text-anchor="middle" font-size="11" fill="#374151">⑩ User clicks "Connect" / approves</text>
+  <line x1="102" y1="462" x2="650" y2="462" stroke="#374151" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- ⑪ DNSP internal: DNS records written  box y=476–502 -->
+  <rect x="575" y="474" width="165" height="30" rx="4" fill="#f0fdf4" stroke="#86efac" stroke-width="1"/>
+  <text x="657" y="493" text-anchor="middle" font-size="11" fill="#166534" font-weight="bold">⑪ DNS records written to zone</text>
+
+  <!-- ⑫ DNSP → SP: redirect back  y=522 -->
+  <text x="518" y="516" text-anchor="middle" font-size="11" fill="#374151">⑫ Redirect back to Service Provider</text>
+  <line x1="650" y1="524" x2="387" y2="524" stroke="#374151" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <!-- ⑬ SP → User: success confirmation  y=562 -->
+  <text x="237" y="556" text-anchor="middle" font-size="11" fill="#374151">⑬ Success confirmation shown to user</text>
+  <line x1="373" y1="564" x2="102" y2="564" stroke="#374151" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#a)"/>
+
+  <!-- Footer note -->
+  <rect x="20" y="590" width="720" height="30" rx="5" fill="#fafafa" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="380" y="609" text-anchor="middle" font-size="10" fill="#6b7280" font-style="italic">User is present throughout. Entire interactive portion completes in under 60 seconds in typical implementations.</text>
+
+  <defs>
+    <marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#374151"/>
+    </marker>
+  </defs>
+</svg>
