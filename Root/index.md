@@ -12,7 +12,7 @@ Choose the edition that fits your role:
 
 <div class="dc-editions" markdown>
 
-## [Marketing & Communications](../marketing-kb/)
+## [Marketing & Communications](./marketing-kb/)
 
 For marketing professionals, communications teams, conference speakers, and partner outreach.
 
@@ -20,9 +20,9 @@ Covers the business case, key messages, soundbites, storytelling guides, and aud
 
 **Go here if you** write posts or articles, prepare talks, brief analysts, or pitch Domain Connect to partners.
 
-[Open Marketing Edition →](../marketing-kb/){ .md-button .md-button--primary }
+[Open Marketing Edition →](./marketing-kb/){ .md-button .md-button--primary }
 
-## [Implementers](../implementers-kb/)  
+## [Implementers](./implementers-kb/)  
 
 For DNS providers, service providers, template authors, and protocol contributors.
 
@@ -30,6 +30,6 @@ Covers the technical protocol, template structure, security model, step-by-step 
 
 **Go here if you** are building Domain Connect into a platform, authoring templates, or contributing to the spec.
 
-[Open Implementers Edition →](../implementers-kb/){ .md-button .md-button--primary }
+[Open Implementers Edition →](./implementers-kb/){ .md-button .md-button--primary }
 
 </div>
