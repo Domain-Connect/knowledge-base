@@ -37,6 +37,7 @@ CLAUDE.md                   — this file
 | 12_Getting_Started_DNS_Provider.md | Step-by-step implementation guide for DNS Providers |
 | 13_Getting_Started_Service_Provider.md | Step-by-step integration guide for Service Providers |
 | 14_Storytelling.md | Index of stories and explainers; Stories/ subfolder contains individual files per role/audience |
+| 15_Template_Use_Cases.md | Index of 8 use-case patterns; Use Cases/ subfolder has one document per pattern with examples and implementation guidance |
 
 ### Source documents
 
@@ -80,7 +81,7 @@ Statistics from [stats.domainconnect.org](https://stats.domainconnect.org) (upda
 | Find use cases | 05 |
 | Convince a registrar or DNS provider | 06, 07 |
 | Answer "Is it a real standard?" | 07, 09 |
-| Build or review a template | 11_Template_Reference.md |
+| Build or review a template | 11_Template_Reference.md, 15_Template_Use_Cases.md |
 | Implement as a DNS Provider | 12_Getting_Started_DNS_Provider.md |
 | Implement as a Service Provider | 13_Getting_Started_Service_Provider.md |
 | Tell a story for a specific audience | 14_Storytelling.md |

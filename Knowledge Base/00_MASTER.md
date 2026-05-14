@@ -48,6 +48,7 @@ Each linked sub-document covers a specific angle in depth. This master document 
 | [12](./12_Getting_Started_DNS_Provider.md) | Getting Started: DNS Provider | Step-by-step implementation guide for DNS Providers |
 | [13](./13_Getting_Started_Service_Provider.md) | Getting Started: Service Provider | Step-by-step integration guide for Service Providers |
 | [14](./14_Storytelling.md) | Storytelling | First-person stories for DNS/SP CEOs, PMs, support, devs; user stories; plain-language explainers |
+| [15](./15_Template_Use_Cases.md) | Template Use Cases | 9 use-case patterns from the template repository with examples, DNS setup guidance, and implementation notes |
 
 ---
 
@@ -95,10 +96,10 @@ Half of all users who try to connect their domain to a service like Microsoft 36
 
 **"Answer 'Is it a real standard?'"** → [07](./07_Adoption_and_Ecosystem.md), [09](./09_Getting_Involved.md)
 
-**"Build or review a template"** → [11](./11_Template_Reference.md)
+**"Build or review a template"** → [11](./11_Template_Reference.md), [15](./15_Template_Use_Cases.md)
 
 **"Implement as a DNS Provider"** → [12](./12_Getting_Started_DNS_Provider.md)
 
-**"Implement as a Service Provider"** → [13](./13_Getting_Started_Service_Provider.md)
+**"Implement as a Service Provider"** → [13](./13_Getting_Started_Service_Provider.md), [15](./15_Template_Use_Cases.md)
 
 **"Tell a story for a specific audience"** → [14](./14_Storytelling.md)
