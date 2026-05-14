@@ -1,0 +1,9 @@
+{
+  "features": {
+    "ghcr.io/devcontainers-extra/features/mkdocs:2": {
+      "version": "2.0.19",
+      "resolved": "ghcr.io/devcontainers-extra/features/mkdocs@sha256:bfb6865b0fb7ae25ccf2df1dcdb937452bdf6b3dc2055f530aee2a663c07f4a0",
+      "integrity": "sha256:bfb6865b0fb7ae25ccf2df1dcdb937452bdf6b3dc2055f530aee2a663c07f4a0"
+    }
+  }
+}

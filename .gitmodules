@@ -1,3 +1,6 @@
 [submodule "Sources/Templates"]
 	path = Sources/Templates
 	url = https://github.com/Domain-Connect/Templates.git
+[submodule "Sources/assets"]
+	path = Sources/assets
+	url = https://github.com/Domain-Connect/assets.git
