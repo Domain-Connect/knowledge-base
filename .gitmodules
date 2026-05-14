@@ -1,0 +1,3 @@
+[submodule "Sources/Templates"]
+	path = Sources/Templates
+	url = https://github.com/Domain-Connect/Templates.git
