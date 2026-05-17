@@ -122,18 +122,23 @@ If your platform always uses a specific subdomain (e.g. always `www`), use `host
 ## Things to Take Care About
 
 **CNAME at apex (`@`) without `hostRequired` breaks the domain.**  
+
 A CNAME at the root of a domain (the apex) is technically prohibited by DNS standards (RFC 1034) and breaks MX, NS, and other essential records. If you set `host: "@"` with `hostRequired: false`, the DNS provider may create an invalid CNAME at the apex. Always use `hostRequired: true` when using `@` as the host, or use `APEXCNAME` (see below) if you genuinely need apex support.
 
 **APEXCNAME — apex CNAME support.**  
+
 Some DNS providers implement a Domain Connect record type called `APEXCNAME` (or an `ALIAS`/`ANAME` record underneath). If your platform's target is a hostname (not an IP) and you need apex domain support, use `APEXCNAME` instead of `A`. Not all DNS providers support `APEXCNAME`, so either test against your target providers or provide both an `A`-record group and an `APEXCNAME` group, with the provider applying whichever it supports.
 
 **`multiInstance: true` for multiple deployments.**  
+
 If your platform allows a single domain to host multiple projects (e.g. `app.yourdomain.com` and `shop.yourdomain.com`), set `"multiInstance": true`. Without it, applying the template a second time may be treated as a conflict or an attempt to replace the first deployment.
 
 **CNAME coexistence with other records.**  
+
 A CNAME must be the only record at its name — DNS prohibits combining a CNAME with A, MX, or TXT records at the same subdomain. If the user already has records at the subdomain you are targeting, the DNS provider will need to remove them before creating the CNAME. Document which subdomains your template claims.
 
 **Wildcard subdomains.**  
+
 Domain Connect does not natively support wildcard CNAME records (`*`). If your platform needs a wildcard subdomain pointing to your infrastructure, this must be handled outside Domain Connect or via a separate template that uses a specific, well-known subdomain.
 
 ---

@@ -133,18 +133,23 @@ Some CDN providers use per-customer hostnames rather than IPs:
 ## Things to Take Care About
 
 **Traffic interception is a high-trust action.**  
+
 The consent screen wording matters. Users should understand they are routing traffic through a third party, not just changing a hosting IP. Use the `description` field to be explicit: "This redirects all web traffic for your domain through Acme EdgeShield's network." DNS providers surface this description in the consent UI.
 
 **Origin server bypass via direct IP access.**  
+
 A WAF/CDN only protects traffic that reaches it via DNS. If the origin server's IP is publicly known, attackers can bypass the WAF by sending requests directly to the IP. This is an application-layer concern, not a DNS concern — but it is worth flagging in your onboarding documentation.
 
 **Avoid exposing the origin IP in the template.**  
+
 The template should never contain the origin server IP — only the WAF/CDN IP. If a template variable is user-supplied and represents the origin, validate it server-side. A template that inadvertently exposes or logs origin IPs creates a security surface.
 
 **IPv6 protection parity.**  
+
 If your WAF/CDN infrastructure supports IPv6, include an AAAA record alongside the A record. An AAAA-only IPv6 path that bypasses your WAF is a protection gap.
 
 **Template replacement vs. coexistence.**  
+
 When a user already has a Domain Connect website-hosting template applied (e.g. pointing to a WordPress host), applying a WAF template replaces the A record. The website-hosting template is not automatically removed — the DNS provider applies the newer template on top. Ensure your platform's onboarding makes clear that the origin destination is now your WAF, and that the origin server should be updated to only accept traffic from your IP ranges.
 
 ---

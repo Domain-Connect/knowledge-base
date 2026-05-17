@@ -174,12 +174,15 @@ The `%acmeCnameDelegation%` variable in the example is a per-customer hostname o
 ## Things to Take Care About
 
 **CNAME at `_acme-challenge` and ACME CA support.**  
+
 All major ACME CAs (Let's Encrypt, ZeroSSL, Google Trust Services) follow CNAMEs when resolving `_acme-challenge` records. This is specified behaviour per RFC 8555. However, some private or enterprise CAs do not follow CNAMEs. Verify your CA supports CNAME delegation before choosing the delegation pattern.
 
 **The direct TXT pattern requires re-consent for renewal.**  
+
 If you place the ACME TXT value directly in the template, certificate renewal requires placing a new TXT value — which means either re-running the Domain Connect consent flow (unacceptable for automated renewal) or having async flow write access to push the update. If your platform does not hold an async token for the user's DNS provider, use the CNAME delegation pattern instead.
 
 **`_acme-challenge` TXT conflicts.**  
+
 If the user already has an `_acme-challenge` TXT record (from a previous CA validation or a different platform), the DNS provider's conflict handling will determine whether it is replaced or whether both records coexist. Multiple TXT records at `_acme-challenge` are valid DNS — ACME CAs check all of them. This is generally harmless, but stale tokens from previous issuances can accumulate. Include `"txtConflictMatchingMode": "None"` if you want the DNS provider to leave existing TXT records in place, or rely on default conflict handling to replace them.
 
 ---

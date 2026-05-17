@@ -123,6 +123,7 @@ These are valid Domain Connect applications that go beyond the original service-
 **Domain Connect application:** A service provider (e.g., Shopify) partners with a registrar. When a user wants a custom domain on their store, the registrar registers the domain and Domain Connect immediately configures it — all without the user leaving the service provider's interface.
 
 **Flow:**
+
 ```
 User in Service Provider → selects domain → registrar registers it
   → Domain Connect applies DNS configuration

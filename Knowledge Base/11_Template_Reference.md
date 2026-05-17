@@ -60,6 +60,7 @@ GET /v2/domainTemplates/providers/{providerId}/services/{serviceId}
 **Allowed values:** Must conform to the `dc-id` syntax — alphanumeric characters, hyphens, and dots; no spaces or special characters. To ensure non-coordinated uniqueness, SHOULD be the Service Provider's own domain name (e.g. `shopify.com`, `microsoft.com`).
 
 **Example:**
+
 ```json
 "providerId": "shopify.com"
 ```
@@ -78,6 +79,7 @@ The human-readable name of the Service Provider, suitable for display on the DNS
 **Allowed values:** Must conform to `dc-display-name` syntax — printable Unicode characters, limited length (typically ≤255 characters).
 
 **Example:**
+
 ```json
 "providerName": "Shopify"
 ```
@@ -98,6 +100,7 @@ The unique identifier for this specific service/template within the Service Prov
 **Allowed values:** Must conform to `dc-id` syntax. Scoped to the `providerId` namespace, so uniqueness only needs to be per-provider.
 
 **Example:**
+
 ```json
 "serviceId": "website"
 ```
@@ -116,6 +119,7 @@ The unique identifier for this specific service/template within the Service Prov
 The human-readable name of the specific service, suitable for display on the consent screen. This is what the user sees as the name of what they are connecting.
 
 **Example:**
+
 ```json
 "serviceName": "Shopify Website"
 ```
@@ -134,6 +138,7 @@ A monotonically increasing integer that identifies the version of the template c
 **Purpose:** Coordination and transparency between the Service Provider and DNS Providers. When a SP submits an updated template, the version number signals to the DNS Provider that a review and re-deployment is needed. The DNS Provider MAY expose the version in the template query response.
 
 **Example:**
+
 ```json
 "version": 4
 ```
@@ -152,6 +157,7 @@ A URL pointing to a logo image representing the Service Provider and/or service.
 **Allowed values:** Must be a valid URI with scheme `https`. No `http` URLs.
 
 **Example:**
+
 ```json
 "logoUrl": "https://cdn.example.com/logo.svg"
 ```
@@ -172,6 +178,7 @@ A human-readable description of what the template does, intended for developer r
 **Allowed values:** Must conform to `dc-description-text` syntax.
 
 **Example:**
+
 ```json
 "description": "Connects your domain apex and www to our web hosting infrastructure. Adds DKIM key for outgoing mail."
 ```
@@ -188,6 +195,7 @@ A human-readable description of what the template does, intended for developer r
 A human-readable description of the template variables — what they are, what values are expected, and any constraints. Like `description`, intended for developer reference only, not end-user display.
 
 **Example:**
+
 ```json
 "variableDescription": "IP: the IPv4 address of the user's hosting instance. RANDOMTEXT: a one-time verification token prefixed with 'shm:'"
 ```
@@ -249,12 +257,14 @@ When `true`, indicates that the caller MAY supply an additional `serviceName` pa
 The domain name under which the Service Provider publishes its public signing key(s) as DNS TXT records. When this field is present, digital signing is **required** for synchronous apply requests — the DNS Provider MUST verify the signature and MUST reject unsigned requests.
 
 **How it works:**
+
 - The SP signs the apply request URL using a private key (RS256 by default)
 - The corresponding public key is published in DNS at `{key-label}.{syncPubKeyDomain}`
 - The apply request includes `sig=` (the signature) and `key=` (the label identifying which public key to use)
 - The DNS Provider fetches the public key from DNS and verifies the signature
 
 **Example:**
+
 ```json
 "syncPubKeyDomain": "domainconnect.shopify.com"
 ```
@@ -289,6 +299,7 @@ A comma-separated list of domain names to which the DNS Provider is permitted to
 **Purpose:** Prevents open redirect attacks, where a malicious actor crafts an apply URL with a `redirect_uri` pointing to an attacker-controlled site. Without this list, the DNS Provider cannot validate whether a redirect destination is legitimate.
 
 **Example:**
+
 ```json
 "syncRedirectDomain": "shopify.com,myshopify.com"
 ```
@@ -331,6 +342,7 @@ When `true`, signals that the template contains variable-resolved record values 
 **Mutual exclusivity with `syncPubKeyDomain`:** `warnPhishing` and `syncPubKeyDomain` MUST NOT appear in the same template — linter rule **DCTL1028**. `warnPhishing` is only valid when `syncPubKeyDomain` is absent. It is a last-resort fallback, not a complement to signing.
 
 **Priority order for phishing mitigation (best to weakest):**
+
 1. URL signing (`syncPubKeyDomain`) — cryptographic guarantee; prevents parameter tampering
 2. `syncBlock: true` — prevents the synchronous flow entirely; forces OAuth with its stronger authentication
 3. `warnPhishing: true` — UI-only warning; no cryptographic backing; some DNS providers will reject templates with this flag by policy
@@ -416,6 +428,7 @@ The DNS record type. Controls which additional fields are required and how confl
 The DNS owner name for the record, relative to the applied domain and subdomain scope. Determines where in the zone the record is written.
 
 **Special values:**
+
 - `@` or empty string — the zone apex (or the applied subdomain if `host` is specified in the apply request)
 - A label like `www` — prepended to the domain scope: `www.example.com.`
 - A trailing dot `.` suffix — treated as an absolute DNS name, used as-is
@@ -424,6 +437,7 @@ The DNS owner name for the record, relative to the applied domain and subdomain 
 **Variables:** May contain variable expressions (`%VARNAME%`), though embedding subdomain labels as variables is discouraged — see the `host` apply parameter guidance below.
 
 **Example:**
+
 ```json
 { "type": "A", "host": "@", "pointsTo": "192.0.2.1", "ttl": 1800 }
 { "type": "CNAME", "host": "www", "pointsTo": "target.cdn.example.", "ttl": 3600 }
@@ -451,6 +465,7 @@ Time-to-live in seconds. Controls how long the record is cached by resolvers.
 **Variables:** Support for variables in the `ttl` field is OPTIONAL for DNS Providers. Template authors should prefer integer literals.
 
 **Example:**
+
 ```json
 "ttl": 1800
 ```
@@ -469,6 +484,7 @@ Assigns this record to a named group, enabling staged template application. When
 **Allowed values:** Must conform to `dc-id` syntax. MUST NOT contain variable expressions.
 
 **Group filtering rules:**
+
 1. A record with no `groupId` is always active, regardless of the `groupId` apply parameter
 2. A record with a `groupId` is active only if its `groupId` appears in the apply request's `groupId` parameter
 3. If no `groupId` is supplied in the apply request, all records are active
@@ -562,6 +578,7 @@ For unknown/unspecified record types: the canonical presentation format of the r
 **Variables:** May contain variable expressions, either as the entire value or embedded in a larger string.
 
 **TXT record example with prefix:**
+
 ```json
 {
   "type": "TXT",
@@ -639,6 +656,7 @@ For SRV records: the priority of the target host. Lower values are preferred.
 **Variables:** Support for variables in `priority` is OPTIONAL for DNS Providers.
 
 **Example (MX):**
+
 ```json
 { "type": "MX", "host": "@", "pointsTo": "mail.example.com", "priority": 10, "ttl": 3600 }
 ```
@@ -677,6 +695,7 @@ The transport protocol for the SRV record. Must conform to `dc-srv-protocol` syn
 **Common values:** `_tcp`, `_udp`, `_sctp`
 
 **Example:**
+
 ```json
 { "type": "SRV", "name": "@", "service": "_sip", "protocol": "_tcp", "priority": 10, "weight": 20, "port": 5060, "target": "sipserver.example.com.", "ttl": 3600 }
 ```
@@ -722,6 +741,7 @@ The SPF mechanism and modifier terms to be merged into the domain's SPF TXT reco
 **Allowed content:** SPF mechanism and modifier terms as defined in RFC 7208 Section 5. Must NOT include the version prefix (`v=spf1`) or the terminating `all` qualifier.
 
 **Example:**
+
 ```json
 {
   "type": "SPFM",
@@ -754,6 +774,7 @@ Template variable expressions use `%VARNAME%` notation:
 - The special variable `@` is a shorthand for `%fqdn%.` (the fully qualified applied domain)
 
 **Two notation systems exist to prevent injection:**
+
 - `%VARNAME%` — for Service Provider-defined variables (values passed in the apply request)
 - `{variable}` — reserved exclusively for RFC 6570 URI Template syntax in protocol-level URL construction
 

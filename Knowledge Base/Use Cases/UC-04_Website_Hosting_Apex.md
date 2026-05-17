@@ -261,15 +261,19 @@ If your platform needs to work across all DNS providers, implement the redirect-
 ## Things to Take Care About
 
 **Replacing an active A record takes down existing content immediately.**  
+
 If the user's domain currently points to another website, applying this template replaces that immediately. The consent screen should name the current IP if possible, and your UI should warn the user that this change is immediate and will replace existing content.
 
 **Do not hardcode IPs you do not control long-term.**  
+
 If your infrastructure IPs change (CDN provider migration, IP address reassignment), all domains pointed to the old IP break simultaneously and silently. If you operate on a shared anycast range that is stable, hardcoded IPs are fine. Otherwise, use per-customer variables or CNAME-based hosting (see [UC-05](./UC-05_Website_Hosting_Subdomain.md)) where a CNAME pointing to your platform gives you the ability to change the IP behind it without touching DNS.
 
 **www CNAME conflicts with existing records.**  
+
 If the user has existing records at `www` (e.g. a CNAME to a different host), the DNS provider will remove them. This is expected but should be communicated.
 
 **IPv4-only infrastructure with AAAA record in template.**  
+
 If you include an AAAA record but your servers do not handle IPv6 traffic, connections from IPv6-only clients will time out. Only include AAAA if your infrastructure genuinely responds on the IPv6 address.
 
 ---

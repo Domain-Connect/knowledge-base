@@ -141,18 +141,23 @@ Each logical function (MX routing, SPF, DKIM, DMARC, autodiscovery) is assigned 
 ## Things to Take Care About
 
 **SPF: always SPFM, never raw TXT.**  
+
 Using a `TXT` record with `v=spf1 ...` instead of `SPFM` will overwrite the user's existing SPF policy. The DNS provider's conflict resolution will either reject the record or replace the existing one. Both outcomes break other senders that rely on the current SPF.
 
 **DKIM key rotation.**  
+
 Your template creates a DKIM record that is static once applied. Plan for key rotation: either use a fixed selector that your service rotates on its own infrastructure (CNAME-based DKIM, as Microsoft 365 does), or design a process to re-apply the template with a new selector when rotating. Document this for your users.
 
 **DMARC policy strength.**  
+
 Starting with `p=quarantine` is a reasonable default for a new email hosting template. Do not default to `p=reject` without user understanding — it can immediately block legitimate mail from other senders not yet covered by DKIM or SPF. Consider making the policy a variable so users can progress from `none` → `quarantine` → `reject`.
 
 **Don't conflict with existing MX records.**  
+
 If a user already has MX records pointing elsewhere (e.g. a different email provider), your new MX records will conflict. Domain Connect DNS providers are expected to handle this via conflict resolution, but some providers replace rather than merge MX. Inform users in your UI that applying the template will replace existing MX records — this is a hard cutover, not an additive change.
 
 **`warnPhishing` flag.**  
+
 Consider setting `"warnPhishing": true` if your template creates records that could be misused for phishing (e.g. MX records enabling impersonation of any domain). DNS providers that support this flag will show an additional warning in the consent screen.
 
 ---

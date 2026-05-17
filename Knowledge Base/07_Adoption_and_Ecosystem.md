@@ -29,6 +29,7 @@ Domain Connect has crossed from experimental protocol to deployed infrastructure
 The following DNS providers have deployed Domain Connect support. These are the companies that host authoritative DNS for user domains and have implemented the server-side API:
 
 **Major implementations:**
+
 - **GoDaddy** — the original proposer; one of the largest domain registrars globally
 - **IONOS** — major European registrar and hosting provider
 - **Cloudflare** — largest DNS resolver globally; significant DNS hosting footprint
@@ -47,16 +48,19 @@ The diversity of implementations matters: GoDaddy and IONOS together cover a ver
 The 720 templates from 408 service providers span the full range of online services. Notable implementations include:
 
 **Email and productivity:**
+
 - Microsoft Office 365 / Microsoft 365
 - Google Workspace
 - Apple iCloud+ (custom domain email)
 
 **Website and e-commerce:**
+
 - Shopify
 - Squarespace
 - Weebly
 
 **Other services:**
+
 - A wide range of SaaS platforms, email marketing services, and web application providers
 
 The template registry is maintained publicly at [domainconnect.org](https://domainconnect.org) and on GitHub at [github.com/domain-connect](https://github.com/domain-connect).

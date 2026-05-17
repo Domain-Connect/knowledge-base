@@ -60,12 +60,15 @@ Understanding the boundaries is important for accurate communication:
 Domain Connect involves exactly three parties:
 
 **Service Provider (SP)**
+
 An entity offering a service that needs DNS configuration — e.g., Microsoft (Office 365), Google (Workspace), Shopify, Squarespace, Weebly, Apple (iCloud+). The SP knows what DNS records their service requires. They define this as a *template*. They cannot touch the user's DNS zone directly.
 
 **DNS Provider (DNSP)**
+
 An entity hosting the authoritative DNS zone for the user's domain. This is typically a registrar or a dedicated DNS hosting company — GoDaddy, IONOS, Cloudflare, WordPress.com, Squarespace Domains, Plesk, etc. The DNS Provider implements the Domain Connect protocol, vouches for the trustworthiness of templates, authenticates users, presents consent screens, and applies the DNS changes.
 
 **User**
+
 The domain owner who wants to connect their domain to a service. In the Domain Connect flow, the user:
 - Enters their domain name at the service provider
 - Is redirected to their DNS provider (automatically detected)
@@ -94,6 +97,7 @@ Templates are exchanged between Service Providers and DNS Providers **out-of-ban
 ## The User Experience in Practice
 
 **Before Domain Connect** (typical manual flow):
+
 1. Sign up for a service → get told to "configure your DNS"
 2. Navigate to separate registrar/DNS control panel
 3. Find "DNS Management" or "Zone Editor"
@@ -103,6 +107,7 @@ Templates are exchanged between Service Providers and DNS Providers **out-of-ban
 7. Wait for propagation, troubleshoot if it doesn't work
 
 **With Domain Connect:**
+
 1. Enter domain name in the service provider interface
 2. The service detects "GoDaddy supports Domain Connect for this service"
 3. Click "Connect automatically"

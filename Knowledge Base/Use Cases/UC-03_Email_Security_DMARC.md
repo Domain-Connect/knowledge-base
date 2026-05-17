@@ -162,15 +162,19 @@ Start here and add groups progressively as your platform's capabilities expand.
 ## Things to Take Care About
 
 **CNAME at `_dmarc` is not universally accepted by DNS providers.**  
+
 Some DNS providers (particularly those with strict record-type validation) refuse to create a CNAME at `_dmarc` because [RFC 1912](https://datatracker.ietf.org/doc/html/rfc1912) discourages CNAMEs at names that also have other record types. In practice, `_dmarc` is a dedicated subdomain with no other records, so this is safe — but you may encounter implementation quirks. Test against your target DNS providers before deploying.
 
 **The CNAME must resolve to a valid DMARC TXT record.**  
+
 When a mail receiver queries `_dmarc.yourdomain.com` and gets a CNAME to `abc123.emailguard.example`, it will then query `abc123.emailguard.example` for a TXT record containing `v=DMARC1; ...`. If that record is missing or misconfigured, the domain has no effective DMARC policy. Your platform infrastructure must be ready before the user applies the template.
 
 **NS delegation for `_domainkey` requires authoritative DNS support.**  
+
 Not all DNS providers allow NS records at arbitrary subdomains. The `_domainkey` NS delegation pattern is powerful but may not work in all DNS hosting environments. Always check if the target DNS provider supports subdomain NS delegation in Domain Connect before relying on this as your primary DKIM management mechanism.
 
 **Revoking the template.**  
+
 When a customer cancels their subscription, you must revoke the template (via the Domain Connect async delete flow, if implemented) or instruct the user to remove the DNS records. A dangling `_dmarc` CNAME pointing to a deprovisioned provider record means the domain effectively has no DMARC policy — which can be exploited for spoofing. Implement lifecycle management for your DNS delegations.
 
 **BIMI delegation (NS at `_bimi`)** follows the same pattern as `_domainkey` NS delegation. BIMI (Brand Indicators for Message Identification) requires a Verified Mark Certificate from an approved authority. Only use this if your platform actively manages BIMI, as a misconfigured BIMI record can suppress brand logo display in supported mail clients.

@@ -19,11 +19,13 @@ Domain Connect is an authorization protocol operating on a sensitive resource: t
 Domain Connect establishes explicit trust relationships between three parties:
 
 **DNS Provider trusts the template (not the Service Provider directly)**
+
 The most important security property of Domain Connect is that the DNS Provider does not trust Service Providers at runtime. A Service Provider cannot push DNS changes to a user's zone simply by constructing a redirect URL. The DNS Provider only acts on templates that it has previously reviewed, approved, and deployed. If a template doesn't exist in the DNS Provider's system, the request is rejected.
 
 This out-of-band vetting process is the foundation of the trust model: malicious actors cannot create new templates and push them to a DNS Provider without that provider's explicit review and approval.
 
 **User trusts the DNS Provider**
+
 The user's consent is obtained by their own DNS Provider — a party they already have a relationship with (they use them for DNS hosting). The consent screen is controlled entirely by the DNS Provider, not by the Service Provider. The Service Provider cannot manipulate what the user sees or bypass the consent step.
 
 ![GoDaddy + Shopify consent screen — controlled by DNS Provider](media/screenshot_godaddy_consent.png)
@@ -35,6 +37,7 @@ The user's consent is obtained by their own DNS Provider — a party they alread
 *Reference implementation: the consent screen displays the exact DNS records that will be written, allowing informed user approval.*
 
 **DNS Provider verifies user identity and zone ownership**
+
 Before applying any template, the DNS Provider must authenticate the user and verify that the user controls the target zone. A user cannot apply DNS changes to a domain they don't own, even if they have a valid redirect URL.
 
 ### What this prevents
@@ -53,6 +56,7 @@ Before applying any template, the DNS Provider must authenticate the user and ve
 The redirect URL that a Service Provider sends to the user can be signed with a private key. The DNS Provider verifies the signature using the Service Provider's public key, which is published in DNS under a reserved subdomain.
 
 **How it works:**
+
 1. The Service Provider signs the redirect URL using a private key
 2. The public key is published in DNS at `_dck<N>.<provider-domain>.` as a TXT record
 3. The redirect URL includes a `sig=` parameter (the signature) and a `key=` parameter (the key identifier)
@@ -63,6 +67,7 @@ The redirect URL that a Service Provider sends to the user can be signed with a 
 **Template-level control:** The `syncPubKeyDomain` field in a template specifies the domain under which the Service Provider's signing keys are published. When this field is present, the DNS Provider MUST verify the signature. High-risk templates (those that affect where web traffic goes, such as A and CNAME records) should require signing.
 
 **Public key DNS record format:**
+
 ```
 _dck1.exampleservice.domainconnect.org. IN TXT "p=<base64-encoded-public-key>"
 ```
@@ -149,6 +154,7 @@ Being clear about the protocol's security boundaries is important:
 ## Security for Implementation Teams
 
 **For DNS Provider implementers:**
+
 - Require and verify URL signatures for all templates with A, AAAA, or CNAME records
 - Do not accept templates without a thorough vetting process
 - Display clear, honest consent screens — users must understand what they are approving
@@ -156,6 +162,7 @@ Being clear about the protocol's security boundaries is important:
 - Verify zone ownership before processing any apply request
 
 **For Service Provider implementers:**
+
 - Sign your redirect URLs — especially for templates that configure web traffic records
 - Request only the minimum set of DNS records and variables your service needs (scope minimization)
 - Do not pass sensitive values as URL parameters that could be intercepted; prefer short-lived signed tokens

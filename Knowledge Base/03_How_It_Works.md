@@ -37,16 +37,20 @@ This vetting process is intentional and security-critical: it means a malicious 
 
 When a user enters their domain name in a Service Provider's interface, the Service Provider automatically checks whether the domain's DNS Provider supports Domain Connect.
 
-**Step 1 — DNS Lookup for `_domainconnect` record**  
+**Step 1 — DNS Lookup for `_domainconnect` record**
+
 The SP looks up the TXT record at `_domainconnect.<domain>` (e.g., `_domainconnect.example.com`). If this record exists, it contains a pointer to the DNS Provider's Domain Connect API endpoint. Its presence signals: "this domain's DNS provider speaks Domain Connect."
 
-**Step 2 — Fetch DNS Provider Settings**  
+**Step 2 — Fetch DNS Provider Settings**
+
 The SP calls the DNS Provider's settings endpoint (a JSON document called the "discovery document") to learn:
+
 - The base URL for the Domain Connect API
 - Which protocol features are supported
 - Any additional configuration details
 
-**Step 3 — Check Template Support**  
+**Step 3 — Check Template Support**
+
 The SP queries the DNS Provider's API to confirm that its specific template is deployed and supported. If the answer is yes, the user is offered the "connect automatically" button. If not, the SP falls back to showing manual DNS instructions.
 
 ![Domain Connect discovery sequence](media/discovery_sequence.svg)
@@ -76,6 +80,7 @@ The screenshots below show a real-world example: connecting a custom domain to S
 *The user is redirected to GoDaddy to authenticate — the DNS Provider controls this step entirely.*
 
 **Key security checkpoints in this flow:**
+
 - The DNS Provider authenticates the user — no one else can approve changes to their zone
 - The URL may be signed with a cryptographic signature, verified by the DNS Provider against public keys published in DNS — preventing URL tampering
 - Changes are strictly limited to what the pre-approved template specifies
@@ -89,6 +94,7 @@ The screenshots below show a real-world example: connecting a custom domain to S
 Some services need to make DNS changes over time, or in multiple steps, without requiring the user to be present each time. The asynchronous flow solves this using OAuth 2.0.
 
 **When it's used:**
+
 - Multi-step DNS configuration (e.g., first verify ownership via TXT, then configure MX records)
 - Services that need to update DNS records as their infrastructure changes (e.g., dynamic DNS, changing IP addresses)
 - Long-running service integrations where the SP needs ongoing DNS management capability
@@ -178,6 +184,7 @@ https://domainconnect.dnsprovider.example/sync/v2/domainTemplates
 ```
 
 **Color-coded components:**
+
 - DNS Provider's base URL (from discovery)
 - Provider and template identifiers
 - Standard parameters: domain, host

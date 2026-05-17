@@ -17,9 +17,11 @@ DNS Providers are the server side of Domain Connect. Implementing Domain Connect
 ### What implementation involves
 
 **1. Discovery endpoint**
+
 Publish a `_domainconnect` TXT record pointing to your API base URL. This signals to all Service Providers that your zones support Domain Connect.
 
 **2. Settings document (discovery document)**
+
 Serve a JSON document at a standardized URL containing your API endpoints:
 - `urlSyncUX` — the synchronous flow endpoint
 - `urlAsyncUX` — the OAuth authorization endpoint
@@ -27,15 +29,19 @@ Serve a JSON document at a standardized URL containing your API endpoints:
 - Provider display name and metadata
 
 **3. Template hosting**
+
 Accept, vet, store, and serve templates from Service Providers. When a Service Provider queries whether you support their template, return an appropriate response. You control which templates you deploy.
 
 **4. Synchronous flow endpoint**
+
 Handle redirect requests from Service Providers: authenticate the user, verify zone ownership, display the consent screen (listing the DNS records that will be changed), and apply the approved changes.
 
 **5. Asynchronous flow (OAuth, optional but recommended)**
+
 Implement an OAuth 2.0 authorization flow. Issue tokens scoped to specific templates and zones. Expose the API endpoint that allows Service Providers to apply templates using tokens.
 
 **6. Template vetting process**
+
 Establish your process for reviewing and approving Service Provider templates before deployment. This is the critical trust anchor of the protocol — it must be taken seriously.
 
 ### Implementation effort
@@ -55,6 +61,7 @@ Service Providers are the client side of Domain Connect. Implementing as a Servi
 ### What implementation involves
 
 **1. Create your template**
+
 Define a JSON template that describes:
 - Your `providerId` and `serviceId` (unique identifiers for your organization and this specific service)
 - The DNS records your service requires (A, AAAA, CNAME, MX, TXT, SRV, etc.)
@@ -64,9 +71,11 @@ Define a JSON template that describes:
 - Whether URL signing is required (`syncPubKeyDomain`)
 
 **2. Submit your template to DNS Providers**
+
 Contact DNS Providers you want to support and submit your template for their review and deployment. The template repository at `domainconnect.org` and on GitHub serves as a reference, but DNS Providers deploy templates through their own onboarding process.
 
 **3. Implement the discovery flow**
+
 In your product flow, when a user enters a domain name:
 1. Look up `_domainconnect.<domain>` as a TXT record
 2. Fetch the DNS Provider's settings document
@@ -74,12 +83,14 @@ In your product flow, when a user enters a domain name:
 4. If supported, present the "Connect automatically" option; otherwise, fall back to manual instructions
 
 **4. Implement the redirect**
+
 When the user clicks "Connect," redirect them to the DNS Provider's synchronous flow URL with:
 - The domain and optional host parameters
 - Your template variable values
 - A cryptographic signature (if your template requires it)
 
 **5. Handle the post-connection callback**
+
 After the DNS Provider redirects the user back, verify that DNS changes have propagated before activating the service.
 
 ### Template design principles
@@ -98,16 +109,20 @@ The DCONN (Domain Connect) working group at the IETF is the venue for shaping th
 ### Ways to participate
 
 **Mailing list**
+
 The primary discussion channel is the DCONN working group mailing list. All substantive technical discussion about the specification happens here. Subscribe and participate at:
 `https://datatracker.ietf.org/wg/dconn/about/`
 
 **Read and comment on the draft**
+
 The current specification is available at the IETF Datatracker. Submit feedback as GitHub issues on the specification repository or as IETF review comments.
 
 **Attend working group sessions**
+
 The DCONN WG meets at IETF meetings (three per year). Sessions are open and can be attended in person or remotely via meetecho. Upcoming meetings are listed on the WG page.
 
 **Submit implementation feedback**
+
 Organizations that have implemented the protocol are especially valuable participants. Implementation experience surfaces specification ambiguities, gaps in security guidance, and interoperability issues that are invisible in theoretical review.
 
 ### What the working group is currently working on
@@ -141,6 +156,7 @@ Practitioners, implementers, and advocates sharing experience and news.
 ## Getting Started: A Practical Path
 
 **For DNS Providers that want to implement:**
+
 1. Read the specification (`draft-ietf-dconn-domainconnect-01`)
 2. Review the reference implementation at github.com/domain-connect
 3. Identify which Service Provider templates are most requested by your customers (Microsoft 365 and Google Workspace are typically the highest demand)
@@ -149,12 +165,14 @@ Practitioners, implementers, and advocates sharing experience and news.
 6. Onboard your first template and run a pilot
 
 **For Service Providers that want to implement:**
+
 1. Write your template JSON based on the specification and the template examples in the GitHub repository
 2. Reach out to the DNS Providers most used by your customers and submit your template for review
 3. Integrate the discovery flow into your product
 4. Test the full flow with at least one DNS Provider implementation before general availability
 
 **For organizations evaluating adoption:**
+
 1. Check whether you already have `_domainconnect` TXT records in your zones (if you're a registrar or DNS provider) — if so, customers are already trying to use Domain Connect with you
 2. Review the template registry to understand which services your customers are likely trying to connect
 3. Connect with the DCONN working group mailing list to get current information on the specification status

@@ -128,18 +128,23 @@ This pattern is only supported by DNS providers that have implemented these exte
 ## Things to Take Care About
 
 **No content at the redirect IP means search engines index nothing.**  
+
 A redirect domain that was previously indexed will lose its search ranking during the transition. This is expected and by design for redirect-only domains, but worth mentioning in your user documentation — particularly for users who are forwarding from a previously ranked domain.
 
 **URL masking (frame redirect) is an SEO anti-pattern.**  
+
 Some redirect services offer "URL masking" (loading the destination inside an iframe while keeping the original URL in the browser bar). This is a legitimate use case for certain applications but is widely considered an SEO and accessibility anti-pattern. Domain Connect does not distinguish between redirect types — the HTTP behaviour is entirely your service's concern.
 
 **HTTPS redirect requires a valid TLS certificate at your redirect IP.**  
+
 When the user's domain resolves to your redirect IP and a browser requests `https://yourdomain.com`, your server must present a valid certificate for `yourdomain.com`. This requires ACME / Let's Encrypt provisioning at the point the A record is set. Plan for the propagation delay between the Domain Connect callback and the moment DNS is globally live.
 
 **The redirect destination URL is not a DNS concern.**  
+
 The template sets the DNS side only. The redirect destination (`https://example.com/landing`) must be configured separately in your platform. Domain Connect passes variables to the template, but multi-step configuration (DNS record + redirect rule in your service) must be orchestrated by your backend after the template is applied. Use the Domain Connect async flow callback to trigger redirect rule creation.
 
 **Wildcard subdomains for redirect are not covered by this template.**  
+
 If you need to redirect all subdomains (`*.yourdomain.com` → destination), that requires a wildcard A record, which Domain Connect does not natively support. Handle wildcard setups via your DNS provider's native interface or provide guidance to users alongside the Domain Connect flow.
 
 ---

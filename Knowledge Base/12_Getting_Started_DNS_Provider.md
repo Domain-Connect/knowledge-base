@@ -123,6 +123,7 @@ Applying a template correctly is the most complex part of the implementation. Th
 **Group filtering:** If the apply request includes a `groupId` parameter, only process records whose `groupId` matches. Records with no `groupId` are always active.
 
 **Conflict detection rules (by record type):**
+
 - **CNAME** — conflicts with any other record at the same hostname
 - **NS** — conflicts with all records at the same hostname and all records subordinate to it
 - **A / AAAA** — conflict with any A or AAAA record at the same hostname

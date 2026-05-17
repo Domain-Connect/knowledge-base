@@ -128,18 +128,23 @@ Unlike DDNS (where 60 seconds is correct), NS records for a stable subdomain del
 ## Things to Take Care About
 
 **Not all DNS providers support NS records at arbitrary subdomains.**  
+
 Creating NS records at subdomains (other than the apex) requires the DNS provider to correctly implement zone cut semantics. Some DNS hosting platforms restrict NS record creation to the apex zone, or require special configuration to enable it. Before building a product on this pattern, test explicitly against each DNS provider whose Domain Connect implementation you intend to support. Do not assume support based on general DNS capability.
 
 **Zone cut makes parent-zone records at that subdomain invisible.**  
+
 Once NS records are created at `services.yourdomain.com`, the DNS resolver stops consulting the parent zone for any name at or below `services.yourdomain.com`. Any records the user previously had at that subdomain in their DNS provider panel become unreachable — they exist in the parent zone but are shadowed by the zone cut. Make sure users understand this in your onboarding UI.
 
 **Glue records cannot be created via Domain Connect.**  
+
 Glue records (A records for nameserver hostnames that are within the delegated zone) must be created in the parent zone and are managed by the parent DNS provider, not the child zone operator. Domain Connect has no mechanism for glue record creation. To avoid this complication entirely, always use out-of-zone nameserver hostnames — i.e., NS targets that are not within the subdomain being delegated. The example template follows this rule: `ns1.subzonehost.example` is outside `yourdomain.com` and requires no glue.
 
 **Revoking the delegation is the provider's responsibility.**  
+
 When a customer cancels, the NS records must be removed from the parent zone. If they remain, queries for the delegated subdomain are sent to nameservers that may no longer be authoritative for it, resulting in SERVFAIL responses for all names in the zone. Implement a deprovisioning flow that either revokes the template via the Domain Connect async delete mechanism (if the DNS provider supports it) or instructs the user to remove the NS records manually.
 
 **Four NS records is a minimum for production.**  
+
 RFC 2182 recommends at least three nameservers per zone, located in different administrative and topological locations. Using four is common practice. Do not create a delegation with a single NS record — the zone becomes unreachable if that nameserver is unavailable.
 
 ---

@@ -125,6 +125,7 @@ If your template uses `syncPubKeyDomain` (which it should), you need to:
 3. **Sign each apply URL** using the private key before redirecting the user
 
 **Signing procedure:**
+
 1. Take all apply request parameters except `sig` and `key`
 2. URL-encode each parameter name and value
 3. Sort parameters in ascending lexicographic order of the URL-encoded name

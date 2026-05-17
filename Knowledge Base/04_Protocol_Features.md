@@ -117,18 +117,22 @@ When a template is applied to a zone, the DNS records it wants to create may con
 ### Conflict detection by record type
 
 **For A and AAAA records:**
+
 - A conflict exists if a record with the same hostname already exists
 - The template can specify whether to replace existing records or abort
 
 **For CNAME records:**
+
 - CNAME records cannot coexist with other records at the same hostname
 - Domain Connect treats any existing record at the same hostname as a conflict
 
 **For MX records:**
+
 - Conflicts are detected at the hostname level
 - The template controls whether existing MX records should be replaced
 
 **For TXT records (special handling):**
+
 The `txtConflictMatchingMode` field controls TXT conflict detection:
 - `None` — no conflict detection; add the new record regardless
 - `All` — any existing TXT record at this hostname is a conflict
@@ -169,6 +173,7 @@ When applying this record, the DNS Provider:
 This means a domain can have both Microsoft 365 and Google Workspace configured for email security without breaking either service's SPF requirement.
 
 **Example:**
+
 ```
 Before: v=spf1 include:_spf.google.com ~all
 After:  v=spf1 include:_spf.google.com include:spf.protection.outlook.com ~all
@@ -191,6 +196,7 @@ This eliminates orphaned verification records that would otherwise accumulate in
 To prevent a malicious actor from crafting a fraudulent redirect URL that tricks a user into configuring DNS for a different service, Domain Connect supports **cryptographic URL signing**.
 
 **How it works:**
+
 1. The Service Provider generates a signature over the redirect URL using a private key
 2. The Service Provider publishes the corresponding public key in DNS (at a subdomain like `_dck1.<provider-domain>.`)
 3. The redirect URL includes the signature and a key identifier
@@ -201,6 +207,7 @@ To prevent a malicious actor from crafting a fraudulent redirect URL that tricks
 **Template-level control:** Each template specifies whether signing is required (`warnPhishing: true` enables phishing warnings; templates can require signed requests). This allows low-risk templates to work without signing while high-risk templates (those that affect where web traffic goes) can require it.
 
 **Public key DNS record format:**
+
 ```
 _dck1.exampleservice.domainconnect.org. IN TXT "p=<base64-encoded-public-key>"
 ```

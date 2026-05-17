@@ -154,6 +154,7 @@ This gives the DNS provider full control and auditability. It is appropriate for
 ## Things to Take Care About
 
 **DNS providers must issue long-lived tokens or support token refresh — this is a hard requirement.**  
+
 DDNS is the only Domain Connect use case that depends on persistent, unattended access to the DNS provider's API. A DNS provider that issues short-lived access tokens with no refresh token support cannot be used for DDNS at all: the client would lose write access after the first token expiry, silently breaking IP updates with no recourse short of the user re-running the entire setup flow.
 
 DNS providers implementing the async flow for DDNS must therefore either:
@@ -163,9 +164,11 @@ DNS providers implementing the async flow for DDNS must therefore either:
 Of the two, refresh token support is strongly preferred. Indefinitely long-lived access tokens are a security liability — if a token is leaked or a device is compromised, the attacker has permanent write access to the domain's A record. A refresh token flow allows token rotation and enables revocation (invalidating the refresh token ends access). DNS providers should support refresh tokens and clients should rotate them proactively.
 
 **The DDNS client must implement OAuth token refresh.**  
+
 Access tokens expire. The client must implement the refresh token cycle — requesting a new access token before the current one expires. If the client fails to refresh, it silently loses the ability to push updates. The domain stops resolving correctly, and the user has no visibility into this failure. Robust error handling and a re-authentication fallback (prompting the user to re-run the async flow) are essential.
 
 **IP validation before every update.**  
+
 The client must validate the IP before pushing an update. Common failure modes:
 - `0.0.0.0` or `127.0.0.1` when the network interface is down or misconfigured
 - A private RFC 1918 address (e.g. `192.168.x.x`) when the client detects the LAN interface instead of the WAN IP, or when NAT reflection causes the client to see its own private IP
@@ -174,9 +177,11 @@ The client must validate the IP before pushing an update. Common failure modes:
 An invalid IP pushed to a live DNS record breaks inbound connectivity for everyone trying to reach the domain. Validate: is the IP public? Is it reachable? Only push if confident.
 
 **Token scope is limited — do not use for other operations.**  
+
 The async token issued by the DNS provider is scoped to this specific template on this specific domain. It cannot be used to create other record types, manage other domains, or access the DNS provider's broader API. Do not attempt to use it for anything other than Domain Connect template updates.
 
 **The reference client implementation.**  
+
 The [DomainConnectDDNS](https://github.com/Domain-Connect/DomainConnectDDNS) open-source client is the reference implementation of the DDNS async flow. Study it before building your own client — it demonstrates correct token storage, refresh handling, and update call construction.
 
 ---
