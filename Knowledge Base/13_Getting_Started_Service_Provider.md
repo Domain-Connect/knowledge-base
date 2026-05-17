@@ -17,6 +17,7 @@ For the business case, see [06 — Value by Audience](./06_Value_by_Audience.md)
 ## Start with the synchronous flow
 
 If you are new to Domain Connect, start with the **synchronous flow**. It is:
+
 - Simpler to implement than the asynchronous (OAuth) flow
 - Supported by all ~20 DNS providers in the ecosystem
 - Sufficient for the vast majority of service integrations — one-time setup where the user is present
@@ -101,6 +102,7 @@ See [08 — Security Model](./08_Security_Model.md) for full discussion.
 ### Validate your template
 
 Use the **[Online Editor](https://domainconnect.paulonet.eu/dc/free/templateedit)** to:
+
 - Check your template against the JSON schema
 - Test variable substitution with custom input values
 - Test group filtering
@@ -118,6 +120,7 @@ If your template uses `syncPubKeyDomain` (which it should), you need to:
 
 1. **Generate an RSA key pair** (RS256 / RSASSA-PKCS1-v1_5 with SHA-256 is the mandatory supported algorithm)
 2. **Publish the public key** in DNS as TXT records at `{key-label}.{syncPubKeyDomain}`:
+
    ```
    _dck1.domainconnect.yourcompany.com. IN TXT "p=1,a=RS256,d=<base64-encoded-public-key>"
    ```

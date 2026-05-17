@@ -18,6 +18,7 @@ Domain Connect solves this cleanly: the template places both the CNAME for the s
 An additional refinement is available when the platform delegates ACME validation to its own infrastructure via a CNAME at `_acme-challenge`: instead of placing the TXT value directly, the template creates a CNAME that points `_acme-challenge.<subdomain>` to a provider-controlled hostname. This enables the provider to rotate challenge tokens and renew certificates without any further DNS changes.
 
 Typical products in this category:
+
 - App deployment platforms (JAMstack, serverless) that issue certificates per custom domain
 - SaaS platforms with custom domain features requiring HTTPS from day one
 - Website builders where TLS is provisioned automatically on domain connection
@@ -28,6 +29,7 @@ Typical products in this category:
 ## Value Added for the End User
 
 Without Domain Connect, automated HTTPS on a custom subdomain typically requires a two-step process:
+
 1. Point the subdomain CNAME at the platform
 2. Manually place an `_acme-challenge` TXT record (or complete an HTTP-01 challenge, which fails if the CNAME isn't fully propagated yet)
 
@@ -36,6 +38,7 @@ Step 2 requires the user to return to their DNS panel, find the right instructio
 With a Domain Connect template combining the CNAME and the ACME TXT record, the user approves one consent screen and the platform can immediately begin certificate issuance. There is no second DNS step, no waiting for the user to return, and no race condition between CNAME propagation and certificate issuance.
 
 Key benefits:
+
 - HTTPS is provisioned in the same flow as DNS — no second step for the user
 - No HTTP-01 race condition: DNS-01 validation does not depend on traffic reaching the server
 - ACME CNAME delegation pattern enables fully automated certificate renewal without further DNS changes
@@ -149,6 +152,7 @@ _acme-challenge.yourdomain.com  CNAME  <token>.acme.appplatform.example
 The provider controls `<token>.acme.appplatform.example` and places the TXT record there. The ACME CA follows the CNAME and validates against the provider's TXT. This is the [acme-dns](https://github.com/joohoi/acme-dns) pattern, standardised in [RFC 8555](https://datatracker.ietf.org/doc/html/rfc8555) and supported by all major ACME CAs.
 
 Benefits:
+
 - **Permanent setup:** the CNAME is created once and never needs to change
 - **Fully automated renewal:** the provider rotates the TXT record on its own infrastructure for every renewal, with no DNS change on the user's domain
 - **No token exposure:** the user never sees or approves a cryptographic token — just "create a CNAME for certificate validation"

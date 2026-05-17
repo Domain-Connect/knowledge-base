@@ -11,6 +11,7 @@
 A service provider hosts email mailboxes on behalf of the domain owner. The user's domain receives email through the provider's mail infrastructure. This is the most complete email template pattern: it configures inbound mail routing (MX), outbound authentication (SPF, DKIM), spoofing protection (DMARC), and optionally client auto-discovery so that desktop/mobile mail clients configure themselves automatically.
 
 Typical products in this category:
+
 - Business email suites (hosted @yourdomain.com mailboxes)
 - Email-as-a-service platforms bundled with website builders
 - White-label hosted email for agencies and resellers
@@ -24,6 +25,7 @@ Without Domain Connect, connecting a custom domain to a hosted email service mea
 With a Domain Connect template, the user clicks "Connect my domain" in the provider's dashboard, is redirected to their DNS provider's consent screen, reviews what will change, and clicks Approve. All records are created in seconds. The complexity of MX priorities, DKIM key formatting, and SPF merge semantics is handled entirely by the protocol.
 
 Key benefits:
+
 - Eliminates the most error-prone DNS task (manual MX + SPF configuration)
 - Users see a consent screen with plain-language record descriptions — not raw DNS syntax
 - SPF is applied as a merge (SPFM record type), preserving any existing SPF policy on the domain

@@ -19,6 +19,7 @@ In all three cases, the DNS change is the same: the domain's A record (and CNAME
 This pattern closely resembles [UC-04 (Website Hosting — Apex)](./UC-04_Website_Hosting_Apex.md) at the DNS level, but the intent and security implications differ: the origin server remains under the user's control, and the provider is a transparent intermediary rather than the content host. This distinction has implications for `warnPhishing`, record conflict handling, and how the consent screen is worded.
 
 Typical products in this category:
+
 - Cloud WAF and DDoS protection services
 - CDN providers offering a one-click setup flow
 - Reverse proxy services for performance optimisation
@@ -30,6 +31,7 @@ Typical products in this category:
 ## Value Added for the End User
 
 Onboarding to a WAF or CDN traditionally requires the user to:
+
 1. Find the provider's "activation IP" or CNAME target
 2. Change the A record (or CNAME) in their DNS panel
 3. Wait for propagation and confirm traffic is flowing through the provider
@@ -40,6 +42,7 @@ Each step has a meaningful failure rate. Users often skip the `www` update, resu
 With a Domain Connect template, the provider injects the correct IP or CNAME target as a variable. The user approves a single consent screen. Both A and CNAME records are set atomically. No traffic path is accidentally left unprotected.
 
 Key benefits:
+
 - Atomic update of all traffic paths (A + AAAA + www CNAME)
 - Provider controls the target IP — correct value is guaranteed
 - Consent screen clearly names the provider, so the user understands what they are routing traffic through

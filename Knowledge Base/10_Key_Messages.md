@@ -103,6 +103,7 @@ Link to WG: datatracker.ietf.org/wg/dconn/about/
 ### Post 4: The renewal rate angle (registry/registrar audience)
 ---
 Domain renewal rates by usage level:
+
 📊 No content: ~70%
 📊 Low content: ~78%
 📊 High content: ~90%

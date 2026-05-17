@@ -11,6 +11,7 @@
 A service provider sends email **on behalf of** the domain owner — newsletters, transactional notifications, marketing campaigns — but does not host the mailboxes. The domain owner retains their existing email setup (e.g. Google Workspace, Microsoft 365). The template adds the authentication layer that tells receiving mail servers that the service provider is an authorised sender for this domain.
 
 This is the most common email-related template pattern in the repository. It covers:
+
 - Email marketing platforms (newsletters, campaigns)
 - Transactional email APIs (order confirmations, password resets)
 - CRM and sales automation tools that send outbound email
@@ -27,6 +28,7 @@ Email deliverability depends on SPF and DKIM being correctly configured. Without
 With a Domain Connect template, the service provider generates the DKIM key, encodes it as a template variable, and invokes the DNS change on behalf of the user. The user sees a consent screen, approves, and the domain is authenticated. What previously required a 10-step help article now happens in a single OAuth flow.
 
 Key benefits:
+
 - Domain authentication is completed correctly on the first attempt
 - SPF merge semantics (SPFM) prevent breaking existing SPF policy
 - Dramatically reduces support tickets related to failed domain verification

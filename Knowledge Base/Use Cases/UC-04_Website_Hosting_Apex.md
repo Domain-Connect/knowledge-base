@@ -13,6 +13,7 @@ A service provider hosts a website and the user wants to point their domain's ro
 This is the most frequently used template pattern for website builders, e-commerce platforms, CMS hosts, and app deployment platforms that support apex domains. It is structurally simple — often just two or three records — but carries the highest operational risk of any template type, because replacing the A record at `@` immediately changes where the domain resolves for all HTTP traffic.
 
 Typical products in this category:
+
 - Website builders and landing page tools
 - E-commerce platforms (shop on `yourdomain.com`)
 - CMS hosting platforms (WordPress, Ghost, static sites)
@@ -28,6 +29,7 @@ Connecting a domain to a website builder is the most common Domain Connect deplo
 With a Domain Connect template, the user is redirected to their DNS provider's consent screen that shows exactly which records will be changed, clicks Approve, and the domain is live within the TTL window. The provider handles conflict resolution (removing old A records), dual-stack setup (A + AAAA), and the www CNAME in one atomic operation.
 
 Key benefits:
+
 - Fastest DNS change a user can make — 3 records, one click
 - DNS providers handle conflict resolution: old conflicting A records are removed
 - IPv6 (AAAA) can be added alongside IPv4 without the user knowing it exists

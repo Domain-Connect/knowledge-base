@@ -70,6 +70,7 @@ An entity hosting the authoritative DNS zone for the user's domain. This is typi
 **User**
 
 The domain owner who wants to connect their domain to a service. In the Domain Connect flow, the user:
+
 - Enters their domain name at the service provider
 - Is redirected to their DNS provider (automatically detected)
 - Authenticates with their DNS provider (credentials they already have)

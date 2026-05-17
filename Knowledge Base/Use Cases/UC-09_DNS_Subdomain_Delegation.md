@@ -13,6 +13,7 @@ A service provider takes authoritative control over a specific subdomain zone wi
 This is a structural DNS operation, not a content operation. The template does not create any actual resource records (A, MX, TXT, etc.) — it creates the zone cut that makes the provider's nameservers authoritative for the subdomain. All content within the delegated zone is then managed by the provider.
 
 Typical products in this category:
+
 - Protocol overlay services that use DNS as a structured data store (NUM, ENUM, NAPTR hierarchies)
 - Managed sub-zone hosting (enterprise DNS providers managing a department or product subdomain)
 - IoT device management platforms that need a per-customer DNS namespace
@@ -29,6 +30,7 @@ A manual delegation also has a zero-tolerance error profile: a single typo in an
 With a Domain Connect template, the provider injects the correct NS hostnames as variables, the DNS provider creates all four records atomically, and the user only approves a consent screen. The provider can also verify delegation immediately by querying the parent zone.
 
 Key benefits:
+
 - Atomic creation of all NS records — no partial delegation possible
 - Provider controls the NS values — correct nameserver hostnames guaranteed
 - Zone cut is established in a single consent-and-approve step

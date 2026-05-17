@@ -23,6 +23,7 @@ Publish a `_domainconnect` TXT record pointing to your API base URL. This signal
 **2. Settings document (discovery document)**
 
 Serve a JSON document at a standardized URL containing your API endpoints:
+
 - `urlSyncUX` — the synchronous flow endpoint
 - `urlAsyncUX` — the OAuth authorization endpoint
 - `urlAPI` — the asynchronous API endpoint
@@ -63,6 +64,7 @@ Service Providers are the client side of Domain Connect. Implementing as a Servi
 **1. Create your template**
 
 Define a JSON template that describes:
+
 - Your `providerId` and `serviceId` (unique identifiers for your organization and this specific service)
 - The DNS records your service requires (A, AAAA, CNAME, MX, TXT, SRV, etc.)
 - The variables your template needs at runtime (e.g., `%IP%`, `%VERIFICATION_TOKEN%`)
@@ -77,6 +79,7 @@ Contact DNS Providers you want to support and submit your template for their rev
 **3. Implement the discovery flow**
 
 In your product flow, when a user enters a domain name:
+
 1. Look up `_domainconnect.<domain>` as a TXT record
 2. Fetch the DNS Provider's settings document
 3. Check whether your template is supported (`GET /domainTemplates/providers/{providerId}/services/{serviceId}`)
@@ -85,6 +88,7 @@ In your product flow, when a user enters a domain name:
 **4. Implement the redirect**
 
 When the user clicks "Connect," redirect them to the DNS Provider's synchronous flow URL with:
+
 - The domain and optional host parameters
 - Your template variable values
 - A cryptographic signature (if your template requires it)
@@ -111,6 +115,7 @@ The DCONN (Domain Connect) working group at the IETF is the venue for shaping th
 **Mailing list**
 
 The primary discussion channel is the DCONN working group mailing list. All substantive technical discussion about the specification happens here. Subscribe and participate at:
+
 `https://datatracker.ietf.org/wg/dconn/about/`
 
 **Read and comment on the draft**
@@ -128,6 +133,7 @@ Organizations that have implemented the protocol are especially valuable partici
 ### What the working group is currently working on
 
 As of mid-2026, the working group is focused on:
+
 - Resolving open issues from the -01 draft review
 - Expanding and refining the security considerations section
 - Clarifying ambiguities surfaced by implementation reports

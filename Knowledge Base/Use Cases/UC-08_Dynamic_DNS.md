@@ -13,6 +13,7 @@ A client application (home router, IoT device, self-hosted server, home automati
 This use case is unique in the Domain Connect ecosystem because the template is not a one-time configuration: it is the bootstrap step for an ongoing, automated relationship between a client and a DNS provider. The OAuth access token obtained during async flow setup is the credential the client uses for all future updates.
 
 Typical products in this category:
+
 - Home lab and self-hosted server connectivity
 - IP camera and NVR remote access
 - Home automation platforms (point a stable hostname at a residential connection)
@@ -24,6 +25,7 @@ Typical products in this category:
 ## Value Added for the End User
 
 Without Domain Connect, DDNS setup requires the user to:
+
 1. Create a DNS record manually with their current IP in the DNS panel
 2. Configure a DDNS client with DNS provider credentials (API key, account login)
 3. Verify that the client is successfully pushing updates
@@ -33,6 +35,7 @@ Step 2 is where most users fail: each DNS provider has a different API, differen
 With Domain Connect, the initial record creation is handled by the template (step 1). The async OAuth flow (step 2) produces a standardised access token that works with any Domain Connect–compatible DNS provider. The DDNS client only needs to implement the Domain Connect async update call — one interface, all providers.
 
 Key benefits:
+
 - No DNS-panel credentials shared with the DDNS client — only a scoped OAuth token
 - Token scope is limited to the specific template (only allowed to update this record type)
 - The client can rotate IP updates as frequently as needed without re-authenticating
@@ -96,6 +99,7 @@ Some DDNS platforms use even shorter TTLs (30s or less). Balance this against in
 ### Separate groupIds per address family
 
 IPv4 and IPv6 are in separate `groupId` blocks (`"IPv4"` and `"IPv6"`). This allows:
+
 - An IPv4-only client to apply only the A record group
 - A dual-stack client to apply both
 - The DNS provider to handle partial application cleanly (e.g. skip AAAA if IPv6 is not supported)
@@ -158,6 +162,7 @@ This gives the DNS provider full control and auditability. It is appropriate for
 DDNS is the only Domain Connect use case that depends on persistent, unattended access to the DNS provider's API. A DNS provider that issues short-lived access tokens with no refresh token support cannot be used for DDNS at all: the client would lose write access after the first token expiry, silently breaking IP updates with no recourse short of the user re-running the entire setup flow.
 
 DNS providers implementing the async flow for DDNS must therefore either:
+
 - Issue access tokens with a lifetime long enough to be practical for unattended devices (months to years), or
 - Issue refresh tokens alongside access tokens, allowing the client to obtain a new access token autonomously when the current one nears expiry.
 
@@ -170,6 +175,7 @@ Access tokens expire. The client must implement the refresh token cycle — requ
 **IP validation before every update.**  
 
 The client must validate the IP before pushing an update. Common failure modes:
+
 - `0.0.0.0` or `127.0.0.1` when the network interface is down or misconfigured
 - A private RFC 1918 address (e.g. `192.168.x.x`) when the client detects the LAN interface instead of the WAN IP, or when NAT reflection causes the client to see its own private IP
 - A stale IP from a cached response

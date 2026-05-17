@@ -31,6 +31,7 @@ Discovery is how a Service Provider finds out that your DNS provider supports Do
 For each zone you host, respond to DNS queries for `_domainconnect.<domain>` with a TXT record containing your API base URL (authority + optional path, no scheme, no query or fragment).
 
 Example record content:
+
 ```
 api.domainconnect.yourdnsprovider.com
 ```

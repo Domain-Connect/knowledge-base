@@ -11,12 +11,14 @@
 A service provider operates a redirect infrastructure: when a browser requests `yourdomain.com`, the redirect service intercepts the HTTP request and issues a 301 or 302 redirect to a destination URL. The domain's DNS A record (and AAAA for IPv6) points to the redirect service's IP. The redirect service is responsible for the HTTP-layer forwarding; DNS only delivers the browser to the right server.
 
 This is structurally identical to website hosting at the DNS level — an A record at the apex. What distinguishes it as a use case is:
+
 - The "content" served is a redirect, not actual website content
 - The user's intent is forwarding traffic, not hosting anything
 - The destination URL is often user-configurable and unrelated to the domain being configured
 - Path-forwarding and URL masking variants add complexity
 
 Typical products in this category:
+
 - Domain redirect services (park a domain, forward it to another URL)
 - URL shortener platforms with custom domains
 - Brand link management services
@@ -31,6 +33,7 @@ Domain redirect setup is deceptively simple (it is "just an A record") but relia
 With a Domain Connect template, both A and AAAA are set correctly and atomically. A `www` CNAME can be included in the same template. The user's only task is approving the consent screen.
 
 Key benefits:
+
 - Correct A + AAAA + www CNAME in one step, eliminating partial-redirect configurations
 - Provider controls the redirect IP — no risk of the user copying an outdated IP from a help article
 - Propagation is immediate from the DNS provider side; no waiting for propagation to "take effect" on the redirect service
@@ -82,6 +85,7 @@ Key benefits:
 ### A and AAAA with variable IPs
 
 The redirect service's IPs are injected as variables. This is appropriate when:
+
 - Different service tiers use different IPs
 - The user's redirect configuration is hosted on a specific server or cluster
 - The provider needs the flexibility to reassign IPs without a code change to the template

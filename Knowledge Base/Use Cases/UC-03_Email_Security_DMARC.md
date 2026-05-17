@@ -13,6 +13,7 @@ A service provider specialises in monitoring and enforcing email security standa
 The distinguishing feature of this use case is that the DNS records **delegate control to the provider's infrastructure** rather than setting static values. The canonical pattern is a CNAME at `_dmarc` pointing to the provider's reporting pipeline. This allows the provider to update the DMARC policy, reporting addresses, and forensic options without any further DNS changes.
 
 Typical products in this category:
+
 - DMARC monitoring and enforcement platforms
 - Email security posture management tools
 - Managed email security services offered by MSSPs
@@ -27,6 +28,7 @@ DMARC adoption stalls at the "getting the first record in" step. The correct syn
 A DMARC management platform solves this by becoming the authoritative source of the DMARC policy for the domain. The user connects their domain once (via Domain Connect), and the provider manages everything thereafter: policy progression, report ingestion, DKIM key inventory, and alerts. The Domain Connect template is the mechanism for establishing this delegation in a single, consent-driven step.
 
 Key benefits:
+
 - Zero-friction DMARC onboarding: one click instead of a multi-step DNS walkthrough
 - Policy is managed server-side — no further DNS changes required for policy progression
 - Reduces time from signup to `p=reject` enforcement from weeks to days
@@ -123,6 +125,7 @@ This is a powerful but consequential change: no other party can add DKIM records
 ### MTA-STS and TLSRPT
 
 MTA-STS ([RFC 8461](https://datatracker.ietf.org/doc/html/rfc8461)) enforces TLS for inbound SMTP delivery. It requires two records:
+
 - `mta-sts.yourdomain.com` (CNAME or A) — serves the policy document
 - `_mta-sts.yourdomain.com` (TXT) — signals that MTA-STS is active
 

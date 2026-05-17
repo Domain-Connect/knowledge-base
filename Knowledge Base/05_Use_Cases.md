@@ -75,6 +75,7 @@ Domain Connect was designed for a specific problem: the gap between "domain regi
 ## Multi-Step Flows: Verification Then Configuration
 
 Many services require a two-phase DNS configuration:
+
 1. **Phase 1:** Prove domain ownership (TXT record)
 2. **Phase 2:** Configure the actual service (MX, CNAME records)
 

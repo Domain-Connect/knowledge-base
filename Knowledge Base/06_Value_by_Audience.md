@@ -17,6 +17,7 @@ Registries are in an unusual position: they benefit from Domain Connect without 
 ### The core connection
 
 CENTR renewal data shows a direct relationship between domain use and renewal:
+
 - Domains with no content: ~70% renewal rate
 - Domains with high content: ~90% renewal rate
 
@@ -104,6 +105,7 @@ End users are the ultimate beneficiaries of Domain Connect, and the value is the
 ### What users experience without Domain Connect
 
 A small business owner who registers a domain and signs up for Microsoft 365 email must:
+
 1. Log into their registrar's control panel
 2. Find the DNS management section
 3. Understand what MX, TXT, and CNAME records are

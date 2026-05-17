@@ -13,6 +13,7 @@ A service provider hosts a website, app, or service endpoint and the user wants 
 This is the simplest and most portable hosting pattern. Because a CNAME points to a hostname rather than an IP, the provider can change its infrastructure IP, move to a CDN, or rebalance traffic without requiring any DNS change from the user. It is also the foundation for nearly every SaaS "custom domain" feature.
 
 Typical products in this category:
+
 - SaaS platforms with custom domain features (help centres, portals, dashboards)
 - App deployment platforms (JAMstack, serverless, container hosting)
 - Landing page and funnel builders
@@ -28,6 +29,7 @@ Custom domain support in SaaS is a table-stakes feature, but CNAME setup has a s
 With a Domain Connect template, the CNAME target is provided by the platform and injected as a template variable. The user does not need to copy any string. The DNS provider creates the record atomically and the platform can immediately check resolution.
 
 Key benefits:
+
 - Eliminates copy-paste errors in CNAME targets (the most common cause of failed custom domain setups)
 - The provider controls the CNAME target — IP changes and CDN migrations are transparent to the user
 - Optional TXT verification record can be included in the same flow, removing a separate "verify domain" step

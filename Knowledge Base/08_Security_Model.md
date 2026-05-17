@@ -75,6 +75,7 @@ _dck1.exampleservice.domainconnect.org. IN TXT "p=<base64-encoded-public-key>"
 ### 2. Template Pre-Approval (Vetting)
 
 Every template must be reviewed and deployed by the DNS Provider before it can be used. This review process:
+
 - Confirms the template does what it claims
 - Confirms the records are consistent with the described service
 - Establishes accountability (the DNS Provider has vouched for this template)
@@ -85,6 +86,7 @@ The vetting process is intentionally out-of-band and cannot be bypassed.
 ### 3. OAuth Token Scoping (Asynchronous Flow)
 
 In the asynchronous flow, OAuth tokens are issued with precise scope. A token issued for a specific template is:
+
 - Scoped to that specific template and the resource records it covers
 - Cannot be used to modify records outside the template's scope
 - Cannot be used for a different domain than the one authorized
@@ -94,6 +96,7 @@ Subdomain scoping is configurable: the scope can be limited to no subdomain, a s
 ### 4. User Authentication and Zone Ownership Verification
 
 The DNS Provider must authenticate the user through its own authentication mechanism before processing any Domain Connect request. The user must prove they control the target zone. This means:
+
 - A user cannot apply a template to someone else's domain
 - Credentials are the DNS Provider's own (e.g., GoDaddy login) — not managed by the Service Provider
 - The DNS Provider's authentication system is not in the Service Provider's control or visibility

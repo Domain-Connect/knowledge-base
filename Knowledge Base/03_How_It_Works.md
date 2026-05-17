@@ -154,11 +154,13 @@ The core of the template — defines which DNS records to create:
 
 ### Variables
 Dynamic values filled in at runtime by the Service Provider and passed in the redirect URL:
+
 - `%IP%` — the IP address of the service's server
 - `%RANDOMTEXT%` — a verification token for domain ownership checks
 
 ### Conflict Resolution Controls
 Instructions for how to handle existing DNS records:
+
 - `txtConflictMatchingMode`: how to detect conflicts in TXT records (`None`, `All`, `Prefix`)
 - `essential`: whether a record is `Always` required or only `OnApply`
 - `multiInstance`: whether multiple instances of a record can coexist
@@ -240,6 +242,7 @@ _domainconnect.example.com. IN TXT "https://api.domaincontrol.com/v2"
 ```
 
 This record:
+
 - **Signals** that the DNS provider supports Domain Connect
 - **Points** to the API base URL of the DNS Provider's Domain Connect service
 - **Enables** zero-configuration discovery for any Service Provider

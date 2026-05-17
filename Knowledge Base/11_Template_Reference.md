@@ -270,6 +270,7 @@ The domain name under which the Service Provider publishes its public signing ke
 ```
 
 The public key is then published at:
+
 ```
 _dcpubkeyv1.domainconnect.shopify.com. IN TXT "p=1,a=RS256,d=<base64-key>"
 ```
@@ -751,6 +752,7 @@ The SPF mechanism and modifier terms to be merged into the domain's SPF TXT reco
 ```
 
 This instructs the DNS Provider to merge `include:spf.protection.outlook.com` into the existing SPF record:
+
 - If no SPF record exists: creates `v=spf1 include:spf.protection.outlook.com ~all`
 - If an SPF record exists: merges the mechanism in, producing e.g. `v=spf1 include:_spf.google.com include:spf.protection.outlook.com ~all`
 
@@ -769,6 +771,7 @@ Service Providers MUST NOT check the content of the SPF TXT record for an exact 
 ### Variable syntax
 
 Template variable expressions use `%VARNAME%` notation:
+
 - Variable names are case-insensitive alphanumeric identifiers
 - The entire expression `%VARNAME%` is replaced with the value passed by the SP at apply time
 - The special variable `@` is a shorthand for `%fqdn%.` (the fully qualified applied domain)
@@ -788,6 +791,7 @@ Template variable expressions use `%VARNAME%` notation:
 | `@` | Shorthand for `%fqdn%.` (with trailing dot — absolute DNS name) |
 
 **Variable scope minimization principle:** Variables should be constrained to as small a portion of the record value as possible. Instead of `"pointsTo": "%FULLHOSTNAME%"`, prefer `"pointsTo": "%ACCOUNT%.cdn.example.com"` where the variable carries only the variable portion. This:
+
 - Gives the DNS Provider better visibility into the template's intent during review
 - Reduces the attack surface for phishing (a bad actor can only inject the variable portion, not the entire value)
 - Makes the template easier to understand and verify
@@ -847,6 +851,7 @@ Template variable expressions use `%VARNAME%` notation:
 ```
 
 This template:
+
 - Requires URL signing (`syncPubKeyDomain`)
 - Validates the redirect destination (`syncRedirectDomain`)
 - Uses two groups: `verify` (applied first, verification token) and `service` (applied after verification, actual hosting records)
@@ -871,6 +876,7 @@ The template repository at [github.com/Domain-Connect/Templates](https://github.
 **Step 1 — Create and test your template in the Online Editor**
 
 The [Online Editor](https://domainconnect.paulonet.eu/dc/free/templateedit) is the required starting point. It provides:
+
 - Real-time syntax checking against the JSON schema
 - Variable substitution testing with custom input values
 - Group filtering testing
@@ -901,6 +907,7 @@ These rules are enforced by the linter ([github.com/Domain-Connect/dc-template-l
 Every template must have `syncPubKeyDomain`. Many DNS providers reject templates without it.
 
 **Exceptions** (must be justified in the PR description):
+
 - Set `syncBlock: true` to restrict to async flow only (authenticates via OAuth, no key needed). Note: async flow has significantly lower DNS provider support, requires bilateral OAuth setup per provider, and is never automatic.
 - Set `warnPhishing: true` as a last resort when signing and async are both infeasible. This provides no cryptographic guarantee and some providers will reject it by policy.
 

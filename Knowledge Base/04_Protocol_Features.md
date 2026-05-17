@@ -65,6 +65,7 @@ A DNS Provider MAY implement only the synchronous flow. The synchronous flow is 
 2. The value of the TXT record contains the URL fragment pointing to the DNS Provider's API
 3. SP fetches the full "settings" JSON document from that endpoint
 4. Settings document contains:
+
    - `urlSyncUX`: endpoint for the synchronous flow
    - `urlAsyncUX`: endpoint for the asynchronous OAuth flow
    - `urlAPI`: endpoint for the asynchronous API
@@ -96,11 +97,13 @@ These are expressed as **named variables** in the template using `%VARIABLENAME%
 ```
 
 The Service Provider passes variable values in the redirect URL:
+
 ```
 ?domain=example.com&IP=198.51.100.1&RANDOMTEXT=abc123
 ```
 
 **Two notation systems are intentionally used** to prevent injection attacks:
+
 - `{variable}` (RFC 6570 URI Template syntax) — used for protocol-level URL templates defined in the specification
 - `%VARIABLE%` — used for Service Provider-defined template variables and dynamic elements
 
@@ -134,12 +137,14 @@ When a template is applied to a zone, the DNS records it wants to create may con
 **For TXT records (special handling):**
 
 The `txtConflictMatchingMode` field controls TXT conflict detection:
+
 - `None` — no conflict detection; add the new record regardless
 - `All` — any existing TXT record at this hostname is a conflict
 - `Prefix` — only TXT records starting with `txtConflictMatchingPrefix` are conflicts (see SPF merging below)
 
 ### Essential flag
 Each record in a template has an `essential` attribute:
+
 - `Always` (default) — this record is essential; if it conflicts and cannot be applied, abort the entire template application
 - `OnApply` — this record should be applied if possible, but its failure does not block the rest of the template
 
@@ -157,6 +162,7 @@ The Service Provider can include a `force=1` parameter in the redirect URL to ov
 **Domain Connect's solution:** The `SPFM` pseudo-record type handles SPF merging automatically.
 
 A template can specify an SPFM record:
+
 ```json
 {
   "type": "SPFM",
@@ -166,6 +172,7 @@ A template can specify an SPFM record:
 ```
 
 When applying this record, the DNS Provider:
+
 1. Checks if an SPF record already exists at the hostname
 2. If yes, **merges** the new `include:` mechanism into the existing SPF record
 3. If no, creates a new SPF TXT record
@@ -217,6 +224,7 @@ _dck1.exampleservice.domainconnect.org. IN TXT "p=<base64-encoded-public-key>"
 ## 9. Template Groups
 
 A service may need to apply DNS configuration in multiple stages. For example:
+
 1. First, create a TXT record to prove domain ownership
 2. After verification, create MX and CNAME records to configure the actual service
 
