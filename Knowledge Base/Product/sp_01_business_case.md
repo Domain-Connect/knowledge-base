@@ -101,6 +101,35 @@ The single most important number is how many of *your* customers are on a DNS pr
 
 **Annual saving ≈ F × C × H × G + share of I no longer needed**
 
+### Worked Example — 100 Domain Configurations a Day
+
+An illustrative service provider where **100 customers a day** reach the domain step. Every input is an assumption made up for the example; replace each one with your own data.
+
+| Input | Conservative | Optimistic | Assumption |
+|-------|-------------:|-----------:|------------|
+| A — Customers attempting the domain step per year | 36,500 | 36,500 | 100 a day × 365 |
+| B — Current completion rate | 50% | 50% | In line with the Microsoft 365 failure rate |
+| C — Share on supporting DNS providers | 40% | 40% | Measure it in Step 1 |
+| D — Completion rate via Domain Connect | 70% | 85% | |
+| E — Value of an activated customer | €60 | €60 | First-year margin |
+| F — DNS-related tickets per year | 7,300 | 7,300 | 20% of attempts |
+| G — Cost per ticket | €20 | €20 | |
+| H — Deflection for Domain Connect connections | 50% | 80% | |
+| I — Annual registrar-specific documentation effort | €20,000 | €20,000 | Share no longer needed: 25% / 40% |
+
+| Result | Conservative | Optimistic |
+|--------|-------------:|-----------:|
+| Attempts on supporting DNS providers (A × C) | 14,600 | 14,600 |
+| Additional activated customers per year (A × C × (D − B)) | 2,920 | 5,110 |
+| **Activation value** (× E) | **€175,200** | **€306,600** |
+| Tickets avoided per year (F × C × H) | 1,460 | 2,336 |
+| Support saving (F × C × H × G) | €29,200 | €46,720 |
+| Documentation saving (share of I) | €5,000 | €8,000 |
+| **Annual saving** | **€34,200** | **€54,720** |
+| **Total per year** | **€209,400** | **€361,320** |
+
+Activation dominates: 8–14 more of the 100 customers reaching the domain step each day end up with a working domain. C is the multiplier on everything, which is why Step 1 comes first, and it grows as more DNS providers deploy your template.
+
 !!! tip "Keep the assumptions visible"
     D and H are the numbers your CFO will challenge. Put them in your proposal as explicit assumptions with a conservative and an optimistic case, and commit to measuring them on the first DNS providers that deploy your template. Because the manual path stays in place as a fallback, you will have a built-in control group.
 

@@ -100,6 +100,33 @@ Cross-check against the [template repository](https://github.com/Domain-Connect/
 
 **Additional annual renewal revenue ≈ E × F × G × H × I**
 
+### Worked Example — 100,000 Zones
+
+An illustrative DNS provider hosting **100,000 zones**. Every input is an assumption made up for the example; replace each one with your own data.
+
+| Input | Conservative | Optimistic | Assumption |
+|-------|-------------:|-----------:|------------|
+| A — Monthly third-party DNS setup tickets | 200 | 200 | 2 per 1,000 zones |
+| B — Cost per ticket | €25 | €25 | |
+| C — Share for services with a template | 60% | 60% | Mostly Microsoft 365, Google Workspace, website builders |
+| D — Deflection once live | 50% | 80% | |
+| E — New registrations per year | 15,000 | 15,000 | 15% of the zone count |
+| F — Share never connected | 60% | 60% | |
+| G — Share of F converted via Domain Connect | 5% | 15% | |
+| H — Renewal uplift for converted domains | 10 points | 20 points | CENTR gap is ~20 points |
+| I — Annual renewal revenue per domain | €12 | €12 | |
+
+| Result | Conservative | Optimistic |
+|--------|-------------:|-----------:|
+| Tickets avoided per year (A × 12 × C × D) | 720 | 1,152 |
+| **Annual support saving** (A × 12 × B × C × D) | **€18,000** | **€28,800** |
+| Domains converted per year (E × F × G) | 450 | 1,350 |
+| Additional renewals (E × F × G × H) | 45 | 270 |
+| **Additional annual renewal revenue** (E × F × G × H × I) | **€540** | **€3,240** |
+| **Total per year** | **€18,540** | **€32,040** |
+
+At this size the support saving dominates. The renewal figure covers one registration cohort for one year: each new cohort adds its own converted domains, and converted domains keep renewing in the following years, so the effect builds up over time. The activation lever also matters more than its renewal revenue suggests, because a connected domain is where your own hosting, email and upsell products land.
+
 !!! tip "Keep the assumptions visible"
     D and G are the numbers your CFO will challenge. Put them in your proposal as explicit assumptions, propose a conservative and an optimistic case, and commit to validating them with a pilot on your top two or three templates.
 
