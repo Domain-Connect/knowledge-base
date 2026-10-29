@@ -79,7 +79,7 @@ Many services require a two-phase DNS configuration:
 1. **Phase 1:** Prove domain ownership (TXT record)
 2. **Phase 2:** Configure the actual service (MX, CNAME records)
 
-Domain Connect's **template groups** (`groupId`) and the **asynchronous OAuth flow** are designed exactly for this pattern:
+Domain Connect's **template groups** (`groupId`) and the **asynchronous OAuth flow** (async extension draft) are designed exactly for this pattern:
 
 ```
 User approves once (OAuth flow)

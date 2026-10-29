@@ -58,7 +58,7 @@ The redirect URL that a Service Provider sends to the user can be signed with a 
 **How it works:**
 
 1. The Service Provider signs the redirect URL using a private key
-2. The public key is published in DNS at `_dck<N>.<provider-domain>.` as a TXT record
+2. The public key is published in DNS at `{key}.{syncPubKeyDomain}` as one or more TXT records
 3. The redirect URL includes a `sig=` parameter (the signature) and a `key=` parameter (the key identifier)
 4. The DNS Provider fetches the public key from DNS and verifies the signature
 
@@ -69,7 +69,7 @@ The redirect URL that a Service Provider sends to the user can be signed with a 
 **Public key DNS record format:**
 
 ```
-_dck1.exampleservice.domainconnect.org. IN TXT "p=<base64-encoded-public-key>"
+_dcpubkeyv1.exampleservice.domainconnect.org. IN TXT "p=1,a=RS256,d=<base64-encoded-public-key>"
 ```
 
 ### 2. Template Pre-Approval (Vetting)
@@ -84,6 +84,8 @@ Every template must be reviewed and deployed by the DNS Provider before it can b
 The vetting process is intentionally out-of-band and cannot be bypassed.
 
 ### 3. OAuth Token Scoping (Asynchronous Flow)
+
+*The asynchronous flow is specified in the extension {{ facts.src_ietf_async_draft }}.*
 
 In the asynchronous flow, OAuth tokens are issued with precise scope. A token issued for a specific template is:
 
@@ -101,11 +103,11 @@ The DNS Provider must authenticate the user through its own authentication mecha
 - Credentials are the DNS Provider's own (e.g., GoDaddy login) — not managed by the Service Provider
 - The DNS Provider's authentication system is not in the Service Provider's control or visibility
 
-### 5. `warnPhishing` Flag
+### 5. Phishing Warnings for Unsigned Requests
 
 Some templates contain variable-resolved values that could be set to point a domain at an attacker's server (e.g., an A record where the IP address is a template variable). If the Service Provider does not sign the URL, an attacker who intercepts and modifies the redirect URL could change the IP address to their own.
 
-The `warnPhishing: true` flag in a template signals that the template contains such variables. DNS Providers SHOULD display a visible warning to users when this flag is set and URL signing is not present. This prompts users to verify they are on the correct Service Provider's website before approving.
+Unless a request is signed, the DNS Provider MUST treat the template as susceptible to phishing and SHOULD display a visible warning, prompting users to verify they are on the correct Service Provider's website before approving. Until -02 this warning was requested per template with the `warnPhishing` flag; draft -03 deprecated the flag and made the warning the default.
 
 ---
 
@@ -135,7 +137,25 @@ URL signing prevents URL tampering but does not address all attack vectors. A Se
 
 Templates that configure A or CNAME records (which determine where web traffic goes) are higher risk than templates that configure DKIM keys (which only affect email authentication). If a user is tricked into approving a malicious A record change, their web traffic can be redirected.
 
-**Mitigation:** The `warnPhishing` flag and URL signing requirement for high-risk templates. DNS Providers should require signing for templates with A, AAAA, or CNAME records.
+**Mitigation:** Phishing warnings for unsigned requests and URL signing requirement for high-risk templates. DNS Providers should require signing for templates with A, AAAA, or CNAME records.
+
+### Untrusted discovery records
+
+The `_domainconnect` record is controlled by whoever controls the zone, so it can point a Service Provider's backend at a slow or oversized endpoint, or at its own internal network (SSRF).
+
+**Mitigation:** Service Providers treat discovery as untrusted input — bounded timeouts, response size and redirects, and no internal addresses (added in -03).
+
+### Underscored host names
+
+An apply request with a `host` such as `_acme-challenge` or `_dmarc` can turn an innocuous-looking template into a delegation of certificate issuance or email policy.
+
+**Mitigation:** DNS Providers show the affected names explicitly on the consent screen when `host` starts with an underscore (added in -03).
+
+### Impersonating templates
+
+`providerId`, `serviceId`, `providerName` and `logoUrl` are self-asserted. A template could borrow an established brand to gain the user's trust on the consent screen.
+
+**Mitigation:** At onboarding, DNS Providers verify that the submitter controls the claimed identity (e.g. via the `syncPubKeyDomain` key), review the scope of the records, check the display fields for confusion with other providers, and repeat this for each template update (added in -04).
 
 ### Ambiguity in variable notation (historical)
 

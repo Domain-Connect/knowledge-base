@@ -39,10 +39,14 @@ This document is an exhaustive reference for every field in both parts. Each ent
 | Synchronous Public Key Domain | `syncPubKeyDomain` | String | optional | **{{ facts.feature_syncpubkeydomain }} / {{ facts.repo_templates }} ({{ facts.feature_syncpubkeydomain_pct }})** |
 | Synchronous Redirect Domains | `syncRedirectDomain` | String | optional | **{{ facts.feature_syncredirectdomain }} / {{ facts.repo_templates }} ({{ facts.feature_syncredirectdomain_pct }})** |
 | Multiple Instance | `multiInstance` | Boolean | optional | rare |
-| Warn Phishing | `warnPhishing` | Boolean | optional | {{ facts.feature_warnphishing }} / {{ facts.repo_templates }} ({{ facts.feature_warnphishing_pct }}) |
 | Host Required | `hostRequired` | Boolean | optional | **{{ facts.feature_hostrequired }} / {{ facts.repo_templates }} ({{ facts.feature_hostrequired_pct }})** |
+| Template Spec Version | `templateSpecVersion` | Integer | optional (new in -04) | — |
+| Critical Properties | `crit` | Array of String | optional (new in -04) | — |
 | Records | `records` | Array | REQUIRED | {{ facts.repo_templates }} / {{ facts.repo_templates }} |
 | *(deprecated)* Shared | `shared` | Boolean | deprecated | — |
+| *(deprecated)* Warn Phishing | `warnPhishing` | Boolean | deprecated (-03) | {{ facts.feature_warnphishing }} / {{ facts.repo_templates }} ({{ facts.feature_warnphishing_pct }}) |
+
+Vendor-specific properties may be added with a `vnd.` prefix (e.g. `vnd.example.fooBar`); implementations ignore properties they do not recognize unless they are listed in `crit`.
 
 ---
 
@@ -214,7 +218,7 @@ When `true`, signals that this template does NOT support the synchronous flow. T
 
 **Use case:** Templates that require multi-step processing or ongoing DNS management (e.g., initial verification followed by service configuration) may be asynchronous-only. Setting `syncBlock: true` makes this explicit and prevents misuse through the synchronous flow.
 
-**Security relevance:** Some templates with significant phishing risk (see `warnPhishing`) may be locked to the asynchronous flow to ensure that the OAuth consent step provides additional controls. Setting `syncBlock: true` is one of three mitigations for template variable phishing risk (alongside URL signing and `warnPhishing`).
+**Security relevance:** Some templates with significant phishing risk may be locked to the asynchronous flow to ensure that the OAuth consent step provides additional controls. Setting `syncBlock: true` is one of the two mitigations for template variable phishing risk named in the draft, alongside URL signing.
 
 ---
 
@@ -281,7 +285,7 @@ _dcpubkeyv1.domainconnect.shopify.com. IN TXT "p=1,a=RS256,d=<base64-key>"
 
 **Key fragmentation:** Because TXT records have a 255-byte limit per string, public keys MAY be split across multiple TXT records at the same host using the `p=` (fragment index) attribute. Fragments are reassembled in ascending `p` order.
 
-**Mutual exclusivity with `warnPhishing`:** `syncPubKeyDomain` and `warnPhishing` MUST NOT appear in the same template. They are alternatives: `syncPubKeyDomain` provides cryptographic guarantee; `warnPhishing` is a UI-only fallback for when signing is not feasible. Setting both is invalid — linter rule **DCTL1028**.
+**Mutual exclusivity with `warnPhishing`:** `syncPubKeyDomain` and `warnPhishing` MUST NOT appear in the same template — linter rule **DCTL1028**. (`warnPhishing` itself is deprecated since -03.)
 
 **Template repository rule:** The template repository requires `syncPubKeyDomain` in every submitted template. The only accepted alternatives are `syncBlock: true` (restrict to async-only flow, which authenticates via OAuth instead) or `warnPhishing: true` (last resort, no cryptographic guarantee, will cause some DNS providers to reject the template by policy). Omitting `syncPubKeyDomain` without justification causes the PR to be rejected — linter rule **DCTL1029**.
 
@@ -329,14 +333,17 @@ When `true`, signals that the template is designed to be applied multiple times 
 
 ---
 
-### `warnPhishing`
+### `warnPhishing` (deprecated)
 
 **Type:** Boolean  
 **Required:** No  
 **Default:** `false`  
+**Status:** Deprecated since draft -03 — MUST NOT be set in new templates  
 **Usage: {{ facts.feature_warnphishing }} out of {{ facts.repo_templates }} templates ({{ facts.feature_warnphishing_pct }})**
 
-When `true`, signals that the template contains variable-resolved record values that could be set to point the domain at arbitrary infrastructure — and therefore cannot be fully constrained by URL signing. The DNS Provider SHOULD display additional warnings prompting the user to verify the source of the request before approving.
+When `true`, signalled that the template contains variable-resolved record values that could be set to point the domain at arbitrary infrastructure, asking the DNS Provider to display additional warnings.
+
+**Current rule:** The DNS Provider shows these warnings for every unsigned request by default, so the flag no longer has an effect. DNS Providers MUST NOT treat its absence as a sign that a template is safe. The rest of this section describes the underlying risk, which is unchanged.
 
 **The underlying risk:** A template with an A record using `%IP%` as the value is inherently open — any IP address could be substituted. If an attacker sends a user a crafted apply URL with a malicious IP address and the user approves it, the domain gets hijacked. Even with URL signing, the signed request may be legitimate but still carry a malicious value placed by a compromised SP.
 
@@ -346,7 +353,7 @@ When `true`, signals that the template contains variable-resolved record values 
 
 1. URL signing (`syncPubKeyDomain`) — cryptographic guarantee; prevents parameter tampering
 2. `syncBlock: true` — prevents the synchronous flow entirely; forces OAuth with its stronger authentication
-3. `warnPhishing: true` — UI-only warning; no cryptographic backing; some DNS providers will reject templates with this flag by policy
+3. `warnPhishing: true` — legacy, deprecated in the draft; UI-only warning; some DNS providers will reject templates with this flag by policy
 
 **Use case for `warnPhishing`:** Only when signing is genuinely infeasible and async-only flow is impractical. Examples: templates with variables that must be the entire record value as prescribed by an external standard, where the SP cannot implement key management.
 
@@ -370,6 +377,31 @@ Also applies to templates designed to configure subdomain services rather than t
 **Example scenario:** A CDN service template that sets `www CNAME customer.cdn.example.com.` requires `host=www` to be passed. If the user omits the host parameter, the template would try to set `@ CNAME customer.cdn.example.com.` which is either invalid (CNAME at apex) or wrong (pointing the root domain instead of `www`).
 
 **Caveat:** Setting `hostRequired: true` shifts the responsibility for providing a valid `host` value to the Service Provider's integration code. The SP must always include `host=` in the apply URL. Omitting this flag on templates that need it is a common integration bug.
+
+---
+
+### `templateSpecVersion`
+
+**Type:** Integer  
+**Required:** No (new in -04)
+
+The version of the template *format* the template conforms to — not the version of its content (that is `version`). The current value is `1`; a template without it is treated as `1`. An implementation that does not support the declared version rejects the template.
+
+---
+
+### `crit`
+
+**Type:** Array of String  
+**Required:** No (new in -04)
+
+Names of template properties that an implementation must understand to apply the template correctly — typically `vnd.` extensions that are unsafe to ignore. An implementation that does not understand a listed property rejects the template. Records may carry their own `crit` list for record fields.
+
+```json
+"vnd.example.lockRecords": true,
+"crit": ["vnd.example.lockRecords"]
+```
+
+**Caveat:** DNS Providers that predate -04 ignore `crit`, so it must not be the only safeguard for a security-relevant extension.
 
 ---
 
@@ -405,11 +437,11 @@ The DNS record type. Controls which additional fields are required and how confl
 | `MX` | Mail exchange | REQUIRED | {{ facts.records_mx }} |
 | `TXT` | Text record | REQUIRED | {{ facts.records_txt }} |
 | `SRV` | Service locator | REQUIRED | {{ facts.records_srv }} |
-| `NS` | Name server | REQUIRED | {{ facts.records_ns }} |
-| `SPFM` | SPF merge (pseudo-type) | SHOULD support | {{ facts.records_spfm }} |
-| `REDIR301` | HTTP 301 redirect | optional extension | {{ facts.records_redir301 }} |
-| `REDIR302` | HTTP 302 redirect | optional extension | {{ facts.records_redir302 }} |
-| `APEXCNAME` | Apex CNAME (ANAME/ALIAS) | optional extension | {{ facts.records_apexcname }} |
+| `NS` | Name server | optional | {{ facts.records_ns }} |
+| `SPFM` | SPF merge (computed type) | SHOULD support | {{ facts.records_spfm }} |
+| `REDIR301` | HTTP 301 redirect | optional extension (reserved) | {{ facts.records_redir301 }} |
+| `REDIR302` | HTTP 302 redirect | optional extension (reserved) | {{ facts.records_redir302 }} |
+| `APEXCNAME` | Apex CNAME (ANAME/ALIAS) | optional extension (reserved) | {{ facts.records_apexcname }} |
 | `CAA` | Certificate Authority Authorization | optional | {{ facts.records_caa }} |
 | `TYPE{n}` | Unknown type per RFC 3597 | optional | — |
 
@@ -417,7 +449,7 @@ The DNS record type. Controls which additional fields are required and how confl
 
 **Unknown types:** Any IANA-registered DNS RR type name may be used. Types not natively understood by the DNS Provider are specified using the RFC 3597 `TYPE{n}` notation (e.g. `TYPE257` for CAA before it was widely supported). Support for non-core types is optional per DNS Provider.
 
-**Extension types (`REDIR301`, `REDIR302`, `APEXCNAME`):** These are Domain Connect extensions not defined in standard DNS. They instruct the DNS Provider to configure HTTP redirects or apex aliasing using whatever mechanism the DNS Provider supports natively. DNS Provider support varies.
+**Extension types (`REDIR301`, `REDIR302`, `APEXCNAME`):** These are Domain Connect extensions not defined in standard DNS. They instruct the DNS Provider to configure HTTP redirects or apex aliasing using whatever mechanism the DNS Provider supports natively. DNS Provider support varies. The IETF draft does not define them but reserves their names for compatibility with the community specification.
 
 ---
 
@@ -450,7 +482,7 @@ The DNS owner name for the record, relative to the applied domain and subdomain 
 
 **Narrow variables in `host`:** When a variable in `host` is genuinely needed (e.g. a DKIM selector), fix the surrounding label parts so the variable can only resolve to a meaningful, service-specific hostname. For DKIM: use `"host": "%dkimkey%._domainkey"` rather than `"host": "%dkimkey%"`. The `._domainkey` suffix is fixed; only the selector label varies.
 
-**Caveat on variables in `host` (general):** If `host` contains a variable, the template scope becomes indeterminate at consent time — the DNS Provider cannot predict exactly which labels will be affected until the variable is resolved. This prevents accurate conflict detection in the asynchronous flow and is therefore discouraged. Use the `host` apply parameter instead of template variables to specify subdomains.
+**Caveat on variables in `host` (general):** If `host` contains a variable, the template scope becomes indeterminate at consent time — the DNS Provider cannot predict exactly which labels will be affected until the variable is resolved. This prevents accurate conflict detection and is therefore discouraged. Use the `host` apply parameter instead of template variables to specify subdomains.
 
 ---
 
@@ -464,6 +496,8 @@ Time-to-live in seconds. Controls how long the record is cached by resolvers.
 **DNS Provider discretion:** The spec explicitly treats the TTL as "best effort." The DNS Provider MAY adjust the TTL to fit its own minimum/maximum constraints or TTL enumeration policy without rejecting the template. The SP should not rely on the exact TTL being honored, and MUST NOT reject responses where DNS records have been written with a different TTL.
 
 **Variables:** Support for variables in the `ttl` field is OPTIONAL for DNS Providers. Template authors should prefer integer literals.
+
+**Same RRset, same TTL:** Records with the same `host` and type form one RRset and SHOULD use the same `ttl`, since DNS requires a single TTL per RRset.
 
 **Example:**
 
@@ -555,9 +589,11 @@ The target value of the record. Interpretation depends on record type:
 |------|----------------|
 | A | IPv4 address (e.g. `198.51.100.1`) |
 | AAAA | IPv6 address (e.g. `2001:db8::1`) |
-| CNAME | Fully qualified domain name (e.g. `target.cdn.example.com.`) |
+| CNAME | Fully qualified domain name (e.g. `target.cdn.example.com`) |
 | NS | Nameserver hostname |
 | MX | Mail exchange hostname |
+
+For CNAME, MX and NS, the value is always treated as fully qualified, whether or not it ends with a dot — it is never relative to the applied domain.
 
 **Variables:** May contain variable expressions. For A/AAAA records, the entire value or a suffix of it may be variable (e.g., `198.51.100.%srv%` where `srv` resolves to a last-octet value). For CNAME/MX, the variable typically represents the full hostname or a meaningful prefix/suffix.
 
@@ -812,7 +848,6 @@ Template variable expressions use `%VARNAME%` notation:
   "syncPubKeyDomain": "domainconnect.example.com",
   "syncRedirectDomain": "example.com",
   "hostRequired": false,
-  "warnPhishing": false,
   "records": [
     {
       "type": "A",
@@ -909,7 +944,7 @@ Every template must have `syncPubKeyDomain`. Many DNS providers reject templates
 **Exceptions** (must be justified in the PR description):
 
 - Set `syncBlock: true` to restrict to async flow only (authenticates via OAuth, no key needed). Note: async flow has significantly lower DNS provider support, requires bilateral OAuth setup per provider, and is never automatic.
-- Set `warnPhishing: true` as a last resort when signing and async are both infeasible. This provides no cryptographic guarantee and some providers will reject it by policy.
+- Set `warnPhishing: true` as a last resort when signing and async are both infeasible. This provides no cryptographic guarantee and some providers will reject it by policy. Note that the IETF draft has deprecated this flag since -03.
 
 *Linter: [DCTL1029](https://github.com/Domain-Connect/dc-template-linter/wiki/DCTL1029)*
 

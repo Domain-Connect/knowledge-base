@@ -113,7 +113,9 @@ If your nameserver hostnames are identical for all customers, hardcoding them is
 
 ### `shared: true` and `sharedProviderName: true`
 
-NS delegation at a specific subdomain does not conflict with other Domain Connect services on the same domain (which typically operate at `@` or at different subdomains). Setting `shared: true` signals that this template is designed to coexist with other services on the domain.
+`sharedProviderName: true` allows the Service Provider to pass an additional `providerName` in the apply request, which the DNS provider shows on the consent screen alongside the template's own `providerName`. This suits platforms whose template is used on behalf of other brands (resellers, white-label partners). The deprecated `shared` flag is the pre-v2.2 name of the same feature and is set as well for compatibility with older DNS providers. Neither flag has any effect on conflict detection or coexistence with other templates.
+
+NS delegation at a specific subdomain does not conflict with other Domain Connect services on the same domain simply because those typically operate at `@` or at different subdomains.
 
 ### TTL of 3600
 

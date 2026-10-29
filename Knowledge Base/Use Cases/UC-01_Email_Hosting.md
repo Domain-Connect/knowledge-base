@@ -160,7 +160,7 @@ If a user already has MX records pointing elsewhere (e.g. a different email prov
 
 **`warnPhishing` flag.**  
 
-Consider setting `"warnPhishing": true` if your template creates records that could be misused for phishing (e.g. MX records enabling impersonation of any domain). DNS providers that support this flag will show an additional warning in the consent screen.
+The flag is deprecated since draft -03 and must not be set in new templates: DNS providers now show an additional phishing warning for every unsigned request by default. Sign your requests (`syncPubKeyDomain`) instead.
 
 ---
 

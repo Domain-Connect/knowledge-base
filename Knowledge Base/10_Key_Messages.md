@@ -84,7 +84,7 @@ That's Domain Connect — an open standard that's been running in production sin
 
 ### Post 3: The IETF angle (standards/technical audience)
 ---
-The IETF DCONN working group was approved in October 2025. First meeting at IETF 124 in Montreal. Current draft: draft-ietf-dconn-domainconnect-01.
+The IETF DCONN working group was approved in October 2025. First meeting at IETF 124 in Montreal. Current draft: draft-ietf-dconn-domainconnect-04.
 
 Domain Connect is becoming an internet standard. That matters for:
 
@@ -174,7 +174,7 @@ For quick use in presentations and posts:
 | GitHub contributors to template repository | {{ facts.contributors }} |
 | Year first proposed | 2016 (GoDaddy) |
 | IETF WG approval | October 2025 |
-| Current specification | draft-ietf-dconn-domainconnect-01 |
+| Current specification | draft-ietf-dconn-domainconnect-04 |
 
 ---
 

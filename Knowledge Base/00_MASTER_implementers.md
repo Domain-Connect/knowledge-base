@@ -29,7 +29,7 @@ Evaluating Domain Connect for your product? See the Product Editions for [DNS Pr
 
 - **Originally proposed by:** GoDaddy, 2016
 - **Status:** Production-deployed; IETF standardization underway (DCONN working group, approved Oct 2025)
-- **Specification:** draft-ietf-dconn-domainconnect-01 (Standards Track)
+- **Specification:** draft-ietf-dconn-domainconnect-04 (Standards Track)
 - **Template repository:** [github.com/Domain-Connect/Templates](https://github.com/Domain-Connect/Templates) — {{ facts.templates }} templates, {{ facts.service_providers }} service providers, {{ facts.contributors }} contributors
 
 ---

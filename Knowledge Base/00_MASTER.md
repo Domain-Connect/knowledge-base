@@ -9,7 +9,7 @@
 
 - **Originally proposed by:** GoDaddy, 2016
 - **Status:** Production-deployed; IETF standardization underway (DCONN working group, approved Oct 2025)
-- **Specification:** draft-ietf-dconn-domainconnect-01 (Standards Track)
+- **Specification:** draft-ietf-dconn-domainconnect-04 (Standards Track)
 - **Scale:** {{ facts.dns_providers }} DNS providers, {{ facts.templates }} templates, {{ facts.service_providers }} service providers, ~{{ facts.dc_share }} of scanned domains covered
 
 This knowledge base is published in four focused editions. Choose the one that matches your role:

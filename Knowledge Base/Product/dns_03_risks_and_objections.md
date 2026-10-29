@@ -60,7 +60,7 @@ The service provider can only supply values for the variables your approved temp
 
 **"What about phishing — someone tricking a user into pointing their domain at an attacker?"**
 
-Service providers sign their requests with a key published in their own DNS; you verify the signature, so parameters cannot be tampered with in transit. Set a policy to require signing for templates that redirect web traffic (A, AAAA, CNAME). For unsigned templates with risky variables, the `warnPhishing` flag tells you to show an extra warning.
+Service providers sign their requests with a key published in their own DNS; you verify the signature, so parameters cannot be tampered with in transit. Set a policy to require signing for templates that redirect web traffic (A, AAAA, CNAME). For unsigned requests you show the customer an extra warning.
 
 **"What is our vetting policy?"**
 

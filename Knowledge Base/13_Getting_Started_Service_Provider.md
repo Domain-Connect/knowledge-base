@@ -22,7 +22,7 @@ If you are new to Domain Connect, start with the **synchronous flow**. It is:
 - Supported by all {{ facts.dns_providers }} DNS providers in the ecosystem
 - Sufficient for the vast majority of service integrations — one-time setup where the user is present
 
-The asynchronous flow is covered at the end of this document for services that need ongoing DNS management or multi-step flows.
+The asynchronous flow, specified in a separate extension draft, is covered at the end of this document for services that need ongoing DNS management or multi-step flows.
 
 ---
 
@@ -93,7 +93,7 @@ A narrower variable is harder to misuse, easier to review, and less likely to co
 
 **`syncPubKeyDomain` (strongly recommended for all templates):** Enables cryptographic signing of apply URLs. Without it, an attacker who intercepts the redirect URL can change parameter values (e.g. substituting their own IP address) before the user sees the consent screen.
 
-**`warnPhishing`:** A weaker fallback for when signing is not feasible. Causes DNS providers to display an extra warning. Do not use this together with `syncPubKeyDomain` — they are mutually exclusive.
+**`warnPhishing`:** Deprecated since draft -03 — do not set it in new templates. DNS providers now show an extra phishing warning for every unsigned request anyway. Never combine it with `syncPubKeyDomain`.
 
 **`syncBlock: true`:** Restricts the template to the asynchronous flow only. Use this if your template cannot support signing and you want to prevent synchronous flow usage.
 
@@ -122,7 +122,7 @@ If your template uses `syncPubKeyDomain` (which it should), you need to:
 2. **Publish the public key** in DNS as TXT records at `{key-label}.{syncPubKeyDomain}`:
 
    ```
-   _dck1.domainconnect.yourcompany.com. IN TXT "p=1,a=RS256,d=<base64-encoded-public-key>"
+   _dcpubkeyv1.domainconnect.yourcompany.com. IN TXT "p=1,a=RS256,d=<base64-encoded-public-key>"
    ```
    If the key is too long for one TXT record, split it across multiple records using sequential `p=` fragment indexes.
 3. **Sign each apply URL** using the private key before redirecting the user
@@ -162,7 +162,7 @@ The Domain Connect community reviews all PRs. Common reasons for revision reques
 | Variable in `host` for subdomain targeting | Use the `host` apply parameter instead |
 | `%host%` written in the `host` field | Remove it — the protocol adds it automatically (causes doubling) |
 | SPF as a TXT record | Use `SPFM` |
-| Missing `syncPubKeyDomain` | Add it, or use `syncBlock`/`warnPhishing` with justification |
+| Missing `syncPubKeyDomain` | Add it, or use `syncBlock` with justification (`warnPhishing` only as a deprecated last resort) |
 | Both `syncPubKeyDomain` and `warnPhishing` set | Remove `warnPhishing` |
 | Missing `syncRedirectDomain` | Add it if you use `redirect_uri` |
 | Missing `hostRequired` on a template with apex-incompatible records | Set `"hostRequired": true` |
@@ -196,6 +196,7 @@ When a user enters their domain name in your interface:
 1. **Look up `_domainconnect.<domain>`** as a DNS TXT record
    - If the record does not exist: Domain Connect is not supported for this domain → show manual instructions
 2. **Fetch the settings document** at `https://{record-value}/v2/{domain}/settings`
+   - The record is controlled by the zone owner, so treat it as untrusted: limit timeouts, response size and redirects, and do not call internal addresses
    - If this fails: fall back to manual instructions
 3. **Query template support**: `GET {urlAPI}/v2/domainTemplates/providers/{your-providerId}/services/{your-serviceId}`
    - `200` → Domain Connect is available → show "Connect automatically" button
@@ -232,7 +233,7 @@ When the user clicks "Connect":
 
 After the DNS Provider redirects the user back to your `redirect_uri`:
 
-1. Poll DNS to verify the expected records are now present
+1. Poll DNS to verify the expected records are now present — DNS, not the redirect, is the proof of success (the redirect can be altered, and carries an `error` parameter if the flow failed or was cancelled)
 2. Do not assume records are immediately resolvable — DNS propagation takes time
 3. Only activate the service once propagation is confirmed
 
@@ -258,6 +259,8 @@ The synchronous flow covers most use cases. Use the asynchronous (OAuth) flow wh
 - You need to manage DNS programmatically on an ongoing basis
 
 **Trade-offs:** The async flow is more complex to implement. Fewer DNS providers support it (though major ones do). Each DNS Provider requires bilateral OAuth setup — there is no automatic onboarding from the template repository. Start with the synchronous flow, add async only if you have a specific need that the sync flow cannot satisfy.
+
+**Specification:** {{ facts.src_ietf_async_draft }}.
 
 **How to start with async:** Contact DNS Providers directly to establish OAuth credentials. Contact the Domain Connect community for guidance and to onboard the example service as a test OAuth partner.
 

@@ -12,7 +12,7 @@
 
 ## The Formal Definition
 
-From the IETF draft specification (draft-ietf-dconn-domainconnect-01):
+From the IETF draft specification (draft-ietf-dconn-domainconnect-04):
 
 > "Domain Connect offers a streamlined and automated solution. It empowers Service Providers to easily enable their services to work with user domains, simplifying both DNS provider discovery and DNS configuration. By abstracting away the complexities of manual DNS management through user-friendly web interactions, standard authentication, and template-based configurations, Domain Connect significantly improves the user experience."
 
@@ -22,7 +22,7 @@ From the IETF draft specification (draft-ietf-dconn-domainconnect-01):
 
 - **Proposed by:** GoDaddy, 2016 (first presented at IETF 96, REGEXT working group)
 - **Nature:** Open standard — freely available, no licensing fees, no vendor lock-in
-- **Specification:** `draft-ietf-dconn-domainconnect-01` (IETF Standards Track)
+- **Specification:** `draft-ietf-dconn-domainconnect-04` (IETF Standards Track); asynchronous flow in the extension `draft-ietf-dconn-domainconnect-async`
 - **Standardization:** IETF DCONN (Domain Connect) working group, approved October 2025; first meeting November 2025 (IETF 124, Montreal)
 - **Authors:** Pawel Kowalik (DENIC), Arnold Blinn, Jon Kolker (GoDaddy), Sami Kerola (Cloudflare)
 
@@ -130,7 +130,7 @@ Templates are exchanged between Service Providers and DNS Providers **out-of-ban
 | DNS Provider (DNSP) | An entity hosting authoritative DNS zones, implementing the Domain Connect protocol |
 | Synchronous Flow | A one-time, user-present DNS configuration flow |
 | Asynchronous Flow | An OAuth-based flow enabling a service to make DNS changes over time with one-time user consent |
-| `_domainconnect` record | A TXT/CNAME DNS record placed in a zone to advertise that the DNS provider supports Domain Connect |
+| `_domainconnect` record | A TXT DNS record (which may be served via a CNAME) placed in a zone to advertise that the DNS provider supports Domain Connect |
 | Discovery | The automated process by which a Service Provider detects whether a domain's DNS Provider supports Domain Connect |
 | Template Application | The act of a DNS Provider writing the DNS records defined in a template to a user's zone |
 

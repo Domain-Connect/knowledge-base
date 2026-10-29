@@ -11,15 +11,16 @@ Domain Connect is designed to handle the real-world complexity of DNS configurat
 | Feature | Purpose |
 |---------|---------|
 | Template system | Standardized, pre-approved DNS configuration contracts |
-| Two-flow architecture | Synchronous (one-time) and asynchronous (ongoing) |
+| Two-flow architecture | Synchronous (one-time, core draft) and asynchronous (ongoing, extension draft) |
 | DNS Provider discovery | Automatic detection of protocol support via `_domainconnect` record |
 | Variable substitution | Dynamic values in templates (IP addresses, verification tokens) |
 | Conflict resolution | Rules for handling existing DNS records |
 | SPF TXT record merging | Combining SPF records from multiple services without conflicts |
-| Ephemeral records | Temporary records (e.g., domain verification) that auto-expire |
+| Ephemeral records | Temporary records (e.g., domain verification) that can be removed without breaking the template |
 | URL signature protection | Cryptographic signing of redirect URLs to prevent tampering |
 | Template groups | Staged application of DNS configuration in multiple steps |
 | Scope minimization | Limiting changes to exactly what the service needs |
+| Extensibility | Unknown elements ignored, `crit` for must-understand, `vnd.` prefix for vendor extensions |
 
 ---
 
@@ -48,6 +49,8 @@ Templates are versioned. The `version` field is an integer incremented with each
 - **User experience:** Single session, typically completes in 30 seconds
 
 ### Asynchronous Flow (OAuth)
+*Specified in the extension {{ facts.src_ietf_async_draft }}; removed from the core draft in -02.*
+
 - **When:** Multi-step setup, or ongoing DNS management needed
 - **How:** OAuth 2.0 authorization grant → access token issued → SP can make API calls over time
 - **Best for:** Complex setups (e.g., first verify ownership, then configure MX), dynamic DNS, services that update their infrastructure
@@ -67,11 +70,12 @@ A DNS Provider MAY implement only the synchronous flow. The synchronous flow is 
 4. Settings document contains:
 
    - `urlSyncUX`: endpoint for the synchronous flow
-   - `urlAsyncUX`: endpoint for the asynchronous OAuth flow
-   - `urlAPI`: endpoint for the asynchronous API
+   - `urlAsyncUX`: endpoint for the asynchronous OAuth flow (defined in the async extension)
+   - `urlAPI`: endpoint for the REST API (template query; also the asynchronous API)
    - `providerName`: human-readable DNS Provider name
    - `providerDisplayName`: display name for UI
-5. SP then checks whether its specific template is supported by calling `GET /domainTemplates/providers/{providerId}/services/{serviceId}`
+   - `nameServers`: optional list of the zone's name servers
+5. SP then checks whether its specific template is supported by calling `GET {urlAPI}/v2/domainTemplates/providers/{providerId}/services/{serviceId}`
 
 If at any step the protocol fails (no `_domainconnect` record, settings unavailable, template not found), the Service Provider falls back gracefully to manual instructions.
 
@@ -121,18 +125,20 @@ When a template is applied to a zone, the DNS records it wants to create may con
 
 **For A and AAAA records:**
 
-- A conflict exists if a record with the same hostname already exists
-- The template can specify whether to replace existing records or abort
+- A conflict exists if an A or AAAA record with the same hostname already exists
 
 **For CNAME records:**
 
 - CNAME records cannot coexist with other records at the same hostname
 - Domain Connect treats any existing record at the same hostname as a conflict
 
-**For MX records:**
+**For MX and SRV records:**
 
-- Conflicts are detected at the hostname level
-- The template controls whether existing MX records should be replaced
+- A conflict exists if a record of the same type already exists at the same hostname
+
+**For NS records:**
+
+- Conflicts with all records at the same hostname and below it
 
 **For TXT records (special handling):**
 
@@ -145,13 +151,15 @@ The `txtConflictMatchingMode` field controls TXT conflict detection:
 ### Essential flag
 Each record in a template has an `essential` attribute:
 
-- `Always` (default) — this record is essential; if it conflicts and cannot be applied, abort the entire template application
-- `OnApply` — this record should be applied if possible, but its failure does not block the rest of the template
+- `Always` (default) — the record must stay as applied for the lifetime of the template; if it is later removed or changed (by the user or another template), the whole template is removed
+- `OnApply` — the record is written when the template is applied, but may later be changed or removed without affecting the template
 
-This allows templates to have "nice to have" records (e.g., CAA records for certificate issuance) that don't block the main service setup if they conflict.
+This allows templates to contain records the user is expected to change later (e.g., a DMARC policy). It only has an effect at DNS Providers that track applied template state.
+
+A record identical to one already in the zone is not a conflict.
 
 ### Force flag
-The Service Provider can include a `force=1` parameter in the redirect URL to override conflict detection and replace existing records. This is typically used for re-configuration scenarios.
+In the asynchronous flow (async extension), the Service Provider can include a `force=1` parameter to apply a template despite conflicts. The synchronous flow has no such parameter: the user resolves conflicts on the consent screen.
 
 ---
 
@@ -192,9 +200,7 @@ After:  v=spf1 include:_spf.google.com include:spf.protection.outlook.com ~all
 
 Some service configurations require temporary DNS records — typically for domain ownership verification. A service might need to place a TXT record to prove you control the domain, then delete it once verification is complete.
 
-Domain Connect supports ephemeral records through the `essential: "OnApply"` flag combined with template state tracking. The DNS Provider can be instructed to apply a record temporarily and remove it after a specified condition (e.g., after the template is reverted or after the verification step completes).
-
-This eliminates orphaned verification records that would otherwise accumulate in DNS zones over time.
+Domain Connect supports ephemeral records through the `essential: "OnApply"` flag combined with template state tracking: the record is written when the template is applied, and can later be removed by the user or the service without the DNS Provider treating it as a conflict and removing the whole template. The protocol does not remove such records automatically.
 
 ---
 
@@ -205,18 +211,18 @@ To prevent a malicious actor from crafting a fraudulent redirect URL that tricks
 **How it works:**
 
 1. The Service Provider generates a signature over the redirect URL using a private key
-2. The Service Provider publishes the corresponding public key in DNS (at a subdomain like `_dck1.<provider-domain>.`)
+2. The Service Provider publishes the corresponding public key in DNS at `{key}.{syncPubKeyDomain}` (e.g. `_dcpubkeyv1.domainconnect.example.com`)
 3. The redirect URL includes the signature and a key identifier
 4. The DNS Provider fetches the public key from DNS and verifies the signature before processing the request
 
 **What this prevents:** A bad actor cannot modify the URL parameters (e.g., change the IP address to redirect the domain to their server) without invalidating the signature.
 
-**Template-level control:** Each template specifies whether signing is required (`warnPhishing: true` enables phishing warnings; templates can require signed requests). This allows low-risk templates to work without signing while high-risk templates (those that affect where web traffic goes) can require it.
+**Template-level control:** A template that sets `syncPubKeyDomain` requires signed requests. This allows low-risk templates to work without signing while high-risk templates (those that affect where web traffic goes) can require it. For unsigned requests the DNS Provider shows an additional phishing warning — since -03 this is the default and replaces the deprecated `warnPhishing` template flag.
 
-**Public key DNS record format:**
+**Public key DNS record format** (`p` = fragment index, `a` = algorithm, `d` = key data; long keys are split over several records):
 
 ```
-_dck1.exampleservice.domainconnect.org. IN TXT "p=<base64-encoded-public-key>"
+_dcpubkeyv1.exampleservice.domainconnect.org. IN TXT "p=1,a=RS256,d=<base64-encoded-public-key>"
 ```
 
 ---
@@ -249,6 +255,17 @@ DNS Providers are expected to track which templates have been applied to which d
 
 ---
 
+## 11. Versioning and Extensibility
+
+Added in -04, so the protocol can evolve without breaking existing deployments:
+
+- **Ignore unknown:** implementations ignore template properties, record fields, settings properties and apply parameters they do not recognize.
+- **Must understand:** a `crit` list names elements that must not be ignored; an implementation that does not understand one of them refuses the template or request.
+- **Name spaces:** unprefixed names are reserved for the standard (coordinated through IANA registries), `vnd.` is for vendor-specific extensions, and `dc.` for future standard apply parameters.
+- **Versions:** the HTTP interface is versioned by the `/v2` path, the template format by the optional `templateSpecVersion` property (currently `1`).
+
+---
+
 ## Supported DNS Record Types
 
 Domain Connect supports all standard DNS record types that may be needed for service integrations:
@@ -261,8 +278,9 @@ Domain Connect supports all standard DNS record types that may be needed for ser
 | MX | Mail exchange — email delivery |
 | TXT | Text — SPF, DKIM, domain verification |
 | SRV | Service locator — VoIP, messaging |
-| NS | Nameserver delegation |
-| SPFM | Pseudo-type — SPF merging (Domain Connect extension) |
+| NS | Nameserver delegation (support optional) |
+| SPFM | Computed type — SPF merging (Domain Connect specific) |
+| CAA and other IANA types | Generic types; record data in presentation format (support optional) |
 | TYPE{n} | Unknown types per RFC 3597 — future-proofing |
 
 ---

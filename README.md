@@ -1,6 +1,6 @@
 # Domain Connect — Marketing Knowledge Base
 
-A comprehensive knowledge base about the [Domain Connect](https://www.domainconnect.org) protocol, maintained by Pawel Kowalik, co-author of [draft-ietf-dconn-domainconnect-01](https://datatracker.ietf.org/doc/draft-ietf-dconn-domainconnect/).
+A comprehensive knowledge base about the [Domain Connect](https://www.domainconnect.org) protocol, maintained by Pawel Kowalik, co-author of [draft-ietf-dconn-domainconnect-04](https://datatracker.ietf.org/doc/draft-ietf-dconn-domainconnect/).
 
 ## What is Domain Connect?
 

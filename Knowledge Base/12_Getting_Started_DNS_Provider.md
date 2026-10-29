@@ -16,7 +16,7 @@ For the business case and value proposition, see [06 — Value by Audience](./06
 
 ## Start with the synchronous flow
 
-If you are new to Domain Connect, implement the **synchronous flow** first. It covers the vast majority of real-world use cases, is simpler to build, and is supported by all {{ facts.service_providers_plus }} service providers with templates. You can add the asynchronous OAuth flow later if your customers need it.
+If you are new to Domain Connect, implement the **synchronous flow** first. It covers the vast majority of real-world use cases, is simpler to build, and is supported by all {{ facts.service_providers_plus }} service providers with templates. You can add the asynchronous OAuth flow (specified in the extension {{ facts.src_ietf_async_draft }}) later if your customers need it.
 
 ---
 
@@ -62,7 +62,7 @@ Return a JSON document with at minimum:
 
 Return `404` if you do not host the zone for the requested domain.
 
-Optional fields: `providerDisplayName`, `urlAsyncUX` (async flow only), `urlControlPanel`, `width`, `height`.
+Optional fields: `providerDisplayName`, `urlAsyncUX` (async flow only), `urlControlPanel`, `width`, `height`. Of these, only `providerDisplayName` is defined in the core draft; the others are reserved there and defined in the community specification or the async extension. Ignore-unknown applies: Service Providers skip properties they do not recognize.
 
 ### 1c. Template query endpoint
 
@@ -106,7 +106,7 @@ Your UX must:
 4. **Verify zone ownership** — confirm the `domain` parameter is in the authenticated user's account
 5. **Resolve variables** — substitute all `%VARNAME%` expressions in the template records with the values from the query string
 6. **Perform conflict detection** — check resolved records against the existing zone; present conflicts to the user before proceeding
-7. **Display the consent screen** — show the user what service they are connecting, which domain, and what DNS records will be changed. Show the template's `providerName` and `serviceName`. If `warnPhishing` is set in the template, show an additional warning
+7. **Display the consent screen** — show the user what service they are connecting, which domain, and what DNS records will be changed. Show the template's `providerName` and `serviceName`. If the request is not signed, show an additional phishing warning (the default since -03; do not depend on the deprecated `warnPhishing` flag)
 8. **Obtain user approval** — the user must explicitly confirm. Always provide a cancel option
 9. **Apply changes atomically** — write all resolved records to the zone in a single operation; remove conflicting records first
 10. **Redirect or close** — redirect the user to the `redirect_uri` parameter (if provided, and if the domain is in `syncRedirectDomain`), or close the window
@@ -169,6 +169,8 @@ Once your implementation is live, you can onboard templates from Service Provide
 **Contact-required onboarding:** Some Service Providers need to be notified to enable your DNS Provider in their flow (e.g., for providers that maintain an explicit allowlist). Contact information is on the Service Provider page at domainconnect.org.
 
 **OAuth onboarding:** For DNS Providers that implement the async flow, each Service Provider that uses it needs to be set up as an OAuth client. This requires bilateral contact.
+
+Whatever the route, review each template before deploying it: confirm the submitter really is the Service Provider it claims to be, that the records match the service, and that its name and logo cannot be confused with another provider's — and review again when a new version arrives.
 
 Prioritize templates with the highest customer demand. Microsoft 365 and Google Workspace are typically the most requested.
 

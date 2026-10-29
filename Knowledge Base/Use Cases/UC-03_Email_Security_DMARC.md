@@ -47,7 +47,6 @@ Key benefits:
   "version": 1,
   "syncPubKeyDomain": "domainconnect.emailguard.example",
   "syncRedirectDomain": "portal.emailguard.example",
-  "warnPhishing": true,
   "description": "Delegates DMARC policy management to Acme EmailGuard. Also configures SPF, MTA-STS, and TLSRPT.",
   "records": [
     {
@@ -133,9 +132,9 @@ TLSRPT ([RFC 8460](https://datatracker.ietf.org/doc/html/rfc8460)) at `_smtp._tl
 
 Using CNAMEs for both lets the provider manage the policy text and update it without further DNS changes. The `_mta-sts` CNAME has a short TTL (600s) because mail senders cache the policy for 24h–30d and a short TTL helps propagate policy changes faster.
 
-### `warnPhishing: true`
+### No `warnPhishing`
 
-This template delegates significant control — DMARC policy, DKIM signing authority — to a third party. Setting `warnPhishing: true` prompts DNS providers that support this flag to display an additional warning in the consent screen. This is appropriate for any template that materially changes who can control email authentication for the domain.
+This template delegates significant control — DMARC policy, DKIM signing authority — to a third party, so it is signed (`syncPubKeyDomain`). The `warnPhishing` flag is deprecated since draft -03 and must not be set in new templates: DNS providers now show an additional phishing warning for every unsigned request by default.
 
 ### Minimal variant
 

@@ -30,7 +30,7 @@ The manual DNS provisioning step in domain onboarding workflows. For organizatio
 
 **Relevant links:**
 
-- IETF specification: draft-ietf-dconn-domainconnect-01
+- IETF specification: draft-ietf-dconn-domainconnect-04
 - Template repository: github.com/Domain-Connect/Templates
 - Zone application library (Python): github.com/domain-connect/DomainConnectApplyZone
 - Reference implementation: exampleservice.domainconnect.org

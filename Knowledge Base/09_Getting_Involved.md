@@ -26,7 +26,7 @@ Serve a JSON document at a standardized URL containing your API endpoints:
 
 - `urlSyncUX` — the synchronous flow endpoint
 - `urlAsyncUX` — the OAuth authorization endpoint
-- `urlAPI` — the asynchronous API endpoint
+- `urlAPI` — the REST API endpoint (template query and asynchronous API)
 - Provider display name and metadata
 
 **3. Template hosting**
@@ -39,7 +39,7 @@ Handle redirect requests from Service Providers: authenticate the user, verify z
 
 **5. Asynchronous flow (OAuth, optional but recommended)**
 
-Implement an OAuth 2.0 authorization flow. Issue tokens scoped to specific templates and zones. Expose the API endpoint that allows Service Providers to apply templates using tokens.
+Specified in the extension `draft-ietf-dconn-domainconnect-async`. Implement an OAuth 2.0 authorization flow. Issue tokens scoped to specific templates and zones. Expose the API endpoint that allows Service Providers to apply templates using tokens.
 
 **6. Template vetting process**
 
@@ -51,7 +51,7 @@ The implementation investment is front-loaded. Once the core protocol is impleme
 
 **Reference implementations and tooling:** Available at [github.com/domain-connect](https://github.com/domain-connect)
 
-**Specification:** `draft-ietf-dconn-domainconnect-01` — available at the IETF Datatracker
+**Specification:** `draft-ietf-dconn-domainconnect-04` and the async extension `draft-ietf-dconn-domainconnect-async` — available at the IETF Datatracker
 
 ---
 
@@ -132,9 +132,9 @@ Organizations that have implemented the protocol are especially valuable partici
 
 ### What the working group is currently working on
 
-As of mid-2026, the working group is focused on:
+As of October 2026, the working group is focused on:
 
-- Resolving open issues from the -01 draft review
+- Resolving open issues on the current drafts (-04 and the async extension)
 - Expanding and refining the security considerations section
 - Clarifying ambiguities surfaced by implementation reports
 - Progressing toward Working Group Last Call
@@ -163,7 +163,7 @@ Practitioners, implementers, and advocates sharing experience and news.
 
 **For DNS Providers that want to implement:**
 
-1. Read the specification (`draft-ietf-dconn-domainconnect-01`)
+1. Read the specification (`draft-ietf-dconn-domainconnect-04`)
 2. Review the reference implementation at github.com/domain-connect
 3. Identify which Service Provider templates are most requested by your customers (Microsoft 365 and Google Workspace are typically the highest demand)
 4. Implement the synchronous flow first — it covers the majority of use cases

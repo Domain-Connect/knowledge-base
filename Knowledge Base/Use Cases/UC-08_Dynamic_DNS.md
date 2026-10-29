@@ -8,7 +8,7 @@
 
 ## Use Case Description
 
-A client application (home router, IoT device, self-hosted server, home automation hub) automatically updates an A or AAAA record whenever the device's public IP address changes. The Domain Connect template establishes the initial record with the current IP; the DDNS client then uses the Domain Connect **async flow** to push updates autonomously — without any further user interaction.
+A client application (home router, IoT device, self-hosted server, home automation hub) automatically updates an A or AAAA record whenever the device's public IP address changes. The Domain Connect template establishes the initial record with the current IP; the DDNS client then uses the Domain Connect **async flow** ({{ facts.src_ietf_async_draft }}) to push updates autonomously — without any further user interaction.
 
 This use case is unique in the Domain Connect ecosystem because the template is not a one-time configuration: it is the bootstrap step for an ongoing, automated relationship between a client and a DNS provider. The OAuth access token obtained during async flow setup is the credential the client uses for all future updates.
 
@@ -53,7 +53,6 @@ Key benefits:
   "serviceName": "Acme DynHost Dynamic DNS",
   "version": 1,
   "syncBlock": true,
-  "warnPhishing": true,
   "description": "Creates a dynamic DNS record for your domain, kept up to date by the Acme DynHost client.",
   "records": [
     {
@@ -106,9 +105,9 @@ IPv4 and IPv6 are in separate `groupId` blocks (`"IPv4"` and `"IPv6"`). This all
 
 This is the pattern used in the reference `dynamicdns-v2` template and should be followed for any new DDNS template.
 
-### `warnPhishing: true`
+### No `warnPhishing`
 
-A DDNS template grants a third-party client persistent write access to the A record at the domain's apex. This is a significant capability. Setting `warnPhishing: true` prompts DNS providers that support the flag to display an additional warning in the consent screen, making the scope of the permission clear to the user.
+A DDNS template grants a third-party client persistent write access to the A record at the domain's apex. This is a significant capability; `syncBlock: true` ensures it can only be granted through the OAuth consent of the async flow. The `warnPhishing` flag is deprecated since draft -03 and must not be set in new templates: DNS providers now show an additional phishing warning for every unsigned request by default.
 
 ### No `syncPubKeyDomain` or `syncRedirectDomain`
 

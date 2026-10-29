@@ -16,7 +16,7 @@ A service provider interposes its own network infrastructure between the domain 
 
 In all three cases, the DNS change is the same: the domain's A record (and CNAME for `www`) is pointed at the provider's infrastructure IP or hostname. Traffic then flows through the provider's network before reaching the origin server.
 
-This pattern closely resembles [UC-04 (Website Hosting — Apex)](./UC-04_Website_Hosting_Apex.md) at the DNS level, but the intent and security implications differ: the origin server remains under the user's control, and the provider is a transparent intermediary rather than the content host. This distinction has implications for `warnPhishing`, record conflict handling, and how the consent screen is worded.
+This pattern closely resembles [UC-04 (Website Hosting — Apex)](./UC-04_Website_Hosting_Apex.md) at the DNS level, but the intent and security implications differ: the origin server remains under the user's control, and the provider is a transparent intermediary rather than the content host. This distinction has implications for request signing, record conflict handling, and how the consent screen is worded.
 
 Typical products in this category:
 
@@ -46,7 +46,7 @@ Key benefits:
 - Atomic update of all traffic paths (A + AAAA + www CNAME)
 - Provider controls the target IP — correct value is guaranteed
 - Consent screen clearly names the provider, so the user understands what they are routing traffic through
-- `warnPhishing` flag can be used to prompt the DNS provider to add a warning for this consequential change
+- Signed requests (`syncPubKeyDomain`) let the DNS provider verify that the target IP comes from the provider
 
 ---
 
@@ -63,7 +63,6 @@ Key benefits:
   "syncRedirectDomain": "portal.edgeshield.example",
   "shared": true,
   "sharedProviderName": true,
-  "warnPhishing": true,
   "description": "Routes your domain's web traffic through Acme EdgeShield for WAF protection and CDN acceleration.",
   "records": [
     {
@@ -100,13 +99,13 @@ The `www` CNAME ensures that `www.yourdomain.com` also flows through the WAF/CDN
 
 ### `shared: true` and `sharedProviderName: true`
 
-These flags indicate that the template may be applied to a domain that already has another Domain Connect service from a different provider. Setting both to `true` allows the DNS provider to treat this as an "additive" or "replacing" operation rather than a conflict. This is appropriate for WAF/CDN providers because the user may already have a website-hosting template in place — the WAF intercepts traffic to the same origin.
+`sharedProviderName: true` allows the Service Provider to pass an additional `providerName` in the apply request, which the DNS provider shows on the consent screen alongside the template's own `providerName`. This suits platforms whose template is used on behalf of other brands (resellers, white-label partners). The deprecated `shared` flag is the pre-v2.2 name of the same feature and is set as well for compatibility with older DNS providers. Neither flag has any effect on conflict detection or coexistence with other templates.
 
-In practice, applying a WAF template will replace the existing A record (which pointed to the origin). The `shared` flag signals to the DNS provider that this replacement is expected and intended.
+Replacing the existing A record (which pointed to the origin) is handled by regular conflict detection: the DNS provider shows the conflicting records on the consent screen, and — if it tracks template state — the website-hosting template that wrote them is removed once the user confirms.
 
-### `warnPhishing: true`
+### No `warnPhishing`
 
-A WAF/CDN/proxy template causes all HTTP traffic to flow through a third-party network. This is a significant trust action: the provider will see all requests and responses. DNS providers that support the `warnPhishing` flag will add an extra warning to the consent screen. This is appropriate here and builds user trust by making the scope of the change explicit.
+A WAF/CDN/proxy template causes all HTTP traffic to flow through a third-party network. This is a significant trust action: the provider will see all requests and responses, which is why the template is signed. The `warnPhishing` flag is deprecated since draft -03 and must not be set in new templates: DNS providers now show an additional phishing warning for every unsigned request by default.
 
 ### Per-customer CNAME variant
 

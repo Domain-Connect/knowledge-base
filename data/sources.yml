@@ -10,9 +10,13 @@
 
 sources:
   ietf_draft:
-    title: IETF draft-ietf-dconn-domainconnect-01
-    url: https://datatracker.ietf.org/doc/html/draft-ietf-dconn-domainconnect-01
-    date: Mar 2026
+    title: IETF draft-ietf-dconn-domainconnect-04
+    url: https://datatracker.ietf.org/doc/html/draft-ietf-dconn-domainconnect-04
+    date: Oct 2026
+  ietf_async_draft:
+    title: IETF draft-ietf-dconn-domainconnect-async-00 (asynchronous flow extension)
+    url: https://datatracker.ietf.org/doc/html/draft-ietf-dconn-domainconnect-async-00
+    date: Jun 2026
   ietf124_slides:
     title: IETF-124 DCONN WG presentation
     url: https://datatracker.ietf.org/meeting/124/materials/slides-124-dconn-ietf-124-domain-connect-issue-summary-03

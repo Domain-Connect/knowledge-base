@@ -60,7 +60,7 @@ Once the capability exists, it supports moves beyond basic service integration:
 
 ### 6. A standard, not a vendor feature
 
-Domain Connect has run in production since 2016, and the IETF approved the DCONN working group in October 2025. The specification (`draft-ietf-dconn-domainconnect-01`) is on the Standards Track. You are investing in shared infrastructure, not in a partner's proprietary API.
+Domain Connect has run in production since 2016, and the IETF approved the DCONN working group in October 2025. The specification (`draft-ietf-dconn-domainconnect-04`) is on the Standards Track. You are investing in shared infrastructure, not in a partner's proprietary API.
 
 ---
 

@@ -76,16 +76,22 @@ GoDaddy proposes Domain Connect at IETF 96 (REGEXT working group). The concept: 
 Domain Connect is deployed in production by GoDaddy and other major DNS providers. The ecosystem grows organically. Templates accumulate. The protocol proves its approach in real-world conditions across hundreds of millions of domains.
 
 ### 2024 — IETF submission
-The protocol specification is submitted to the IETF as an Internet-Draft (`draft-ietf-dconn-domainconnect`). This begins the formal standardization process.
+The protocol specification is submitted to the IETF as an individual Internet-Draft (`draft-kowalik-domainconnect`). This begins the formal standardization process.
 
 ### October 2025 — IETF working group approved
 The IETF approves the formation of the DCONN (Domain Connect) working group. This is a significant milestone: it means the IETF has judged that the problem is real, the solution is worth standardizing, and there is sufficient community support to justify a dedicated working group.
 
 ### November 2025 — First working group meeting (IETF 124, Montreal)
-The DCONN WG holds its inaugural meeting. The agenda covers the current draft, open issues, security considerations, and the adoption call. The WG formally adopts `draft-ietf-dconn-domainconnect-01` as a working group document.
+The DCONN WG holds its inaugural meeting. The agenda covers the current draft, open issues and security considerations.
+
+### December 2025 — Working group adoption
+The WG adopts `draft-kowalik-domainconnect-02` as a working group document. Following the IETF process, it is republished as `draft-ietf-dconn-domainconnect-00`, which replaces the individual draft.
 
 ### March 2026 — Draft version -01
 `draft-ietf-dconn-domainconnect-01` is published, incorporating significant revisions based on working group feedback. Key additions include a detailed trust model section, clarified security considerations, and resolutions to issues raised at IETF 123.
+
+### June–October 2026 — Drafts -02 to -04 and the async extension
+`-02` (June 2026) moves the asynchronous OAuth flow into a separate extension, `draft-ietf-dconn-domainconnect-async`, leaving the synchronous flow in the core document. `-03` (July 2026) adds IANA registries and further security considerations, and deprecates the `warnPhishing` flag in favor of default phishing warnings. `-04` (October 2026) defines how the protocol is versioned and extended without breaking existing deployments, and incorporates an early DNS Directorate review.
 
 ---
 

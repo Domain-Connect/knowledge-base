@@ -4,7 +4,7 @@
 
 This is a knowledge base about the Domain Connect protocol. It serves as source material for implementation work (DNS providers, service providers), protocol contribution and IETF participation, communications and marketing (LinkedIn posts, blog articles, press briefings), and conference presentations and partner outreach.
 
-**Author:** Pawel Kowalik — co-author of `draft-ietf-dconn-domainconnect-01`. DNS concepts do not need to be over-explained. Content should reflect the perspective of a registry operator and protocol author.
+**Author:** Pawel Kowalik — co-author of `draft-ietf-dconn-domainconnect-04`. DNS concepts do not need to be over-explained. Content should reflect the perspective of a registry operator and protocol author.
 
 ---
 
@@ -72,7 +72,9 @@ CLAUDE.md                   — this file
 | `DC_APNIC blog_2025_Claude_long.md` | APNIC blog article, Oct 2025 |
 | `DomainConnect-ROW-2025v2.pdf` | Registration Operations Workshop presentation, Oct 2025 |
 | `IETF-124-domain-connect_v4.pdf` | IETF 124 DCONN WG presentation |
-| `draft-ietf-dconn-domainconnect-01.txt` | IETF Standards Track draft, Mar 2026 |
+| `draft-ietf-dconn-domainconnect-01.txt` | IETF Standards Track draft, Mar 2026 (superseded) |
+| `draft-ietf-dconn-domainconnect-04.txt` | IETF Standards Track draft, Oct 2026 — current core specification (synchronous flow) |
+| `draft-ietf-dconn-domainconnect-async-00.txt` | IETF draft, Jun 2026 — asynchronous OAuth flow extension |
 | `ietf 123 transcript.txt` | IETF 123 DCONN WG session transcript |
 | `DomainConnect-CENTR-Jamboree-2025.pdf` | CENTR Jamboree 2025 presentation |
 | `Templates-README.md` | Domain-Connect/Templates repository README — contribution process and quality rules |
@@ -91,7 +93,7 @@ Ecosystem numbers are **not hard-coded** in content pages. They live in `data/fa
 - Microsoft 365 requires **7–15 DNS records**, **16 help sites** (10 registrar-specific), **40 min** training
 - Domain renewal rate: **~70%** (no content) vs **~90%** (high content) — CENTR 2024 study
 - IETF DCONN working group approved **October 2025**
-- Current specification: **draft-ietf-dconn-domainconnect-01** (March 2026)
+- Current specification: **draft-ietf-dconn-domainconnect-04** (October 2026); asynchronous flow in **draft-ietf-dconn-domainconnect-async-00** (June 2026)
 - Sources of `data/facts.yml`: DNS provider support data from [pawel-kow/DomainConnectSupportStatsData](https://github.com/pawel-kow/DomainConnectSupportStatsData) (`statsdata/providers/`), published at [Domain Connect Support Stats](https://pawel-kow.github.io/DomainConnectSupportStats/) (Beta); template repository data (contributors, PRs, field and record type usage) from **https://stats.domainconnect.org/stats.json**
 
 The other figures (failure rate, Microsoft 365 numbers, renewal rates, IETF dates) are static research facts and stay as plain text in content pages.
@@ -118,6 +120,15 @@ The other figures (failure rate, Microsoft 365 numbers, renewal rates, IETF date
 When writing a number that comes from the statistics sources, use a `{{ facts.<key> }}` placeholder (keys: see `data/facts.yml`; `*_plus` keys give rounded prose values such as "2,200+"). To refresh the numbers, run `python3 .github/.scripts/update_facts.py` (`--source DIR` reads a local checkout of the data repository, `--check` only reports whether the file is out of date) and commit `data/facts.yml`; to add a key, extend that script. `build.sh` runs the update before every build, so deployed sites always use fresh data; if the sources cannot be reached it falls back to the committed file (`SKIP_FACTS_UPDATE=1` skips the fetch). Also update the current values in this file.
 
 When listing or citing sources, link them through `data/sources.yml`: `{{ facts.src_<key> }}` renders `[title](url) (date, note)` (no link when the source has no public URL), so don't repeat the date in the page; `src_<key>_url`, `src_<key>_title` and `src_<key>_date` give the parts. Add new sources there rather than writing the URL into a page, so a moved source is fixed in one place.
+
+### Updating to a new version of a source document
+
+When a new version of a source (e.g. a new draft revision) arrives, work from its diff and change history, and keep the update proportional:
+
+- **Only necessary factual changes**, at the level of detail and for the audience of each page — a version bump on overview and marketing pages, one or two sentences in explainers, field-level detail only in the reference and getting-started pages. Do not rewrite sections or add depth a page did not have.
+- **Correct what has become, or always was, incorrect** (e.g. deprecated flags in example templates, wrong field names or key labels); leave correct content alone.
+- New concepts get a short entry where the page's scope calls for them, not a new deep-dive.
+- Add the new document to `Sources/` (keep the old one), update its entry in `data/sources.yml` and the source table and key facts in this file.
 
 ---
 

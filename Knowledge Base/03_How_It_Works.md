@@ -91,7 +91,7 @@ The screenshots below show a real-world example: connecting a custom domain to S
 
 ## Phase 1: The Asynchronous Flow (OAuth-Based)
 
-Some services need to make DNS changes over time, or in multiple steps, without requiring the user to be present each time. The asynchronous flow solves this using OAuth 2.0.
+Some services need to make DNS changes over time, or in multiple steps, without requiring the user to be present each time. The asynchronous flow solves this using OAuth 2.0. It is specified in a separate extension document ({{ facts.src_ietf_async_draft }}); the core draft covers the synchronous flow only.
 
 **When it's used:**
 
@@ -214,6 +214,8 @@ The screenshots below show two real consent screens — GoDaddy's production imp
 
 *Reference implementation consent screen: shows the exact DNS records that will be written (type, hostname, value) before the user approves.*
 
+If the request is not signed, the DNS Provider additionally warns the user to verify where the request came from.
+
 The user can always cancel. The DNS Provider controls this UI — the Service Provider cannot manipulate it beyond providing the service name and logo (which were vetted during template onboarding).
 
 ---
@@ -235,10 +237,10 @@ Once the user approves and DNS records are written:
 
 ## What Happens Under the Hood: Discovery Record Details
 
-The `_domainconnect` DNS record is a TXT or CNAME record placed at the zone apex. For example:
+The `_domainconnect` DNS record is a TXT record at the zone apex (the DNS Provider may serve it via a CNAME). It holds the host and optional path of the settings endpoint — no scheme and no `/v2`, which the Service Provider adds. For example:
 
 ```
-_domainconnect.example.com. IN TXT "https://api.domaincontrol.com/v2"
+_domainconnect.example.com. IN TXT "domainconnect.dnsprovider.example"
 ```
 
 This record:
