@@ -3,7 +3,8 @@
     "allow": [
       "Bash(curl -s \"https://stats.domainconnect.org/stats.json\")",
       "Bash(.venv/bin/python3 -)",
-      "Bash(.venv/bin/mkdocs build *)"
+      "Bash(.venv/bin/mkdocs build *)",
+      "WebFetch(domain:mailarchive.ietf.org)"
     ]
   }
 }

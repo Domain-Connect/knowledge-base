@@ -10,14 +10,7 @@ if [ ! -d "$VENV" ]; then
   "$VENV/bin/pip" install -q -r requirements.txt
 fi
 
-echo "Building landing site..."
-"$VENV/bin/mkdocs" build --strict
-
-echo "Building marketing site..."
-"$VENV/bin/mkdocs" build --strict --config-file mkdocs-marketing.yml
-
-echo "Building implementers site..."
-"$VENV/bin/mkdocs" build --strict --config-file mkdocs-implementers.yml
+.github/.scripts/build.sh "http://localhost:$PORT/" "$VENV/bin/mkdocs"
 
 echo ""
 echo "Serving at http://localhost:$PORT"

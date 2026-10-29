@@ -32,17 +32,12 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Build landing site
-        run: mkdocs build --strict
-
-      - name: Build marketing site
-        run: mkdocs build --strict --config-file mkdocs-marketing.yml
-
-      - name: Build implementers site
-        run: mkdocs build --strict --config-file mkdocs-implementers.yml
-
       - name: Setup Pages
+        id: pages
         uses: actions/configure-pages@v5
+
+      - name: Build sites and check links
+        run: .github/.scripts/build.sh "${{ steps.pages.outputs.base_url }}"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

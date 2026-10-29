@@ -1,6 +1,7 @@
 site_name: Domain Connect Knowledge Base
 site_description: Knowledge base for the Domain Connect protocol
 site_author: Pawel Kowalik
+site_url: !ENV SITE_URL
 
 docs_dir: Root
 site_dir: docs

@@ -1,6 +1,7 @@
 site_name: Domain Connect — Implementers Knowledge Base
 site_description: Technical implementation knowledge base for the Domain Connect protocol
 site_author: Pawel Kowalik
+site_url: !ENV SITE_URL
 
 docs_dir: Knowledge Base
 site_dir: docs/implementers-kb
@@ -83,3 +84,7 @@ copyright: "Copyright &copy; 2026 Domain Connect Contributors. Content licensed 
 
 extra:
   generator: false
+  edition_overview: 00_MASTER_implementers.md
+
+hooks:
+  - hooks/edition.py

@@ -1,0 +1,30 @@
+name: Check links
+
+on:
+  pull_request:
+  push:
+    branches-ignore: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check-links:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Build sites and check links
+        # Placeholder URL with a sub-path, like the GitHub Pages project URL,
+        # so links that only work at the domain root are caught.
+        run: .github/.scripts/build.sh https://example.org/kb/

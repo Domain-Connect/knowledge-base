@@ -23,7 +23,13 @@ Knowledge Base/             — the knowledge base (MkDocs docs_dir)
   index.md                  — root redirect to Overview (do not remove)
 docs/                       — MkDocs build output (git-ignored; published via GitHub Actions)
 .github/workflows/
-  pages.yml                 — GitHub Actions workflow: build MkDocs and deploy to GitHub Pages
+  pages.yml                 — GitHub Actions workflow: build MkDocs, check links, deploy to GitHub Pages
+  check-links.yml           — GitHub Actions workflow: build MkDocs and check links on PRs and non-main pushes
+.github/.scripts/
+  build.sh                  — builds all three sites into docs/ for a given base URL, then runs check_links.py
+  check_links.py            — QA: fails if any internal link in the built docs/ would 404
+hooks/
+  edition.py                — MkDocs hook: points index.md redirect and 00_MASTER.md links at the edition overview
 mkdocs.yml                  — MkDocs configuration
 requirements.txt            — Python dependencies (mkdocs, mkdocs-material)
 .venv/                      — local Python virtual environment (git-ignored)
@@ -131,6 +137,14 @@ python3 -m venv .venv          # first time only
 .venv/bin/mkdocs build --strict --config-file mkdocs-implementers.yml
 ```
 Output goes to `docs/marketing-kb/` and `docs/implementers-kb/` respectively (both git-ignored on `main`).
+
+**Full build + link check** (what CI runs):
+```bash
+.github/.scripts/build.sh [BASE_URL] [.venv/bin/mkdocs]   # BASE_URL defaults to http://localhost:8000/
+```
+Builds all three configs with `SITE_URL` set per site, then serves `docs/` on a temporary local HTTP server, crawls every page and fails with a list of every URL that returns an error, with the pages linking to it. To crawl an already running site instead: `python3 .github/.scripts/check_links.py --url http://localhost:8000/`. Runs in CI on every PR and push (`check-links.yml`) and before deploy (`pages.yml`, with the URL from `actions/configure-pages`).
+
+**Edition links:** both editions share `Knowledge Base/`, so `index.md` and links to `00_MASTER.md` are rewritten per build by `hooks/edition.py` to the edition's overview (`extra.edition_overview` in each config). Keep linking to `./00_MASTER.md` in content pages. **Site URL:** no deployment URL is stored in the repo. Each config reads `site_url: !ENV SITE_URL`; `build.sh` sets it (base URL, `+marketing-kb/`, `+implementers-kb/`), and a plain `mkdocs build`/`serve` leaves it unset. It mainly matters for `404.html`, whose links MkDocs renders as absolute URLs.
 
 **Deployment:** Every push to `main` triggers `.github/workflows/pages.yml`, which builds both sites and deploys the entire `docs/` tree to GitHub Pages. In the repository settings, Pages source must be set to **GitHub Actions**.
 
