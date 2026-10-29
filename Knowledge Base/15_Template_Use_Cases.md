@@ -8,7 +8,7 @@
 
 ## Overview
 
-The Domain Connect template repository contains 720+ templates from 408+ service providers. Analysing the full set reveals ten recurring DNS function patterns. Each pattern maps to a distinct type of SaaS product or service. This section documents each pattern with a concrete template example, implementation guidance, and things to watch out for.
+The Domain Connect template repository contains {{ facts.templates_plus }} templates from {{ facts.service_providers_plus }} service providers. Analysing the full set reveals ten recurring DNS function patterns. Each pattern maps to a distinct type of SaaS product or service. This section documents each pattern with a concrete template example, implementation guidance, and things to watch out for.
 
 Use this section when:
 

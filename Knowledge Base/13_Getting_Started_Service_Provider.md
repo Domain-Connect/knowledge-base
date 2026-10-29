@@ -2,7 +2,7 @@
 
 *Part of the [Domain Connect Knowledge Base](./00_MASTER.md)*
 
-*Sources: [domainconnect.org/getting-started](https://www.domainconnect.org/getting-started/), [11 — Template Reference](./11_Template_Reference.md), [draft-ietf-dconn-domainconnect-01](https://datatracker.ietf.org/doc/draft-ietf-dconn-domainconnect/)*
+*Sources: {{ facts.src_getting_started }}, [11 — Template Reference](./11_Template_Reference.md), {{ facts.src_ietf_draft }}*
 
 ---
 
@@ -19,7 +19,7 @@ For the business case, see [06 — Value by Audience](./06_Value_by_Audience.md)
 If you are new to Domain Connect, start with the **synchronous flow**. It is:
 
 - Simpler to implement than the asynchronous (OAuth) flow
-- Supported by all ~20 DNS providers in the ecosystem
+- Supported by all {{ facts.dns_providers }} DNS providers in the ecosystem
 - Sufficient for the vast majority of service integrations — one-time setup where the user is present
 
 The asynchronous flow is covered at the end of this document for services that need ongoing DNS management or multi-step flows.
@@ -177,7 +177,7 @@ Each DNS Provider deploys templates individually after their own review. Contact
 
 Some DNS Providers will deploy your template after a quick review. Others require contractual terms or a more formal vetting process. Plan for this to take days to weeks per provider.
 
-**Which providers to prioritize:** Start with the providers your users most commonly use. GoDaddy, IONOS, Cloudflare, Squarespace Domains, and WordPress.com collectively cover the majority of the customer base for most service providers. Between them they cover roughly 35% of the .com zone.
+**Which providers to prioritize:** Start with the providers your users most commonly use. GoDaddy, IONOS, Cloudflare, Squarespace Domains, and WordPress.com collectively cover the majority of the customer base for most service providers. All supporting DNS providers together host roughly {{ facts.dc_share }} of scanned domains.
 
 ---
 

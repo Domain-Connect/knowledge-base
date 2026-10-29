@@ -2,7 +2,7 @@
 
 *Part of the [Domain Connect Knowledge Base](./00_MASTER.md)*
 
-*Sources: [domainconnect.org/getting-started](https://www.domainconnect.org/getting-started/), [09 — Getting Involved](./09_Getting_Involved.md), [draft-ietf-dconn-domainconnect-01](https://datatracker.ietf.org/doc/draft-ietf-dconn-domainconnect/)*
+*Sources: {{ facts.src_getting_started }}, [09 — Getting Involved](./09_Getting_Involved.md), {{ facts.src_ietf_draft }}*
 
 ---
 
@@ -16,7 +16,7 @@ For the business case and value proposition, see [06 — Value by Audience](./06
 
 ## Start with the synchronous flow
 
-If you are new to Domain Connect, implement the **synchronous flow** first. It covers the vast majority of real-world use cases, is simpler to build, and is supported by all 120+ service providers with templates. You can add the asynchronous OAuth flow later if your customers need it.
+If you are new to Domain Connect, implement the **synchronous flow** first. It covers the vast majority of real-world use cases, is simpler to build, and is supported by all {{ facts.service_providers_plus }} service providers with templates. You can add the asynchronous OAuth flow later if your customers need it.
 
 ---
 

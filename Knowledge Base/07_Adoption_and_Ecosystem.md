@@ -4,23 +4,23 @@
 
 ---
 
-## Current State (as of May 2026)
+## Current State (as of {{ facts.stats_month }})
 
 Domain Connect has crossed from experimental protocol to deployed infrastructure. The numbers reflect a mature ecosystem:
 
 | Metric | Value |
 |--------|-------|
-| DNS Providers with Domain Connect support | ~20 |
-| Share of .com zone covered by supporting providers | ~35% (May 2024) |
-| Service Provider templates deployed | 720 |
-| Service Providers with templates | 408 |
-| GitHub contributors to template repository | 420 |
-| Merged pull requests (template repository) | 831 |
+| DNS Providers with Domain Connect support | {{ facts.dns_providers }} |
+| Share of scanned domains on supporting DNS providers | ~{{ facts.dc_share }} ({{ facts.share_date }}) |
+| Service Provider templates deployed | {{ facts.templates }} |
+| Service Providers with templates | {{ facts.service_providers }} |
+| GitHub contributors to template repository | {{ facts.contributors }} |
+| Merged pull requests (template repository) | {{ facts.merged_prs }} |
 | Years in production | 10 (first deployed ~2016) |
 
-*Statistics from [stats.domainconnect.org](https://stats.domainconnect.org), generated 2026-05-14.*
+*Statistics from {{ facts.src_support_stats }} (DNS provider support and domain share) and {{ facts.src_template_stats }} (template repository), generated {{ facts.stats_date }}.*
 
-35% of the .com zone is not a niche feature. It means that a service provider implementing Domain Connect can immediately offer one-click DNS setup to more than one in three .com domain owners.
+~{{ facts.dc_share }} of scanned domains is not a niche feature. It means that a service provider implementing Domain Connect can immediately offer one-click DNS setup to the owners of {{ facts.dc_domains }} domains.
 
 ---
 
@@ -45,7 +45,7 @@ The diversity of implementations matters: GoDaddy and IONOS together cover a ver
 
 ## Service Provider Templates
 
-The 720 templates from 408 service providers span the full range of online services. Notable implementations include:
+The {{ facts.templates }} templates from {{ facts.service_providers }} service providers span the full range of online services. Notable implementations include:
 
 **Email and productivity:**
 
@@ -118,13 +118,13 @@ The project also maintains a community LinkedIn page at `linkedin.com/company/do
 
 ## Adoption Trajectory and Outlook
 
-The 35% .com zone coverage figure is a floor, not a ceiling. Several factors suggest continued growth:
+The ~{{ facts.dc_share }} domain coverage figure is a floor, not a ceiling. Several factors suggest continued growth:
 
 **IETF standardization removes the biggest adoption blocker.** The most common reason cited by non-adopting DNS providers for not implementing was the perception that Domain Connect was a GoDaddy proprietary protocol. With IETF working group status, that objection is no longer available.
 
 **Service provider pressure is growing.** Major SaaS platforms actively encourage their DNS provider partners to implement Domain Connect. As Microsoft, Google, and Shopify continue deploying Domain Connect as their preferred DNS configuration method, DNS providers face customer demand for support.
 
-**The template network effect.** Each new DNS provider implementation makes 300+ existing templates immediately available to that provider's customers. Each new service provider template becomes available to all ~20 existing DNS provider implementations. The ecosystem's value grows with every participant.
+**The template network effect.** Each new DNS provider implementation makes {{ facts.templates_plus }} existing templates immediately available to that provider's customers. Each new service provider template becomes available to all {{ facts.dns_providers }} supporting DNS providers, which run on {{ facts.dns_provider_stacks }} DNS software stacks. The ecosystem's value grows with every participant.
 
 **Extended use cases open new segments.** The DNSSEC bootstrapping and nameserver change use cases, if standardized in a future working group document, would draw in registry operators as direct participants — extending Domain Connect's reach beyond the registrar/service-provider axis.
 

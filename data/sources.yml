@@ -1,0 +1,50 @@
+# Sources cited in Knowledge Base/, resolved at build time by hooks/facts.py.
+# Hand-maintained: change a title or URL here and every page citing it follows.
+#
+# Each entry <key> provides these placeholders:
+#   {{ facts.src_<key> }}        "[title](url) (date, note)" — or "title (date, note)" without a url
+#   {{ facts.src_<key>_url }}    the url
+#   {{ facts.src_<key>_title }}  the title
+#   {{ facts.src_<key>_date }}   the date
+# url, date and note are optional. Dates are publication or event dates, as "Mon YYYY".
+
+sources:
+  ietf_draft:
+    title: IETF draft-ietf-dconn-domainconnect-01
+    url: https://datatracker.ietf.org/doc/html/draft-ietf-dconn-domainconnect-01
+    date: Mar 2026
+  ietf124_slides:
+    title: IETF-124 DCONN WG presentation
+    url: https://datatracker.ietf.org/meeting/124/materials/slides-124-dconn-ietf-124-domain-connect-issue-summary-03
+    date: Nov 2025
+  ietf123_transcript:
+    title: IETF 123 WG transcript
+    date: Jul 2025
+  support_stats:
+    title: Domain Connect Support Stats
+    url: https://pawel-kow.github.io/DomainConnectSupportStats/
+    note: Beta
+  template_stats:
+    title: stats.domainconnect.org
+    url: https://stats.domainconnect.org
+  templates_readme:
+    title: Templates repository README
+    url: https://github.com/Domain-Connect/Templates/blob/master/README.md
+  getting_started:
+    title: domainconnect.org/getting-started
+    url: https://www.domainconnect.org/getting-started/
+  apnic_blog:
+    title: APNIC blog article
+    url: https://blog.apnic.net/2025/12/24/domain-connect-a-missing-piece-in-the-dns-toolbox/
+    date: Dec 2025
+  row_2025:
+    title: ROW 2025 presentation
+    url: https://regiops.net/
+    date: Sep 2025
+  centr_jamboree_2025:
+    title: CENTR Jamboree 2025 presentation
+    date: May 2025
+  centr_renewal_study:
+    title: CENTR Domain Renewal Study 2024
+    url: https://centr.org/news/blog/centr-study-highlights-key-domain-characteristics-driving-renewal-rates.html
+    date: Oct 2024

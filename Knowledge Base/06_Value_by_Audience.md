@@ -56,14 +56,14 @@ Customers who successfully connect their domains to their chosen services become
 
 ### Competitive differentiation
 
-A DNS provider that supports Domain Connect can offer one-click integration with 120+ service providers. A DNS provider that doesn't requires its customers to navigate manual DNS setup. In a market where most DNS functionality is commoditized, the user experience at domain activation is a genuine differentiator.
+A DNS provider that supports Domain Connect can offer one-click integration with {{ facts.service_providers_plus }} service providers. A DNS provider that doesn't requires its customers to navigate manual DNS setup. In a market where most DNS functionality is commoditized, the user experience at domain activation is a genuine differentiator.
 
 ### "Implement once, benefit forever" scaling
 
-The implementation investment is front-loaded: build the Domain Connect API endpoint once, implement the consent flow, deploy the template hosting infrastructure. After that, each new service provider is just a new template — no additional development. A single implementation connects you to the entire ecosystem of 120+ service providers.
+The implementation investment is front-loaded: build the Domain Connect API endpoint once, implement the consent flow, deploy the template hosting infrastructure. After that, each new service provider is just a new template — no additional development. A single implementation connects you to the entire ecosystem of {{ facts.service_providers_plus }} service providers.
 
 ### Talking points for DNS providers/registrars
-- "We implemented Domain Connect once. Now our customers can connect to Microsoft 365, Google Workspace, Shopify, and 120+ other services in one click."
+- "We implemented Domain Connect once. Now our customers can connect to Microsoft 365, Google Workspace, Shopify, and {{ facts.service_providers_plus }} other services in one click."
 - "Support tickets for DNS configuration dropped significantly after we launched Domain Connect."
 - "When our competitors' customers need help with DNS setup, they call support. When our customers do it, they click 'Connect'."
 
@@ -89,7 +89,7 @@ Template-based DNS configuration is deterministic. The same template, applied vi
 
 ### Access to a growing ecosystem
 
-Implementing Domain Connect means that any DNS provider who also implements it can offer one-click integration with your service — without any bilateral negotiation. Once your template is published, it can be adopted by all ~20 DNS providers in the ecosystem. New DNS providers that implement Domain Connect in the future automatically support your service.
+Implementing Domain Connect means that any DNS provider who also implements it can offer one-click integration with your service — without any bilateral negotiation. Once your template is published, it can be adopted by all {{ facts.dns_providers }} DNS providers in the ecosystem. New DNS providers that implement Domain Connect in the future automatically support your service.
 
 ### Talking points for service providers
 - "DNS configuration is where we lose half our customers. Domain Connect is the fix."

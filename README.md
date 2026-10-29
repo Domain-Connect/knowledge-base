@@ -71,4 +71,4 @@ Every push to `main` automatically builds and deploys the site to GitHub Pages v
 
 > **Repository setting:** Pages → Source must be set to **GitHub Actions**.
 
-*Live stats: [stats.domainconnect.org](https://stats.domainconnect.org)*
+*Live stats: [stats.domainconnect.org](https://stats.domainconnect.org) · DNS provider support: [Domain Connect Support Stats](https://pawel-kow.github.io/DomainConnectSupportStats/) (Beta)*

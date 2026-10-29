@@ -16,7 +16,7 @@ That's Microsoft. With their resources. The documentation problem is not solvabl
 
 Our head of engineering introduced me to Domain Connect. The pitch was simple: instead of us telling customers how to configure DNS — and updating that documentation for every registrar, every time a registrar changes their UI — we define what DNS records we need in a JSON template, the DNS provider hosts that template and presents a consent screen, and the user clicks one button.
 
-I asked about the ecosystem. At the time, around 20 DNS providers supported it. Between them, they covered roughly 35% of the .com zone. The biggest registrars — GoDaddy, IONOS, Cloudflare, WordPress.com — were already live.
+I asked about the ecosystem. At the time, {{ facts.dns_providers }} DNS providers supported it. Between them, they hosted roughly {{ facts.dc_share }} of all scanned domains. The biggest registrars — GoDaddy, IONOS, Cloudflare, WordPress.com — were already live.
 
 I asked about the implementation cost. Template authoring was a day's work. URL signing was a week. Discovery flow integration was another week. The ongoing cost was relationship management with DNS providers to get our template deployed — not engineering.
 

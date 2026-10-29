@@ -2,9 +2,9 @@
 
 *Part of the [Domain Connect Knowledge Base](./00_MASTER.md)*
 
-*Specification source: draft-ietf-dconn-domainconnect-01 (March 2026)*  
-*Usage statistics: [stats.domainconnect.org](https://stats.domainconnect.org) — 720 templates as of 2026-05-14*  
-*Contribution rules: [github.com/Domain-Connect/Templates README](https://github.com/Domain-Connect/Templates/blob/master/README.md)*
+*Specification source: {{ facts.src_ietf_draft }}*  
+*Usage statistics: {{ facts.src_template_stats }} — {{ facts.repo_templates }} templates as of {{ facts.repo_stats_date }}*  
+*Contribution rules: {{ facts.src_templates_readme }}*
 
 ---
 
@@ -23,12 +23,12 @@ This document is an exhaustive reference for every field in both parts. Each ent
 
 ### Quick reference
 
-| Field | Key | Type | Required | Usage in 720 templates |
+| Field | Key | Type | Required | Usage in {{ facts.repo_templates }} templates |
 |-------|-----|------|----------|------------------------|
-| Service Provider Id | `providerId` | String | REQUIRED | 720 / 720 |
-| Service Provider Name | `providerName` | String | REQUIRED | 720 / 720 |
-| Service Id | `serviceId` | String | REQUIRED | 720 / 720 |
-| Service Name | `serviceName` | String | REQUIRED | 720 / 720 |
+| Service Provider Id | `providerId` | String | REQUIRED | {{ facts.repo_templates }} / {{ facts.repo_templates }} |
+| Service Provider Name | `providerName` | String | REQUIRED | {{ facts.repo_templates }} / {{ facts.repo_templates }} |
+| Service Id | `serviceId` | String | REQUIRED | {{ facts.repo_templates }} / {{ facts.repo_templates }} |
+| Service Name | `serviceName` | String | REQUIRED | {{ facts.repo_templates }} / {{ facts.repo_templates }} |
 | Version | `version` | Integer | optional | common |
 | Logo URL | `logoUrl` | String (URI) | optional | common |
 | Description | `description` | String | optional | common |
@@ -36,12 +36,12 @@ This document is an exhaustive reference for every field in both parts. Each ent
 | Synchronous Block | `syncBlock` | Boolean | optional | rare |
 | Shared Provider Name | `sharedProviderName` | Boolean | optional | rare |
 | Shared Service Name | `sharedServiceName` | Boolean | optional | rare |
-| Synchronous Public Key Domain | `syncPubKeyDomain` | String | optional | **649 / 720 (90%)** |
-| Synchronous Redirect Domains | `syncRedirectDomain` | String | optional | **477 / 720 (66%)** |
+| Synchronous Public Key Domain | `syncPubKeyDomain` | String | optional | **{{ facts.feature_syncpubkeydomain }} / {{ facts.repo_templates }} ({{ facts.feature_syncpubkeydomain_pct }})** |
+| Synchronous Redirect Domains | `syncRedirectDomain` | String | optional | **{{ facts.feature_syncredirectdomain }} / {{ facts.repo_templates }} ({{ facts.feature_syncredirectdomain_pct }})** |
 | Multiple Instance | `multiInstance` | Boolean | optional | rare |
-| Warn Phishing | `warnPhishing` | Boolean | optional | 30 / 720 (4%) |
-| Host Required | `hostRequired` | Boolean | optional | **183 / 720 (25%)** |
-| Records | `records` | Array | REQUIRED | 720 / 720 |
+| Warn Phishing | `warnPhishing` | Boolean | optional | {{ facts.feature_warnphishing }} / {{ facts.repo_templates }} ({{ facts.feature_warnphishing_pct }}) |
+| Host Required | `hostRequired` | Boolean | optional | **{{ facts.feature_hostrequired }} / {{ facts.repo_templates }} ({{ facts.feature_hostrequired_pct }})** |
+| Records | `records` | Array | REQUIRED | {{ facts.repo_templates }} / {{ facts.repo_templates }} |
 | *(deprecated)* Shared | `shared` | Boolean | deprecated | — |
 
 ---
@@ -252,7 +252,7 @@ When `true`, indicates that the caller MAY supply an additional `serviceName` pa
 
 **Type:** String (domain name)  
 **Required:** No  
-**Usage: 649 out of 720 templates (90%)**
+**Usage: {{ facts.feature_syncpubkeydomain }} out of {{ facts.repo_templates }} templates ({{ facts.feature_syncpubkeydomain_pct }})**
 
 The domain name under which the Service Provider publishes its public signing key(s) as DNS TXT records. When this field is present, digital signing is **required** for synchronous apply requests — the DNS Provider MUST verify the signature and MUST reject unsigned requests.
 
@@ -285,7 +285,7 @@ _dcpubkeyv1.domainconnect.shopify.com. IN TXT "p=1,a=RS256,d=<base64-key>"
 
 **Template repository rule:** The template repository requires `syncPubKeyDomain` in every submitted template. The only accepted alternatives are `syncBlock: true` (restrict to async-only flow, which authenticates via OAuth instead) or `warnPhishing: true` (last resort, no cryptographic guarantee, will cause some DNS providers to reject the template by policy). Omitting `syncPubKeyDomain` without justification causes the PR to be rejected — linter rule **DCTL1029**.
 
-**Caveat:** 90% of deployed templates use this field — it is effectively the standard. Templates without `syncPubKeyDomain` are vulnerable to URL parameter manipulation. Any template that controls where web traffic goes (A or CNAME records) should use signing.
+**Caveat:** {{ facts.feature_syncpubkeydomain_pct }} of deployed templates use this field — it is effectively the standard. Templates without `syncPubKeyDomain` are vulnerable to URL parameter manipulation. Any template that controls where web traffic goes (A or CNAME records) should use signing.
 
 ---
 
@@ -293,7 +293,7 @@ _dcpubkeyv1.domainconnect.shopify.com. IN TXT "p=1,a=RS256,d=<base64-key>"
 
 **Type:** String (comma-separated list of domain names)  
 **Required:** No  
-**Usage: 477 out of 720 templates (66%)**
+**Usage: {{ facts.feature_syncredirectdomain }} out of {{ facts.repo_templates }} templates ({{ facts.feature_syncredirectdomain_pct }})**
 
 A comma-separated list of domain names to which the DNS Provider is permitted to send the post-apply redirect in the synchronous flow. When the Service Provider supplies a `redirect_uri` parameter in the apply request, the DNS Provider MUST verify that the `redirect_uri` hostname matches one of the domains in this list.
 
@@ -334,7 +334,7 @@ When `true`, signals that the template is designed to be applied multiple times 
 **Type:** Boolean  
 **Required:** No  
 **Default:** `false`  
-**Usage: 30 out of 720 templates (4%)**
+**Usage: {{ facts.feature_warnphishing }} out of {{ facts.repo_templates }} templates ({{ facts.feature_warnphishing_pct }})**
 
 When `true`, signals that the template contains variable-resolved record values that could be set to point the domain at arbitrary infrastructure — and therefore cannot be fully constrained by URL signing. The DNS Provider SHOULD display additional warnings prompting the user to verify the source of the request before approving.
 
@@ -350,7 +350,7 @@ When `true`, signals that the template contains variable-resolved record values 
 
 **Use case for `warnPhishing`:** Only when signing is genuinely infeasible and async-only flow is impractical. Examples: templates with variables that must be the entire record value as prescribed by an external standard, where the SP cannot implement key management.
 
-**Caveat:** At 4% usage, `warnPhishing` is rare by design — the template repository steers authors toward signing first. If you find yourself setting this flag, reconsider whether `syncPubKeyDomain` is truly impossible to implement.
+**Caveat:** At {{ facts.feature_warnphishing_pct }} usage, `warnPhishing` is rare by design — the template repository steers authors toward signing first. If you find yourself setting this flag, reconsider whether `syncPubKeyDomain` is truly impossible to implement.
 
 ---
 
@@ -359,7 +359,7 @@ When `true`, signals that the template contains variable-resolved record values 
 **Type:** Boolean  
 **Required:** No  
 **Default:** `false`  
-**Usage: 183 out of 720 templates (25%)**
+**Usage: {{ facts.feature_hostrequired }} out of {{ facts.repo_templates }} templates ({{ facts.feature_hostrequired_pct }})**
 
 When `true`, indicates that the template is only applicable when both `domain` AND `host` apply parameters are provided. The DNS Provider MUST reject apply requests that omit the `host` parameter for this template.
 
@@ -397,20 +397,20 @@ Each element of the `records` array defines one DNS resource record to be applie
 
 The DNS record type. Controls which additional fields are required and how conflict detection operates.
 
-| Value | DNS type | DNS Provider support | Usage in 720 templates |
+| Value | DNS type | DNS Provider support | Usage in {{ facts.repo_templates }} templates |
 |-------|----------|---------------------|------------------------|
-| `A` | IPv4 address | REQUIRED | 244 records |
-| `AAAA` | IPv6 address | REQUIRED | 17 records |
-| `CNAME` | Canonical name alias | REQUIRED | 519 records |
-| `MX` | Mail exchange | REQUIRED | 136 records |
-| `TXT` | Text record | REQUIRED | 327 records |
-| `SRV` | Service locator | REQUIRED | 22 records |
-| `NS` | Name server | REQUIRED | 6 records |
-| `SPFM` | SPF merge (pseudo-type) | SHOULD support | 164 records |
-| `REDIR301` | HTTP 301 redirect | optional extension | 16 records |
-| `REDIR302` | HTTP 302 redirect | optional extension | 1 record |
-| `APEXCNAME` | Apex CNAME (ANAME/ALIAS) | optional extension | 5 records |
-| `CAA` | Certificate Authority Authorization | optional | 5 records |
+| `A` | IPv4 address | REQUIRED | {{ facts.records_a }} |
+| `AAAA` | IPv6 address | REQUIRED | {{ facts.records_aaaa }} |
+| `CNAME` | Canonical name alias | REQUIRED | {{ facts.records_cname }} |
+| `MX` | Mail exchange | REQUIRED | {{ facts.records_mx }} |
+| `TXT` | Text record | REQUIRED | {{ facts.records_txt }} |
+| `SRV` | Service locator | REQUIRED | {{ facts.records_srv }} |
+| `NS` | Name server | REQUIRED | {{ facts.records_ns }} |
+| `SPFM` | SPF merge (pseudo-type) | SHOULD support | {{ facts.records_spfm }} |
+| `REDIR301` | HTTP 301 redirect | optional extension | {{ facts.records_redir301 }} |
+| `REDIR302` | HTTP 302 redirect | optional extension | {{ facts.records_redir302 }} |
+| `APEXCNAME` | Apex CNAME (ANAME/ALIAS) | optional extension | {{ facts.records_apexcname }} |
+| `CAA` | Certificate Authority Authorization | optional | {{ facts.records_caa }} |
 | `TYPE{n}` | Unknown type per RFC 3597 | optional | — |
 
 **CNAME constraint:** A CNAME record's `host` field MUST NOT be `@` or empty unless `hostRequired` is `true` in the template definition, because CNAME at the zone apex is prohibited by DNS standards.
@@ -865,7 +865,7 @@ This template:
 
 ## Part 4: Contributing a Template — Process and Quality Rules
 
-*Source: [github.com/Domain-Connect/Templates README](https://github.com/Domain-Connect/Templates/blob/master/README.md)*
+*Source: {{ facts.src_templates_readme }}*
 
 The template repository at [github.com/Domain-Connect/Templates](https://github.com/Domain-Connect/Templates) is the canonical source for all Domain Connect templates. Contributing a new or updated template follows a defined process with binding quality rules enforced by a linter and PR review.
 

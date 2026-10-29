@@ -97,3 +97,7 @@ extra:
 
 hooks:
   - hooks/edition.py
+  - hooks/facts.py
+
+watch:
+  - data

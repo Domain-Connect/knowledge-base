@@ -34,7 +34,7 @@ All messaging is grounded in the facts documented elsewhere in this knowledge ba
 > "The key innovation in Domain Connect isn't automation — it's controlled automation. Service providers define what they need. DNS providers vouch for it. Users approve it. No one skips any of those steps."
 
 ### The scale
-> "35% of the .com zone is already covered by DNS providers that support Domain Connect. 720 templates from 408 service providers are deployed. This isn't an experiment anymore — it's infrastructure."
+> "~{{ facts.dc_share }} of scanned domains are already hosted by DNS providers that support Domain Connect. {{ facts.templates }} templates from {{ facts.service_providers }} service providers are deployed. This isn't an experiment anymore — it's infrastructure."
 
 > "Domain Connect has been running in production since 2016. The IETF is now standardizing it. The question for the rest of the industry isn't whether to support it — it's how quickly."
 
@@ -76,7 +76,7 @@ Done. No DNS knowledge needed. ~30 seconds instead of 40+ minutes.
 
 That's Domain Connect — an open standard that's been running in production since 2016 and is now on the IETF Standards Track through the newly formed DCONN working group.
 
-35% of the .com zone is already covered. 720 templates. 408 service providers. This is what the domain industry looks like when setup actually works.
+~{{ facts.dc_share }} of scanned domains are already covered. {{ facts.templates }} templates. {{ facts.service_providers }} service providers. This is what the domain industry looks like when setup actually works.
 
 \#DomainConnect \#IETF \#DNS \#RegistrarTech
 
@@ -145,13 +145,13 @@ For any registry or registrar looking for levers on renewal rates — this is on
 > Domain utilization directly predicts renewal revenue. Your registrars hold the key to improving it. Domain Connect is the most direct available lever: when registrars implement it, customers can activate their domains in seconds instead of failing over 40 minutes. That's a 20-point renewal rate gap, at scale. We'd like to discuss how to accelerate adoption across your registrar base.
 
 ### For a registrar CTO
-> DNS configuration support is expensive and avoidable. Domain Connect replaces manual DNS setup — and all the support tickets it generates — with an automated, template-based consent flow. Implement it once; every new Service Provider is just a new template. 120+ service providers already have templates ready. GoDaddy, IONOS, Cloudflare, and 17 other DNS providers are already live. When do you want to talk about implementation?
+> DNS configuration support is expensive and avoidable. Domain Connect replaces manual DNS setup — and all the support tickets it generates — with an automated, template-based consent flow. Implement it once; every new Service Provider is just a new template. {{ facts.service_providers_plus }} service providers already have templates ready. GoDaddy, IONOS, Cloudflare, and 17 other DNS providers are already live. When do you want to talk about implementation?
 
 ### For a service provider product manager
 > About half your customers who try to connect their domain to your service will fail. Domain Connect fixes this. Your customers click "Connect," your DNS partner handles the rest. You write one template; every Domain Connect-compatible DNS provider can deploy it. Microsoft, Google, Shopify, and Squarespace are all in. Your DNS configuration support tickets go away. Interested?
 
 ### For a press or analyst briefing
-> Domain Connect solves one of the domain industry's quiet crises: the 50% abandonment rate at DNS configuration. First proposed by GoDaddy in 2016, the protocol has been in production for a decade. The IETF's DCONN working group, approved October 2025, is now standardizing it. With 35% of the .com zone already covered, this is not emerging technology — it's infrastructure that most of the industry hasn't caught up to yet.
+> Domain Connect solves one of the domain industry's quiet crises: the 50% abandonment rate at DNS configuration. First proposed by GoDaddy in 2016, the protocol has been in production for a decade. The IETF's DCONN working group, approved October 2025, is now standardizing it. With ~{{ facts.dc_share }} of scanned domains already covered, this is not emerging technology — it's infrastructure that most of the industry hasn't caught up to yet.
 
 ---
 
@@ -167,11 +167,11 @@ For quick use in presentations and posts:
 | Training time for reliable manual setup | 40 minutes |
 | Domain renewal rate, unused | ~70% |
 | Domain renewal rate, active | ~90% |
-| .com zone covered by DC-supporting providers | ~35% (May 2024) |
-| DNS providers supporting Domain Connect | ~20 |
-| Service provider templates deployed | 720 |
-| Service providers with templates | 408 |
-| GitHub contributors to template repository | 420 |
+| Share of scanned domains on supporting DNS providers | ~{{ facts.dc_share }} ({{ facts.share_date }}) |
+| DNS providers supporting Domain Connect | {{ facts.dns_providers }} |
+| Service provider templates deployed | {{ facts.templates }} |
+| Service providers with templates | {{ facts.service_providers }} |
+| GitHub contributors to template repository | {{ facts.contributors }} |
 | Year first proposed | 2016 (GoDaddy) |
 | IETF WG approval | October 2025 |
 | Current specification | draft-ietf-dconn-domainconnect-01 |

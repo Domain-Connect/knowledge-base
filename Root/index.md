@@ -32,4 +32,24 @@ Covers the technical protocol, template structure, security model, step-by-step 
 
 [Open Implementers Edition →](./implementers-kb/){ .md-button .md-button--primary }
 
+## [Product: DNS Providers](./product-dns-kb/)
+
+For product managers at DNS providers and registrars deciding whether to implement Domain Connect.
+
+Covers the business case, scope of work, risks and objections, and a ready-to-use executive brief.
+
+**Go here if you** need to convince yourself, your team and your CEO, and want a top-level view of what implementation involves.
+
+[Open Product Edition: DNS Providers →](./product-dns-kb/){ .md-button .md-button--primary }
+
+## [Product: Service Providers](./product-sp-kb/)
+
+For product managers at SaaS platforms, email suites, website builders and other services that ask customers to connect a domain.
+
+Covers the business case, scope of work, risks and objections, and a ready-to-use executive brief.
+
+**Go here if you** need to convince yourself, your team and your CEO, and want a top-level view of what integration involves.
+
+[Open Product Edition: Service Providers →](./product-sp-kb/){ .md-button .md-button--primary }
+
 </div>

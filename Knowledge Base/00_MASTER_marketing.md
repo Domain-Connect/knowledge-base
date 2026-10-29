@@ -2,7 +2,7 @@
 
 **Version:** 1.0 | **Last updated:** May 2026  
 **Author:** Pawel Kowalik, Co-Author of Domain Connect specification  
-**Sources:** APNIC blog article (Oct 2025), ROW presentation (Oct 2025), IETF-124 DCONN WG presentation, IETF draft-ietf-dconn-domainconnect-01 (Mar 2026)
+**Sources:** {{ facts.src_apnic_blog }}, {{ facts.src_row_2025 }}, {{ facts.src_ietf124_slides }}, {{ facts.src_ietf_draft }}
 
 ---
 
@@ -19,24 +19,26 @@ This edition is for people who communicate Domain Connect to external audiences 
 
 Looking for technical implementation details? See the [Implementers Edition](../../implementers-kb/).
 
+Evaluating Domain Connect for your product? See the Product Editions for [DNS Providers](../../product-dns-kb/) and [Service Providers](../../product-sp-kb/).
+
 ---
 
 ## The One-Paragraph Summary
 
-Half of all users who try to connect their domain to a service like Microsoft 365 give up before finishing — because DNS configuration requires expert knowledge most people don't have. Domain Connect solves this with a standardized protocol: the service provider defines a DNS template, the DNS provider vouches for and hosts it, and the user simply clicks "Connect" and approves. What used to take 40 minutes of following instructions now takes seconds. With ~20 DNS providers already supporting it (covering 35% of the .com zone) and 720 templates from 408 service providers deployed, Domain Connect has crossed from experiment to infrastructure. IETF standardization — through the newly approved DCONN working group — is now locking it in as an internet standard.
+Half of all users who try to connect their domain to a service like Microsoft 365 give up before finishing — because DNS configuration requires expert knowledge most people don't have. Domain Connect solves this with a standardized protocol: the service provider defines a DNS template, the DNS provider vouches for and hosts it, and the user simply clicks "Connect" and approves. What used to take 40 minutes of following instructions now takes seconds. With {{ facts.dns_providers }} DNS providers already supporting it (covering ~{{ facts.dc_share }} of scanned domains) and {{ facts.templates }} templates from {{ facts.service_providers }} service providers deployed, Domain Connect has crossed from experiment to infrastructure. IETF standardization — through the newly approved DCONN working group — is now locking it in as an internet standard.
 
 ---
 
-## Core Statistics (as of May 2026)
+## Core Statistics (as of {{ facts.stats_month }})
 
 | Metric | Value |
 |--------|-------|
-| DNS Providers supporting Domain Connect | ~20 |
-| Share of .com zone covered | ~35% (May 2024) |
-| Service Provider templates | 720 |
-| Service Providers with templates | 408 |
-| GitHub contributors to template repository | 420 |
-| Merged pull requests (template repository) | 831 |
+| DNS Providers supporting Domain Connect | {{ facts.dns_providers }} |
+| Share of scanned domains on supporting DNS providers | ~{{ facts.dc_share }} ({{ facts.share_date }}) |
+| Service Provider templates | {{ facts.templates }} |
+| Service Providers with templates | {{ facts.service_providers }} |
+| GitHub contributors to template repository | {{ facts.contributors }} |
+| Merged pull requests (template repository) | {{ facts.merged_prs }} |
 | Microsoft 365 DNS setup failure rate (without DC) | ~50% |
 | MS 365 manual setup: DNS entries required | 7–15 |
 | MS 365 manual setup: help sites maintained | 16 (10 registrar-specific) |
@@ -45,7 +47,7 @@ Half of all users who try to connect their domain to a service like Microsoft 36
 | Domain renewal rate, high content | ~90% |
 | Year first proposed | 2016 (GoDaddy) |
 | IETF WG approval | October 2025 |
-| Statistics source | stats.domainconnect.org (2026-05-14) |
+| Statistics source | {{ facts.src_support_stats }} and {{ facts.src_template_stats }} ({{ facts.stats_date }}) |
 
 ---
 

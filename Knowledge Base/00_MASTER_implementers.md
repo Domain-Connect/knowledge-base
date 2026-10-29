@@ -2,7 +2,7 @@
 
 **Version:** 1.0 | **Last updated:** May 2026  
 **Author:** Pawel Kowalik, Co-Author of Domain Connect specification  
-**Sources:** IETF draft-ietf-dconn-domainconnect-01 (Mar 2026), IETF 123 WG transcript, IETF-124 DCONN WG presentation, Templates repository README
+**Sources:** {{ facts.src_ietf_draft }}, {{ facts.src_ietf123_transcript }}, {{ facts.src_ietf124_slides }}, {{ facts.src_templates_readme }}
 
 ---
 
@@ -19,6 +19,8 @@ This edition is for DNS providers, service providers, template authors, and prot
 
 Looking for messaging, stories, or business-case materials? See the [Marketing & Communications Edition](../../marketing-kb/).
 
+Evaluating Domain Connect for your product? See the Product Editions for [DNS Providers](../../product-dns-kb/) and [Service Providers](../../product-sp-kb/).
+
 ---
 
 ## Quick Reference: What Is Domain Connect?
@@ -28,7 +30,7 @@ Looking for messaging, stories, or business-case materials? See the [Marketing &
 - **Originally proposed by:** GoDaddy, 2016
 - **Status:** Production-deployed; IETF standardization underway (DCONN working group, approved Oct 2025)
 - **Specification:** draft-ietf-dconn-domainconnect-01 (Standards Track)
-- **Template repository:** [github.com/Domain-Connect/Templates](https://github.com/Domain-Connect/Templates) — 720 templates, 408 service providers, 420 contributors
+- **Template repository:** [github.com/Domain-Connect/Templates](https://github.com/Domain-Connect/Templates) — {{ facts.templates }} templates, {{ facts.service_providers }} service providers, {{ facts.contributors }} contributors
 
 ---
 
