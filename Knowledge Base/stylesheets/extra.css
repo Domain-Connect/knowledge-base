@@ -174,3 +174,33 @@ body,
   height: 2rem;
   width: auto;
 }
+
+/* Share links (marketing edition, overrides/marketing/main.html) */
+.dc-share {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 2rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--dc-tertiary);
+  font-size: 0.7rem;
+}
+
+.dc-share__label {
+  color: var(--dc-secondary);
+}
+
+.dc-share a {
+  display: inline-flex;
+  color: var(--dc-secondary);
+}
+
+.dc-share a:hover {
+  color: var(--dc-accent);
+}
+
+.dc-share svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  fill: currentColor;
+}

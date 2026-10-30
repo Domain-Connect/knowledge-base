@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{#- Share links below the page content (marketing edition). Needs site_url
+    (set by build.sh), otherwise pages have no canonical URL and the links
+    are omitted. -#}
+{% block content %}
+  {{ super() }}
+  {% if page.canonical_url and not page.is_homepage %}
+    {% set share_url = page.canonical_url | urlencode %}
+    {% set share_text = (page.title ~ " — Domain Connect Knowledge Base") | urlencode %}
+    <aside class="dc-share">
+      <span class="dc-share__label">Share this page:</span>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ share_url }}" target="_blank" rel="noopener" title="Share on LinkedIn">
+        {% include ".icons/fontawesome/brands/linkedin.svg" %}
+      </a>
+      <a href="https://bsky.app/intent/compose?text={{ share_text }}%20{{ share_url }}" target="_blank" rel="noopener" title="Share on Bluesky">
+        {% include ".icons/fontawesome/brands/bluesky.svg" %}
+      </a>
+      <a href="https://s2f.kytta.dev/?text={{ share_text }}%20{{ share_url }}" target="_blank" rel="noopener" title="Share on Mastodon">
+        {% include ".icons/fontawesome/brands/mastodon.svg" %}
+      </a>
+    </aside>
+  {% endif %}
+{% endblock %}

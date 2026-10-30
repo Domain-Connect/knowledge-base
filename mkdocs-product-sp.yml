@@ -80,6 +80,16 @@ copyright: "Copyright &copy; 2026 Domain Connect Contributors. Content licensed 
 
 extra:
   generator: false
+  social:
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/company/domain-connect/
+      name: Domain Connect on LinkedIn
+    - icon: fontawesome/brands/bluesky
+      link: https://bsky.app/profile/domainconnect.bsky.social
+      name: "@domainconnect.bsky.social on Bluesky"
+    - icon: fontawesome/brands/mastodon
+      link: https://mastodon.social/@domainconnect
+      name: "@domainconnect@mastodon.social on Mastodon"
   edition_overview: 00_MASTER_product_sp.md
 
 hooks:

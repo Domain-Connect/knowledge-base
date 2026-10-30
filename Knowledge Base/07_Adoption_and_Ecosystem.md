@@ -118,7 +118,7 @@ Domain Connect is fully open source. All specification-related work is public:
 - **Template registry:** Publicly browsable and submittable
 - **Issue tracker:** Open for specification questions and implementation reports
 
-The project also maintains a community LinkedIn page at `linkedin.com/company/domain-connect/` where implementers and practitioners connect.
+The project shares news and connects implementers and practitioners on [LinkedIn](https://www.linkedin.com/company/domain-connect/), [Bluesky](https://bsky.app/profile/domainconnect.bsky.social) (@domainconnect.bsky.social) and [Mastodon](https://mastodon.social/@domainconnect) (@domainconnect@mastodon.social).
 
 ---
 

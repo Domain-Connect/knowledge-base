@@ -282,6 +282,9 @@ The synchronous flow covers most use cases. Use the asynchronous (OAuth) flow wh
 | Template field reference | [11 — Template Reference](./11_Template_Reference.md) |
 | DNS Provider list | [domainconnect.org](https://www.domainconnect.org) |
 | Community / Slack | [domainconnect.org/getting-started](https://www.domainconnect.org/getting-started/) |
+| LinkedIn | [linkedin.com/company/domain-connect](https://www.linkedin.com/company/domain-connect/) |
+| Bluesky | [@domainconnect.bsky.social](https://bsky.app/profile/domainconnect.bsky.social) |
+| Mastodon | [@domainconnect@mastodon.social](https://mastodon.social/@domainconnect) |
 
 ---
 

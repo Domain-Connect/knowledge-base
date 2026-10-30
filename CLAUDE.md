@@ -36,6 +36,8 @@ data/
 hooks/
   edition.py                — MkDocs hook: points index.md redirect and 00_MASTER.md links at the edition overview
   facts.py                  — MkDocs hook: replaces {{ facts.<key> }} placeholders with values from data/facts.yml and data/sources.yml
+overrides/
+  marketing/main.html       — theme override for the marketing edition: share links (LinkedIn, Bluesky, Mastodon) below each page
 mkdocs.yml                  — MkDocs configuration
 requirements.txt            — Python dependencies (mkdocs, mkdocs-material)
 .venv/                      — local Python virtual environment (git-ignored)
@@ -171,6 +173,8 @@ Same pattern for `mkdocs-product-dns.yml` and `mkdocs-product-sp.yml`. Output go
 Refreshes `data/facts.yml` (see Key facts), builds all five configs with `SITE_URL` set per site, then serves `docs/` on a temporary local HTTP server, crawls every page and fails with a list of every URL that returns an error, with the pages linking to it. To crawl an already running site instead: `python3 .github/.scripts/check_links.py --url http://localhost:8000/`. Runs in CI on every PR and push (`check-links.yml`) and before deploy (`pages.yml`, with the URL from `actions/configure-pages`).
 
 **Edition links:** all editions share `Knowledge Base/`, so `index.md` and links to `00_MASTER.md` are rewritten per build by `hooks/edition.py` to the edition's overview (`extra.edition_overview` in each config). Keep linking to `./00_MASTER.md` in content pages. **Site URL:** no deployment URL is stored in the repo. Each config reads `site_url: !ENV SITE_URL`; `build.sh` sets it (base URL, `+marketing-kb/`, `+implementers-kb/`, `+product-dns-kb/`, `+product-sp-kb/`), and a plain `mkdocs build`/`serve` leaves it unset. It mainly matters for `404.html`, whose links MkDocs renders as absolute URLs.
+
+**Social links:** every config lists the LinkedIn, Bluesky and Mastodon accounts under `extra.social` (footer icons); keep the five in sync. The marketing edition also shows share links via `overrides/marketing/main.html` (only rendered when `SITE_URL` is set).
 
 **Deployment:** Every push to `main` triggers `.github/workflows/pages.yml`, which builds all sites and deploys the entire `docs/` tree to GitHub Pages. In the repository settings, Pages source must be set to **GitHub Actions**.
 

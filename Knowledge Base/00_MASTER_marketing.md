@@ -70,7 +70,9 @@ Half of all users who try to connect their domain to a service like Microsoft 36
 
 ## Navigation by Content Goal
 
-**"Write a LinkedIn post or blog intro"** → [10 Key Messages](./10_Key_Messages.md)
+**"Write a LinkedIn post or blog intro"** → [10 Key Messages](./10_Key_Messages.md) (handles to tag: [Channels and Handles](./10_Key_Messages.md#channels-and-handles))
+
+**"Find our social media channels"** → [09 Getting Involved — Follow and Engage](./09_Getting_Involved.md#follow-and-engage)
 
 **"Explain what Domain Connect is (non-technical)"** → [02 What Is](./02_What_Is_Domain_Connect.md), [03 How It Works](./03_How_It_Works.md)
 

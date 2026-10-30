@@ -45,6 +45,22 @@ All messaging is grounded in the facts documented elsewhere in this knowledge ba
 
 ---
 
+## Channels and Handles
+
+Tag the official accounts in posts about Domain Connect so they can be reshared, and close posts with a follow line where it fits.
+
+| Platform | Handle to tag | Profile |
+|----------|---------------|---------|
+| LinkedIn | Domain Connect (company page) | [linkedin.com/company/domain-connect](https://www.linkedin.com/company/domain-connect/) |
+| Bluesky | @domainconnect.bsky.social | [bsky.app/profile/domainconnect.bsky.social](https://bsky.app/profile/domainconnect.bsky.social) |
+| Mastodon | @domainconnect@mastodon.social | [mastodon.social/@domainconnect](https://mastodon.social/@domainconnect) |
+
+**Standard hashtags:** \#DomainConnect, plus \#DNS, \#IETF, \#DomainIndustry or \#Registrar as fits the post.
+
+**Follow line:** "Follow Domain Connect for updates on the standard and its adoption — LinkedIn: Domain Connect · Bluesky: @domainconnect.bsky.social · Mastodon: @domainconnect@mastodon.social"
+
+---
+
 ## LinkedIn Post Templates
 
 ### Post 1: The problem framing (general audience)

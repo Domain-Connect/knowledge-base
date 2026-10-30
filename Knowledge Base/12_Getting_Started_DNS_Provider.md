@@ -2,7 +2,7 @@
 
 *Part of the [Domain Connect Knowledge Base](./00_MASTER.md)*
 
-*Sources: {{ facts.src_getting_started }}, [09 — Getting Involved](./09_Getting_Involved.md), {{ facts.src_ietf_draft }}*
+*Sources: {{ facts.src_getting_started }}, {{ facts.src_ietf_draft }}*
 
 ---
 
@@ -192,7 +192,9 @@ Once your implementation is live, contact the Domain Connect community to be lis
 | Example service (for testing) | [exampleservice.domainconnect.org/simple](https://exampleservice.domainconnect.org/simple) |
 | Community / Slack | [domainconnect.org/getting-started](https://www.domainconnect.org/getting-started/) |
 | IETF DCONN WG | [datatracker.ietf.org/wg/dconn/about](https://datatracker.ietf.org/wg/dconn/about/) |
-| LinkedIn community | [linkedin.com/company/domain-connect](https://linkedin.com/company/domain-connect/) |
+| LinkedIn | [linkedin.com/company/domain-connect](https://www.linkedin.com/company/domain-connect/) |
+| Bluesky | [@domainconnect.bsky.social](https://bsky.app/profile/domainconnect.bsky.social) |
+| Mastodon | [@domainconnect@mastodon.social](https://mastodon.social/@domainconnect) |
 
 ---
 
