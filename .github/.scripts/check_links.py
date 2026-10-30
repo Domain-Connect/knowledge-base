@@ -69,9 +69,18 @@ class SiteHandler(SimpleHTTPRequestHandler):
         pass
 
 
+class QuietServer(ThreadingHTTPServer):
+    """fetch() closes non-HTML responses unread; ignore the resulting broken pipes."""
+
+    def handle_error(self, request, client_address):
+        if isinstance(sys.exc_info()[1], (BrokenPipeError, ConnectionResetError)):
+            return
+        super().handle_error(request, client_address)
+
+
 def start_server(site_dir, base_path):
     handler = type("Handler", (SiteHandler,), {"base_path": base_path})
-    server = ThreadingHTTPServer(
+    server = QuietServer(
         ("127.0.0.1", 0), functools.partial(handler, directory=str(site_dir))
     )
     threading.Thread(target=server.serve_forever, daemon=True).start()
