@@ -109,6 +109,7 @@ extra:
 hooks:
   - hooks/edition.py
   - hooks/facts.py
+  - hooks/counter.py
 
 watch:
   - data

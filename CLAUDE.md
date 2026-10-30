@@ -36,6 +36,7 @@ data/
 hooks/
   edition.py                — MkDocs hook: points index.md redirect and 00_MASTER.md links at the edition overview
   facts.py                  — MkDocs hook: replaces {{ facts.<key> }} placeholders with values from data/facts.yml and data/sources.yml
+  counter.py                — MkDocs hook: adds the GoatCounter page-view counter (dcss.dc.paulonet.eu) to every page
 overrides/
   marketing/main.html       — theme override for the marketing edition: share links (LinkedIn, Bluesky, Mastodon) below each page
 mkdocs.yml                  — MkDocs configuration

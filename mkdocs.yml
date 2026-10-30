@@ -50,3 +50,6 @@ extra:
     - icon: fontawesome/brands/mastodon
       link: https://mastodon.social/@domainconnect
       name: "@domainconnect@mastodon.social on Mastodon"
+
+hooks:
+  - hooks/counter.py
